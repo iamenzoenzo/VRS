@@ -11,21 +11,28 @@
 
 		public function create(){
 
-			$data['title'] = 'Create Category';
+			$data['title'] = 'Add New Vehicle';
 
-			$this->form_validation->set_rules('name', 'Name', 'required');
+			$this->form_validation->set_rules('car-name', 'Name', 'required');
+      $this->form_validation->set_rules('car-code-name', 'Code Name', 'required');
+      $this->form_validation->set_rules('car-model-name', 'Model', 'required');
+      $this->form_validation->set_rules('car-manufacturer', 'Manufacturer', 'required');
+      $this->form_validation->set_rules('car-model-year', 'Year', 'required');
+      $this->form_validation->set_rules('car-plate-number', 'Plate Number', 'required');
+      $this->form_validation->set_rules('car-rent-per-day', 'Rent Per Day', 'required');
+      $this->form_validation->set_rules('car-capacity', 'Capacity', 'required');
 
 			if($this->form_validation->run() === FALSE){
 				$this->load->view('templates/header');
-				$this->load->view('categories/create', $data);
+				$this->load->view('cars/create', $data);
 				$this->load->view('templates/footer');
 			} else {
-				$this->category_model->create_category();
+				$this->Car_model->create_car();
 
 				// Set message
 				$this->session->set_flashdata('category_created', 'Your category has been created');
 
-				redirect('categories');
+				redirect('cars/index');
 			}
 		}
 
