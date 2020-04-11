@@ -1,1 +1,1 @@
-you are at home
+you are at <?=$title ?>
