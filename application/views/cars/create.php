@@ -1,5 +1,5 @@
 <h2><?= $title ;?></h2>
-<?php echo form_open('cars/create'); ?>
+<?php echo form_open_multipart('cars/create'); ?>
   <div class="row">
   	<div class="col">
   		<label>Name</label>
@@ -39,10 +39,11 @@
   <div class="row pt-2">
     <div class="col">
       <label>Upload Car Photo</label></br>
-  	  <input type="file" name="car-photo" size="20">
+  	  <input type="file" name="userfile" >
     </div>
   </div>
 <div class="pt-3">
 	<button type="submit" class="btn btn-primary">Submit</button>
+  <a href="<?php echo base_url()?>cars/index" class="btn btn-danger">Cancel</a>
 </div>
 </form>

@@ -5,7 +5,7 @@
         <?php foreach($cars as $car) : ?>
           <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
-              <img class="img-fluid img-thumbnail" height="100%" width="100%" src="<?php echo base_url()."assets/".$car['file_path'].$car['file_extension']; ?>">
+              <img class="img-fluid img-thumbnail" height="100%" width="100%" src="<?php echo base_url()."assets/images/cars_images/".$car['car_image_path']; ?>">
               <div class="card-body">
               <h4><?php echo $car['manufacturer']." ".$car['model']." (".$car['year'].")"; ?></h4>
                 <p class="card-text">Test Paragraph</p>

@@ -5,7 +5,8 @@ $route['default_controller'] = 'pages/view';
 $route['(:any)'] = 'pages/view/$1';
 
 $route['cars'] = 'cars/cars';
-$route['maintenance'] = 'maintenance/index';
+$route['settings'] = 'settings/index';
+$route['users'] = 'users/index';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

@@ -32,8 +32,7 @@
                   Booking
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="<?php echo base_url(); ?>/cars/create">View Booking</a>
-                  <a class="dropdown-item" href="<?php echo base_url(); ?>/cars/create">Add Booking</a>
+                  <a class="dropdown-item" href="<?php echo base_url(); ?>cars/create">View Booking</a>
                 </div>
               </li>
               <li class="nav-item dropdown">
@@ -41,10 +40,11 @@
                   Admin
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="<?php echo base_url(); ?>/cars/index">View Vehicles</a>
-                  <a class="dropdown-item" href="<?php echo base_url(); ?>/cars/create">Create Vehicles</a>
+                  <a class="dropdown-item" href="<?php echo base_url(); ?>users/index">View Users</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="<?php echo base_url(); ?>/cars/create">Test</a>
+                  <a class="dropdown-item" href="<?php echo base_url(); ?>cars/index">View Vehicles</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="<?php echo base_url(); ?>settings/index">View Settings</a>
                 </div>
               </li>
             </ul>
@@ -55,6 +55,74 @@
 
 <div class="container">
 <!-- flash messages -->
-<?php if($this->session->flashdata('category_created')): ?>
-  <?php echo '<p class="alert alert-success">'.$this->session->flashdata('category_created').'</p>'; ?>
+<?php if($this->session->flashdata('car_created')): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('car_created'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('setting_created')): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('setting_created'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('setting_updated')): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('setting_updated'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('settings_deleted')): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('settings_deleted'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('user_created')): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('user_created'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('user_deleted')): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('user_deleted'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('user_updated')): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('user_updated'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('user_creation_error')): ?>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('user_creation_error'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 <?php endif; ?>

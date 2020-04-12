@@ -27,10 +27,30 @@
 				$this->load->view('cars/create', $data);
 				$this->load->view('templates/footer');
 			} else {
-				$this->Car_model->create_car();
+
+				// Upload Image
+				$timeStamp=time();
+				$config['upload_path'] = './assets/images/cars_images';
+				$config['allowed_types'] = 'gif|jpg|png';
+				$config['file_name']=$timeStamp."-".$_FILES['userfile']['name'];
+				//$config['max_size'] = '2048';
+				//$config['max_width'] = '2000';
+				//$config['max_height'] = '2000';
+
+				$this->load->library('upload', $config);
+
+				if(!$this->upload->do_upload()){
+					$errors = array('error' => $this->upload->display_errors());
+					$car_image = 'no-image.jpg';
+				} else {
+					$data = array('upload_data' => $this->upload->data());
+					$car_image = $timeStamp."-".$_FILES['userfile']['name'];
+				}
+
+				$this->Car_model->create_car($car_image);
 
 				// Set message
-				$this->session->set_flashdata('category_created', 'Your category has been created');
+				$this->session->set_flashdata('car_created', 'You have added a new vehicle');
 
 				redirect('cars/index');
 			}
