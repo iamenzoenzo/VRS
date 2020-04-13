@@ -10,7 +10,6 @@
       <label>Value</label>
       <input type="text" class="form-control" value="<?php echo $settings['value']; ?>" name="value" placeholder="Enter setting value">
     </div>
-
   </div>
   <div class="row pt-3">
     <div class="col-2">
