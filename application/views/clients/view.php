@@ -1,4 +1,23 @@
 <title><?= $title ;?></title>
+<!-- start of modal popup -->
+<div class="modal fade bd-example-modal-xl" role="dialog" id="exampleModal" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Full Image</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+            <div id="ImageContainer">
+
+            </div>
+
+          </div> <!-- end of modal body -->
+      </div> <!-- end of modal content -->
+    </div>
+</div> <!-- end of modal popup -->
 
 <div class="row">
   <div class="col">
@@ -37,9 +56,14 @@
 <!-- start of carousel -->
 <div id="carouselExampleIndicators" class="carousel slide border box-shadow text-center mt-3" data-ride="carousel">
   <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    <?php
+    $counter=0;
+    foreach ($images as $image) {
+
+      echo '<li data-target="#carouselExampleIndicators" data-slide-to="'.$counter.'"'.($counter===1 ? 'class="active"' : ' ' ).'></li>';
+      $counter++;
+    }
+    ?>
   </ol>
   <div class="carousel-inner">
     <?php
@@ -48,7 +72,13 @@
       $counter++;
       echo '
       <div class="carousel-item '.($counter===1 ? 'active' : ' ' ).'">
-        <img style="width:100%;height:100%;object-fit: contain;" class="d-block" src="'.base_url().'assets/images/client_images/'.$image['file_name'].'">
+        <a data-toggle="modal" href="#exampleModal" data-whatever="'.base_url().'assets/images/client_images/'.$image['file_name'].'">
+          <img style="width:100%;height:100%;object-fit: cover;" class="d-block" src="'.base_url().'assets/images/client_images/'.$image['file_name'].'">
+        </a>
+        <div class="carousel-caption d-none d-md-block">
+        <h5>Click image to view full screen</h5>
+        <p>'.$image['file_name'].'</p>
+      </div>
       </div>
       ';
     }
@@ -63,3 +93,16 @@
     <span class="sr-only bg-dark">Next</span>
   </a>
 </div> <!-- end of carousel -->
+
+<script type="text/javascript">
+
+$('#exampleModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var recipient = button.data('whatever')
+    var modal = $(this);
+    //modal.find('.ImageContainer').text('Reserve a Unit ' + recipient)
+    var htmlText='<img style="width:100%;height=100%;object-fit:cover;" src="'+recipient+'">';
+    document.getElementById("ImageContainer").innerHTML=htmlText;
+});
+
+</script>

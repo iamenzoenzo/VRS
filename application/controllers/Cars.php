@@ -2,10 +2,18 @@
 	class Cars extends CI_Controller{
 
 		public function index(){
-			$data['title'] = 'Cars';
+			$data['title'] = 'Vehicles';
 			$data['cars'] = $this->Car_model->get_cars();
 			$this->load->view('templates/header');
-			$this->load->view('cars/cars', $data);
+			$this->load->view('cars/index', $data);
+			$this->load->view('templates/footer');
+		}
+
+		public function availablecars(){
+			$data['title'] = 'Available Vehicles Types For Rent';
+			$data['cars'] = $this->Car_model->get_distinct_cars();
+			$this->load->view('templates/header');
+			$this->load->view('cars/availablecars', $data);
 			$this->load->view('templates/footer');
 		}
 
