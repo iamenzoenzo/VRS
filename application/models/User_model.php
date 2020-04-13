@@ -43,6 +43,20 @@
       return $this->db->update('users', $data);
     }
 
+		public function login($email, $password){
+			// Validate
+			$this->db->where('email', $email);
+			$this->db->where('password', md5($password));
+
+			$result = $this->db->get('users');
+
+			if($result->num_rows() == 1){
+				return $result->row(0)->id;
+			} else {
+				return false;
+			}
+		}
+
 		public function get_settings($id){
       if(isset($id)){
         $query=$this->db->get_where('settings', array('id' => $id));

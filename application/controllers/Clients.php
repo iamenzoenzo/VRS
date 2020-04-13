@@ -24,6 +24,10 @@ date_default_timezone_set('Asia/Manila');
 		}
 
 		public function create(){
+			if(!$this->session->userdata('logged_in')){
+				redirect('users/login');
+			}
+
 			$data['title'] = 'Add New Client';
 			$this->form_validation->set_rules('name', 'Complete Name', 'required');
       if($this->form_validation->run() === FALSE){
@@ -61,7 +65,7 @@ date_default_timezone_set('Asia/Manila');
 
 						if(!$this->upload->do_upload('multiplefiles')){
 							$error = array('error' => $this->upload->display_errors());
-							array_push($fileName,'no-image.jpg');
+							//array_push($fileName,'no-image.jpg');
 						}else{
 							$uploadData = $this->upload->data();
 							array_push($fileNames,$filename = $uploadData['file_name']);
@@ -80,44 +84,26 @@ date_default_timezone_set('Asia/Manila');
 		}
 
     public function edit($id){
-      $data['title'] = 'Edit Status';
-      $data['status'] = $this->Status_model->get_status($id);
+      $data['title'] = 'Edit Client Information';
+      $data['clients'] = $this->Client_model->get_clients($id);
 
-      if(empty($data['status'])){
+      if(empty($data['clients'])){
         show_404();
       }
         $this->load->view('templates/header');
-        $this->load->view('status/edit', $data);
+        $this->load->view('clients/edit', $data);
         $this->load->view('templates/footer');
 
     }
 
-		private function UploadFiles($timeStamp,$FileName){
-			$this->load->library('upload');
-			$image_path="";
-			$config['upload_path'] = './assets/images/client_images';
-			$config['allowed_types'] = 'gif|jpg|png';
-			$config['file_name']=$FileName;
-
-			$this->upload->initialize($config);
-			if(!$this->upload->do_upload()){
-				$errors = array('error' => $this->upload->display_errors());
-				$image_path = 'no-image.jpg'.json_encode($errors);
-			} else {
-				$data = array('upload_data' => $this->upload->data());
-				$image_path = $FileName;
-			}
-			return $image_path;
-		}
-
     public function update(){
 
-      $this->Status_model->update_status();
+      $this->Client_model->update_client();
 
       // Set message
-      $this->session->set_flashdata('status_updated', 'Status has been updated');
+      $this->session->set_flashdata('client_updated', 'Client has been updated');
 
-      redirect('status/index');
+      redirect('clients/index');
     }
 
     public function delete($id){

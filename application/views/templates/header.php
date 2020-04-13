@@ -62,7 +62,14 @@
             </ul>
           </div>
         </nav>
-        <a class="btn btn-outline-primary" href="#">Login</a>
+        <?php
+        if(!$this->session->userdata('logged_in')){
+          echo '<a class="btn btn-outline-primary" href="'.base_url().'/users/login">Login</a>';
+        }else{
+          echo '<a class="btn btn-outline-danger" href="'.base_url().'/users/logout">Logout</a>';
+        }
+        ?>
+
   </div>
 
 <div class="container pb-5">
@@ -169,6 +176,44 @@
 <?php if($this->session->flashdata('client_deleted')): ?>
   <div class="alert alert-success alert-dismissible fade show" role="alert">
   <?php echo $this->session->flashdata('client_deleted'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('client_updates')): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('client_updates'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+
+<?php if($this->session->flashdata('user_loggedin')): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('user_loggedin'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('login_failed')): ?>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('login_failed'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+
+<?php if($this->session->flashdata('user_loggedout')): ?>
+  <div class="alert alert-info alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('user_loggedout'); ?>
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>

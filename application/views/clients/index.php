@@ -25,7 +25,6 @@
       <th scope="col">#</th>
       <th scope="col-4">Name</th>
       <th scope="col-4">Contact Information</th>
-      <th scope="col-4">Address</th>
       <th scope="col">Is Active</th>
       <th scope="col">Actions</th>
     </tr>
@@ -38,8 +37,7 @@
         echo '<tr>';
         echo '<th scope="row">'.$counter.'</th>';
         echo '<td>'.$client['name'].'</td>';
-        echo '<td>Email address: <i>'.$client['email_address'].'</i></br># '.$client['contact_number'].'</td>';
-        echo '<td>'.$client['address'].'</td>';
+        echo '<td>'.$client['email_address'].'</br>#'.$client['contact_number'].'</br>'.$client['address'].'</td>';        
         echo '<td>'.($client['Is_Active']==1 ? 'True' : 'False').'</td>';
         echo '
         <td>
