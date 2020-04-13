@@ -23,7 +23,6 @@
 				'password' => md5($this->input->post('password')),
 				'user_type' => $this->input->post('user_type'),
 				'Is_Active' => 1
-
 			);
 			return $this->db->insert('users', $data);
 		}
