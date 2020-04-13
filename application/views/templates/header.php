@@ -14,7 +14,9 @@
 </head>
 <body class="pb-5">
   <div class="bg-light d-flex flex-column flex-md-row align-items-center pb-1 px-md-4 mb-3 bg-white border-bottom box-shadow sticky-top">
-        <h5 class="my-0 mr-md-auto font-weight-normal">Wheels Automarket and Car Rental</h5>
+        <h5 class="my-0 mr-md-auto font-weight-normal">
+          <a class="nav-link text-dark"href="<?php echo base_url(); ?>">Wheels Automarket and Car Rental</a>
+        </h5>
         <nav class="navbar navbar-expand-lg navbar-light">
           <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
@@ -63,7 +65,7 @@
         <a class="btn btn-outline-primary" href="#">Login</a>
   </div>
 
-<div class="container">
+<div class="container pb-5">
 <!-- flash messages -->
 <?php if($this->session->flashdata('car_created')): ?>
   <div class="alert alert-success alert-dismissible fade show" role="alert">

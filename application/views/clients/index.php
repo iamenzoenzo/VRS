@@ -43,6 +43,7 @@
         echo '<td>'.($client['Is_Active']==1 ? 'True' : 'False').'</td>';
         echo '
         <td>
+        <a class="btn btn-info" href="'.base_url().'clients/view/'.$client['Id'].'">View</a>
         <a class="btn btn-warning" href="'.base_url().'clients/edit/'.$client['Id'].'">Edit</a>
         <a class="btn btn-danger" href="'.base_url().'clients/delete/'.$client['Id'].'">Delete</a>
         </td>';

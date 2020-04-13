@@ -10,6 +10,19 @@ date_default_timezone_set('Asia/Manila');
 			$this->load->view('templates/footer');
 		}
 
+		public function view($id){
+			$data['title'] = 'Client Information';
+			$data['clients'] = $this->Client_model->get_clients($id);
+			$data['images'] = $this->UserImage_model->get_images(null,$id);
+			if(empty($data['clients'])){
+				show_404();
+			}
+				$this->load->view('templates/header');
+				$this->load->view('clients/view', $data);
+				$this->load->view('templates/footer');
+
+		}
+
 		public function create(){
 			$data['title'] = 'Add New Client';
 			$this->form_validation->set_rules('name', 'Complete Name', 'required');
@@ -36,7 +49,7 @@ date_default_timezone_set('Asia/Manila');
 						$_FILES['multiplefiles']['size'] = $files['multiplefiles']['size'][$i];
 
 						$config['upload_path'] = './assets/images/client_images';
-						$config['allowed_types'] = 'jpg|jpeg|png|gif|pdf|doc|docx|xls|xlsx';
+						$config['allowed_types'] = 'jpg|jpeg|png|gif';
 						$config['max_size'] = '0';
 						$config['max_width'] = '0';
 						$config['max_height'] = '0';

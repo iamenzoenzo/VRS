@@ -1,6 +1,6 @@
 
 </div> <!-- end of container-fluid located in navbar -->
-<div class="fixed-bottom bg-light border-top box-shadow text-center">
+<div class="fixed-bottom mt-3 bg-light border-top box-shadow text-center">
 <footer class="footer py-3 ">
   <div class="container">
     <span class="text-muted">Copyright &copy; 2020</span>
