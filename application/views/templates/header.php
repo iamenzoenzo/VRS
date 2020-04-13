@@ -12,9 +12,11 @@
     <script src="<?php echo base_url(); ?>assets/bootstrap-4.4.1/js/jquery.min.js" ></script>
     <script src="<?php echo base_url(); ?>assets/bootstrap-4.4.1/js/bootstrap.min.js" ></script>
 </head>
-<body>
-  <div class="bg-light d-flex flex-column flex-md-row align-items-center pb-1 px-md-4 mb-3 bg-white border-bottom box-shadow">
-        <h5 class="my-0 mr-md-auto font-weight-normal">Wheels Automarket and Car Rental</h5>
+<body class="pb-5">
+  <div class="bg-light d-flex flex-column flex-md-row align-items-center pb-1 px-md-4 mb-3 bg-white border-bottom box-shadow sticky-top">
+        <h5 class="my-0 mr-md-auto font-weight-normal">
+          <a class="nav-link text-dark"href="<?php echo base_url(); ?>">Wheels Automarket and Car Rental</a>
+        </h5>
         <nav class="navbar navbar-expand-lg navbar-light">
           <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
@@ -27,13 +29,24 @@
               <li class="nav-item">
                 <a class="nav-link" href="<?php echo base_url(); ?>faq">FAQs</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="<?php echo base_url(); ?>#">Estimate Rent</a>
+              </li>
+              <?php if($this->session->userdata('logged_in')): ?>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Booking
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="<?php echo base_url(); ?>/cars/create">View Booking</a>
-                  <a class="dropdown-item" href="<?php echo base_url(); ?>/cars/create">Add Booking</a>
+                  <a class="dropdown-item" href="<?php echo base_url(); ?>cars/index">View Booking</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Client
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="<?php echo base_url(); ?>clients/index">View Clients</a>
                 </div>
               </li>
               <li class="nav-item dropdown">
@@ -41,20 +54,173 @@
                   Admin
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="<?php echo base_url(); ?>/cars/index">View Vehicles</a>
-                  <a class="dropdown-item" href="<?php echo base_url(); ?>/cars/create">Create Vehicles</a>
+                  <a class="dropdown-item" href="<?php echo base_url(); ?>users/index">View Users</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="<?php echo base_url(); ?>/cars/create">Test</a>
+                  <a class="dropdown-item" href="<?php echo base_url(); ?>cars/index">View Vehicles</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="<?php echo base_url(); ?>settings/index">View Settings</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="<?php echo base_url(); ?>status/index">View Status</a>
                 </div>
               </li>
+              <?php endif; ?>
             </ul>
           </div>
         </nav>
-        <a class="btn btn-outline-primary" href="#">Login</a>
+        <?php
+        if(!$this->session->userdata('logged_in')){
+          echo '<a class="btn btn-outline-primary" href="'.base_url().'/users/login">Login</a>';
+        }else{
+          echo '<a class="btn btn-outline-danger" href="'.base_url().'/users/logout">Logout</a>';
+        }
+        ?>
+
   </div>
 
-<div class="container">
+<div class="container pb-5">
 <!-- flash messages -->
-<?php if($this->session->flashdata('category_created')): ?>
-  <?php echo '<p class="alert alert-success">'.$this->session->flashdata('category_created').'</p>'; ?>
+<?php if($this->session->flashdata('car_created')): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('car_created'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('setting_created')): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('setting_created'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('setting_updated')): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('setting_updated'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('settings_deleted')): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('settings_deleted'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('user_created')): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('user_created'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('user_deleted')): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('user_deleted'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('user_updated')): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('user_updated'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('status_created')): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('status_created'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('status_updated')): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('status_updated'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('status_deleted')): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('status_deleted'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('clients_created')): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('clients_created'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('client_deleted')): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('client_deleted'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('client_updates')): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('client_updates'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+
+<?php if($this->session->flashdata('user_loggedin')): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('user_loggedin'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('login_failed')): ?>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('login_failed'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+
+<?php if($this->session->flashdata('user_loggedout')): ?>
+  <div class="alert alert-info alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('user_loggedout'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 <?php endif; ?>

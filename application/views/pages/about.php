@@ -1,3 +1,4 @@
+<title>About Us</title>
 <h2>About Us</h2>
 <p>Vehicle Reservation System is the final project for IS226 Web Information System, Master of Information Systems at the University of the Philippines Open University.</p>
 <p>Developed by: Jeff Manhulad and Enzo Cerbas</p>

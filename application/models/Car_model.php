@@ -11,7 +11,7 @@
 			return $query->result_array();
 		}
 
-		public function create_car(){
+		public function create_car($car_image){
 			$data = array(
 				'name' => $this->input->post('car-name'),
         'code_name' => $this->input->post('car-code-name'),
@@ -20,8 +20,10 @@
         'year' => $this->input->post('car-model-year'),
         'plate_number' => $this->input->post('car-plate-number'),
         'RentPerDay' => $this->input->post('car-rent-per-day'),
-        'Capacity' => $this->input->post('car-capacity')
-        //'code_name' => $this->input->post('car-photo')
+        'Capacity' => $this->input->post('car-capacity'),
+				'car_image_path' => $car_image,
+				'Is_Active' => 1
+
 			);
 
 			return $this->db->insert('cars', $data);

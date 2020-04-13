@@ -1,3 +1,4 @@
+<title>Contact Us</title>
 <h2>Contact Us</h2>
 <p>We'd love to hear from you!</p>
 <div class="card">
