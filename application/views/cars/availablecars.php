@@ -1,4 +1,10 @@
 <title><?= $title; ?></title>
+<div class="row">
+  <div class="col">
+    <h2><?= $title; ?></h2>
+  </div>
+
+</div>
 <div class="album pb-5">
     <div class="container">
       <div class="row">

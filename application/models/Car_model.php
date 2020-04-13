@@ -11,6 +11,14 @@
 			return $query->result_array();
 		}
 
+		public function get_distinct_cars(){
+			$this->db->join('images', 'cars.image_id = images.id', 'left');
+			$this->db->order_by('name');
+			$this->db->group_by(array("cars.model", "cars.manufacturer"));
+			$query = $this->db->get('cars');
+			return $query->result_array();
+		}
+
 		public function create_car($car_image){
 			$data = array(
 				'name' => $this->input->post('car-name'),
