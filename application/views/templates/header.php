@@ -33,7 +33,7 @@
                 <a class="nav-link" href="<?php echo base_url(); ?>cars/availablecars">Available Vehicles</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url(); ?>#">Estimate Rent</a>
+                <a class="nav-link" href="<?php echo base_url(); ?>estimate">Estimate Rent</a>
               </li>
               <?php if($this->session->userdata('logged_in')): ?>
               <li class="nav-item dropdown">
