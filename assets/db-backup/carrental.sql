@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 13, 2020 at 04:06 AM
+-- Generation Time: Apr 14, 2020 at 12:50 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -105,7 +105,10 @@ CREATE TABLE `clients` (
 --
 
 INSERT INTO `clients` (`Id`, `name`, `email_address`, `contact_number`, `address`, `government_id_1_path`, `government_id_2_path`, `attachment_1_path`, `attachment_2_path`, `created_date`, `updated_date`, `Is_Active`) VALUES
-(97, 'Jeffry Manhulad', 'jcmanhulad@up.edu.ph', '09268406884', 'Musuan, Dologon, Maramag, Bukidnon', '', '', '', '', '2020-04-13 10:00:47', '0000-00-00', b'1');
+(97, 'Jeffry Manhulad', 'jcmanhulad@up.edu.ph', '09268406884', 'Musuan, Dologon, Maramag, Bukidnon', '', '', '', '', '2020-04-13 10:00:47', '0000-00-00', b'1'),
+(98, 'asdsa', 'jbbatedio@up.edu.ph', 'asdsa', 'sadsa', '', '', '', '', '2020-04-13 12:26:00', '0000-00-00', b'1'),
+(99, 'Jym Bartolaba Batedio', 'jbbatedio@up.edu.ph', '091231231231', 'Barra Opol Misamis Oriental', '', '', '', '', '2020-04-13 13:24:10', '0000-00-00', b'1'),
+(100, 'Mary Jeziel Cavan', 'johndue@gmail.com', '34324242', 'Musuan', '', '', '', '', '2020-04-13 21:54:53', '0000-00-00', b'1');
 
 -- --------------------------------------------------------
 
@@ -127,7 +130,13 @@ CREATE TABLE `clientsphotos` (
 
 INSERT INTO `clientsphotos` (`Id`, `client_id`, `file_name`, `created_date`, `Is_Active`) VALUES
 (73, 97, '1586743247-Capture.PNG', '2020-04-13 10:00:47', b'1'),
-(74, 97, '1586743247-Manhulad_Jeffry_CMSC208_Assignment2.png', '2020-04-13 10:00:47', b'1');
+(75, 99, '1586755450-pngtree-happy-birthday-background-of-stereo-creative-image_104875.jpg', '2020-04-13 13:24:10', b'1'),
+(76, 99, '1586755450-smoke-spreading-blue-background_23-2147785936.jpg', '2020-04-13 13:24:10', b'1'),
+(77, 99, '1586755450-unnamed.jpg', '2020-04-13 13:24:10', b'1'),
+(78, 100, '1586786092-MVIMG_20191117_163234.jpg', '2020-04-13 21:54:53', b'1'),
+(79, 100, '1586786092-100_1991.JPG', '2020-04-13 21:54:53', b'1'),
+(80, 100, '1586786092-MVIMG_20200215_105930_1.jpg', '2020-04-13 21:54:53', b'1'),
+(81, 100, '1586786092-00100lrPORTRAIT_00100_BURST20200215105941635_COVER.jpg', '2020-04-13 21:54:54', b'1');
 
 -- --------------------------------------------------------
 
@@ -164,7 +173,8 @@ INSERT INTO `images` (`Id`, `file_path`, `file_extension`, `description`, `type`
 CREATE TABLE `settings` (
   `Id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `value` varchar(255) NOT NULL,
+  `value` text NOT NULL,
+  `type` varchar(20) NOT NULL,
   `Is_Active` bit(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -172,11 +182,14 @@ CREATE TABLE `settings` (
 -- Dumping data for table `settings`
 --
 
-INSERT INTO `settings` (`Id`, `name`, `value`, `Is_Active`) VALUES
-(6, 'Driver_Per_Day', '800', b'1'),
-(7, 'telephone', '+63 917 638 1707', b'1'),
-(8, 'Email Address', 'inquiry@carrental.com', b'1'),
-(9, 'Address', 'Poblacion Hagkol Sayre Highway (infront of new bus terminal), Valencia City, Bukidnon 8709', b'1');
+INSERT INTO `settings` (`Id`, `name`, `value`, `type`, `Is_Active`) VALUES
+(6, 'Driver_Per_Day', '800', 'system', b'1'),
+(7, 'telephone', '+63 917 638 1707', 'contact', b'1'),
+(8, 'Email Address', 'inquiry@carrental.com / customer@carrental.com', 'contact', b'1'),
+(9, 'Address', 'Poblacion Hagkol Sayre Highway (infront of new bus terminal), Valencia City, Bukidnon 8709', 'contact', b'1'),
+(10, 'Do I need to register before I can reserve a vehicle?', 'No. Registration is not required before making a reservation. However, information such as name, address, contact details and valid ID will be required upon reservation.', 'faq', b'1'),
+(11, 'Mobile phone', '09268406884', 'contact', b'1'),
+(12, 'Year founded', '2016', 'other', b'0');
 
 -- --------------------------------------------------------
 
@@ -196,7 +209,8 @@ CREATE TABLE `status` (
 
 INSERT INTO `status` (`Id`, `label`, `Is_Active`) VALUES
 (2, 'In Progress', b'1'),
-(3, 'Done', b'1');
+(3, 'Done', b'1'),
+(8, 'Returned', b'1');
 
 -- --------------------------------------------------------
 
@@ -208,6 +222,7 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `firstname` varchar(50) NOT NULL,
   `lastname` varchar(50) NOT NULL,
+  `fullname` varchar(255) NOT NULL,
   `email` varchar(150) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -220,10 +235,11 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `username`, `password`, `user_type`, `created_at`, `Is_Active`) VALUES
-(4, 'Enzo', 'Cerbas', 'bvcerbas@up.edu.ph', '', 'e10adc3949ba59abbe56e057f20f883e', 'user', '2020-02-01 05:18:35', b'0'),
-(9, 'Admin', 'Car Rental', 'admin@carrental.com', '', '25d55ad283aa400af464c76d713c07ad', 'admin', '2020-02-08 03:15:32', b'0'),
-(11, 'Jeffry', 'Manhulad', 'jeff.manhulad@gmail.com', 'jeffman', 'd41d8cd98f00b204e9800998ecf8427e', 'admin', '2020-04-12 14:37:28', b'1');
+INSERT INTO `users` (`id`, `firstname`, `lastname`, `fullname`, `email`, `username`, `password`, `user_type`, `created_at`, `Is_Active`) VALUES
+(4, 'Enzo', 'Cerbas', 'Enzo Cerbas', 'bvcerbas@up.edu.ph', 'enzo', 'd41d8cd98f00b204e9800998ecf8427e', 'user', '2020-02-01 05:18:35', b'1'),
+(11, 'Jeffry', 'Manhulad', 'Jeffry Manhulad', 'jeff.manhulad@gmail.com', 'jeffman', 'd41d8cd98f00b204e9800998ecf8427e', 'user', '2020-04-12 14:37:28', b'1'),
+(12, 'Arvin', 'Reyes', 'Arvin Reyes', 'arvin@gmail.com', 'arvinreyes', '5f4dcc3b5aa765d61d8327deb882cf99', 'admin', '2020-04-14 15:38:23', b'1'),
+(13, 'Admin', 'Carrental', 'Admin Carrental', 'johndue@gmail.com', 'admin', '25d55ad283aa400af464c76d713c07ad', 'admin', '2020-04-14 15:45:03', b'1');
 
 --
 -- Indexes for dumped tables
@@ -297,13 +313,13 @@ ALTER TABLE `clientbookings`
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- AUTO_INCREMENT for table `clientsphotos`
 --
 ALTER TABLE `clientsphotos`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT for table `images`
@@ -315,19 +331,19 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT for table `settings`
 --
 ALTER TABLE `settings`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `status`
 --
 ALTER TABLE `status`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
