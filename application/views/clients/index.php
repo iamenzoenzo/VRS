@@ -1,5 +1,5 @@
 <title><?= $title; ?></title>
-
+<?php echo form_open('clients/index'); ?>
   <div class="row">
     <div class="col">
       <h2>Clients</h2>
@@ -7,7 +7,7 @@
     <div class="col-lg-4">
       <div class="row">
         <div class="col">
-          <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+          <input class="form-control" name="name_filter" value="<?php echo $filter;?>" "type="search" placeholder="Search" aria-label="Search">
         </div class="col-lg-1">
         <div>
           <button class="btn btn-outline-success lg-12" type="submit">Search</button>
@@ -18,7 +18,7 @@
         <a href="<?php echo base_url(); ?>clients/create" class="btn btn-primary">Add New Client</a>
       </div>
   </div>
-
+</form>
 <table class="table table-striped table-hover table-bordered">
   <thead>
     <tr>
@@ -37,7 +37,7 @@
         echo '<tr>';
         echo '<th scope="row">'.$counter.'</th>';
         echo '<td>'.$client['name'].'</td>';
-        echo '<td>'.$client['email_address'].'</br>#'.$client['contact_number'].'</br>'.$client['address'].'</td>';        
+        echo '<td>'.$client['email_address'].'</br>#'.$client['contact_number'].'</br>'.$client['address'].'</td>';
         echo '<td>'.($client['Is_Active']==1 ? 'True' : 'False').'</td>';
         echo '
         <td>

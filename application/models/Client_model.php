@@ -9,7 +9,7 @@
         $query=$this->db->get_where('clients', array('Id' => $id));
         return $query->row_array();
       }else {
-        $query = $this->db->get('clients');
+				$query=$this->db->get_where('clients', array('name LIKE '=>'%'.$this->input->post('name_filter').'%'));
   			return $query->result_array();
       }
 		}
