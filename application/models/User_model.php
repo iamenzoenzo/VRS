@@ -14,6 +14,11 @@
       }
 		}
 
+		public function get_users_by_username($username){
+				$query=$this->db->get_where('users', array('username' => $username));
+				return $query->row_array();
+		}
+
 		public function create_user(){
 			$data = array(
 				'firstname' => $this->input->post('fname'),
@@ -44,9 +49,9 @@
       return $this->db->update('users', $data);
     }
 
-		public function login($email, $password){
+		public function login($username, $password){
 			// Validate
-			$this->db->where('email', $email);
+			$this->db->where('username', $username);
 			$this->db->where('password', md5($password));
 
 			$result = $this->db->get('users');
@@ -56,16 +61,6 @@
 			} else {
 				return false;
 			}
-		}
-
-		public function get_settings($id){
-      if(isset($id)){
-        $query=$this->db->get_where('settings', array('id' => $id));
-        return $query->row_array();
-      }else {
-        $query = $this->db->get('settings');
-  			return $query->result_array();
-      }
 		}
 
 		public function delete_user($id){
