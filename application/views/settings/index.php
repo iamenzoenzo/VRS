@@ -1,22 +1,35 @@
 <title><?= $title; ?></title>
+
+  <?php echo form_open('settings/index'); ?>
+    <div class="row">
+      <div class="col">
+        <h2>Clients</h2>
+      </div>
+      <div class="col-lg-4">
+        <div class="row">
+          <div class="col">
+            <input class="form-control" name="setting_filter" value="<?= $filter;?>" type="search" placeholder="Search setting name" aria-label="Search">
+          </div class="col-lg-1">
+          <div>
+            <button class="btn btn-outline-success lg-12" type="submit">Search</button>
+          </div>
+        </div>
+      </div>
+        <div class="float-right pl-3">
+          <a href="<?php echo base_url(); ?>settings/create" class="btn btn-primary">Add New Setting</a>
+        </div>
+    </div>
+  </form>
 <div>
-  <div class="row">
-    <div class="col">
-      <h2>Settings Page</h2>
-    </div>
-    <div class="col">
-      <a href="<?php echo base_url(); ?>settings/create" class="btn float-right btn-primary">Add New Setting</a>
-    </div>
-  </div>
-<div class="pt-2">
 <table class="table table-striped table-hover table-bordered">
   <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Name</th>
       <th scope="col">Value</th>
-      <th scope="col-1">Is Active</th>
-      <th scope="col-3">Actions</th>
+      <th scope="col">Type</th>
+      <th scope="col">Is Active</th>
+      <th scope="col">Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -25,9 +38,10 @@
       foreach($settings as $setting){
         $counter++;
         echo '<tr>';
-        echo '<th scope="row">'.$counter.'</th>';
+        echo '<td>'.$counter.'</td>';
         echo '<td>'.$setting['name'].'</td>';
         echo '<td>'.$setting['value'].'</td>';
+        echo '<td>'.$setting['type'].'</td>';
         echo '<td>'.($setting['Is_Active']==1 ? 'True' : 'False').'</td>';
         echo '
         <td>
@@ -36,9 +50,11 @@
         </td>';
         echo '</tr> ';
       }
+      if($counter==0){
+        echo '<tr><td colspan="6">No data to show for '.$filter.'</td></tr>';
+      }
     ?>
 
   </tbody>
 </table>
-</div>
 </div>

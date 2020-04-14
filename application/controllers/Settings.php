@@ -3,7 +3,8 @@
 
 		public function index(){
 			$data['title'] = 'Settings';
-			$data['settings'] = $this->Setting_model->get_settings(null);
+			$data['settings'] = $this->Setting_model->get_settings(null,null);
+			$data['filter'] = $this->input->post('setting_filter');
 			$this->load->view('templates/header');
 			$this->load->view('settings/index', $data);
 			$this->load->view('templates/footer');
@@ -13,6 +14,7 @@
 			$data['title'] = 'Add New Settings';
 			$this->form_validation->set_rules('name', 'Name', 'required');
       $this->form_validation->set_rules('value', 'Value', 'required');
+			$this->form_validation->set_rules('type', 'Type', 'required');
 
       if($this->form_validation->run() === FALSE){
 				$this->load->view('templates/header');
@@ -30,7 +32,7 @@
 
     public function edit($id){
       $data['title'] = 'Edit Setting';
-      $data['settings'] = $this->Setting_model->get_settings($id);
+      $data['settings'] = $this->Setting_model->get_settings($id,null);
 
       if(empty($data['settings'])){
         show_404();

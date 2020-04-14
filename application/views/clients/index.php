@@ -1,5 +1,5 @@
 <title><?= $title; ?></title>
-
+<?php echo form_open('clients/index'); ?>
   <div class="row">
     <div class="col">
       <h2>Clients</h2>
@@ -7,7 +7,7 @@
     <div class="col-lg-4">
       <div class="row">
         <div class="col">
-          <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+          <input class="form-control" name="name_filter" value="<?= $filter;?>" type="search" placeholder="Search" aria-label="Search">
         </div class="col-lg-1">
         <div>
           <button class="btn btn-outline-success lg-12" type="submit">Search</button>
@@ -18,7 +18,7 @@
         <a href="<?php echo base_url(); ?>clients/create" class="btn btn-primary">Add New Client</a>
       </div>
   </div>
-
+</form>
 <table class="table table-striped table-hover table-bordered">
   <thead>
     <tr>
@@ -35,9 +35,9 @@
       foreach($clients as $client){
         $counter++;
         echo '<tr>';
-        echo '<th scope="row">'.$counter.'</th>';
+        echo '<td>'.$counter.'</td>';
         echo '<td>'.$client['name'].'</td>';
-        echo '<td>'.$client['email_address'].'</br>#'.$client['contact_number'].'</br>'.$client['address'].'</td>';        
+        echo '<td>'.$client['email_address'].'</br>#'.$client['contact_number'].'</br>'.$client['address'].'</td>';
         echo '<td>'.($client['Is_Active']==1 ? 'True' : 'False').'</td>';
         echo '
         <td>
@@ -46,6 +46,9 @@
         <a class="btn btn-danger" href="'.base_url().'clients/delete/'.$client['Id'].'">Delete</a>
         </td>';
         echo '</tr> ';
+      }
+      if($counter==0){
+        echo '<tr><td colspan="5">No data to show for '.$filter.'</td></tr>';
       }
     ?>
 

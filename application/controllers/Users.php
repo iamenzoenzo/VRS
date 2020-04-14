@@ -4,6 +4,7 @@
 		public function index(){
 			$data['title'] = 'Users';
 			$data['users'] = $this->User_model->get_users(null);
+			$data['filter'] = $this->input->post('users_filter');
 			$this->load->view('templates/header');
 			$this->load->view('users/index', $data);
 			$this->load->view('templates/footer');
@@ -57,7 +58,7 @@
 					// Create session
 					$user_data = array(
 						'user_id' => $user_id,
-						'email' => $username,
+						'username' => $username,
 						'logged_in' => true
 					);
 
@@ -81,7 +82,7 @@
 			// Unset user data
 			$this->session->unset_userdata('logged_in');
 			$this->session->unset_userdata('user_id');
-			$this->session->unset_userdata('email');
+			$this->session->unset_userdata('username');
 
 			// Set message
 			$this->session->set_flashdata('user_loggedout', 'You are now logged out');

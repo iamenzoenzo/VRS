@@ -5,6 +5,7 @@ date_default_timezone_set('Asia/Manila');
 		public function index(){
 			$data['title'] = 'Clients';
 			$data['clients'] = $this->Client_model->get_clients(null);
+			$data['filter'] = $this->input->post('name_filter');
 			$this->load->view('templates/header');
 			$this->load->view('clients/index', $data);
 			$this->load->view('templates/footer');

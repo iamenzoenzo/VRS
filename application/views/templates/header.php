@@ -11,7 +11,6 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/bootstrap-4.4.1/css/bootstrap.min.css">
     <script src="<?php echo base_url(); ?>assets/bootstrap-4.4.1/js/jquery.min.js" ></script>
     <script src="<?php echo base_url(); ?>assets/bootstrap-4.4.1/js/bootstrap.min.js" ></script>
-
 </head>
 <body class="pb-5">
   <div class="bg-light d-flex flex-column flex-md-row align-items-center pb-1 px-md-4 mb-3 bg-white border-bottom box-shadow sticky-top">
@@ -78,9 +77,7 @@
           echo '<a class="btn btn-outline-danger" href="'.base_url().'/users/logout">Logout</a>';
         }
         ?>
-
   </div>
-
 <div class="container pb-5">
 <!-- flash messages -->
 <?php if($this->session->flashdata('car_created')): ?>
