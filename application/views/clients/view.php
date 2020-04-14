@@ -1,23 +1,4 @@
 <title><?= $title ;?></title>
-<!-- start of modal popup -->
-<div class="modal fade bd-example-modal-xl" role="dialog" id="exampleModal" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Full Image</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-              </button>
-          </div>
-          <div class="modal-body">
-            <div id="ImageContainer">
-
-            </div>
-
-          </div> <!-- end of modal body -->
-      </div> <!-- end of modal content -->
-    </div>
-</div> <!-- end of modal popup -->
 
 <div class="row">
   <div class="col">
@@ -51,7 +32,25 @@
   </div>
 </div>
 
+<?php if(count($images)>0): ?>
 
+  <!-- start of modal popup -->
+  <div class="modal fade bd-example-modal-xl" role="dialog" id="exampleModal" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Full Image</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+              <div id="ImageContainer">
+              </div>
+            </div> <!-- end of modal body -->
+        </div> <!-- end of modal content -->
+      </div>
+  </div> <!-- end of modal popup -->
 
 <!-- start of carousel -->
 <div id="carouselExampleIndicators" class="carousel slide border box-shadow text-center mt-3" data-ride="carousel">
@@ -106,3 +105,4 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 });
 
 </script>
+<?php endif; ?>
