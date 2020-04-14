@@ -35,7 +35,7 @@
       foreach($clients as $client){
         $counter++;
         echo '<tr>';
-        echo '<th scope="row">'.$counter.'</th>';
+        echo '<td>'.$counter.'</td>';
         echo '<td>'.$client['name'].'</td>';
         echo '<td>'.$client['email_address'].'</br>#'.$client['contact_number'].'</br>'.$client['address'].'</td>';
         echo '<td>'.($client['Is_Active']==1 ? 'True' : 'False').'</td>';
@@ -46,6 +46,9 @@
         <a class="btn btn-danger" href="'.base_url().'clients/delete/'.$client['Id'].'">Delete</a>
         </td>';
         echo '</tr> ';
+      }
+      if($counter==0){
+        echo '<tr><td colspan="5">No data to show for '.$filter.'</td></tr>';
       }
     ?>
 
