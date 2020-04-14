@@ -7,7 +7,7 @@
     <div class="col-lg-4">
       <div class="row">
         <div class="col">
-          <input class="form-control" name="name_filter" value="<?php echo $filter;?>" "type="search" placeholder="Search" aria-label="Search">
+          <input class="form-control" name="name_filter" value="<?= $filter;?>" type="search" placeholder="Search" aria-label="Search">
         </div class="col-lg-1">
         <div>
           <button class="btn btn-outline-success lg-12" type="submit">Search</button>

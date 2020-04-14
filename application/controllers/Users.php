@@ -4,6 +4,7 @@
 		public function index(){
 			$data['title'] = 'Users';
 			$data['users'] = $this->User_model->get_users(null);
+			$data['filter'] = $this->input->post('users_filter');
 			$this->load->view('templates/header');
 			$this->load->view('users/index', $data);
 			$this->load->view('templates/footer');

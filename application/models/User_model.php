@@ -9,7 +9,7 @@
         $query=$this->db->get_where('users', array('id' => $id));
         return $query->row_array();
       }else {
-        $query = $this->db->get('users');
+				$query=$this->db->get_where('users', array('fullname LIKE' => '%'.$this->input->post('users_filter').'%'));
   			return $query->result_array();
       }
 		}
@@ -18,6 +18,7 @@
 			$data = array(
 				'firstname' => $this->input->post('fname'),
         'lastname' => $this->input->post('lname'),
+				'fullname' => $this->input->post('fname').' '.$this->input->post('lname'),
 				'email' => $this->input->post('email'),
 				'username' => $this->input->post('username'),
 				'password' => md5($this->input->post('password')),
@@ -31,6 +32,7 @@
       $data = array(
 				'firstname' => $this->input->post('fname'),
         'lastname' => $this->input->post('lname'),
+				'fullname' => $this->input->post('fname').' '.$this->input->post('lname'),
 				'email' => $this->input->post('email'),
 				'username' => $this->input->post('username'),
 				'password' => md5($this->input->post('password')),

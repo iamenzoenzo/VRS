@@ -6,8 +6,20 @@
   		<input type="text" class="form-control" name="name" placeholder="Enter setting name">
   	</div>
     <div class="col">
+      <label>Type</label>
+      <select name="type" class="form-control">
+        <option>-</option>
+        <option value="contact">Contact</option>
+        <option value="faq">FAQ</option>
+        <option value="system">System</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
       <label>Value</label>
-      <input type="text" class="form-control" name="value" placeholder="Enter setting value">
+      <textarea class="form-control" name="value" placeholder="Enter setting value" rows="10" cols="30"></textarea>
     </div>
   </div>
 <div class="pt-3">
