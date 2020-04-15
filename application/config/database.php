@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'projectvrsdb.chioee9qrhwf.us-east-1.rds.amazonaws.com',
-	'username' => 'vrsdbadmin',
-	'password' => 'Teamlaban!',
+	'hostname' => 'localhost',
+	'username' => 'root',
+	'password' => '',
 	'database' => 'carrental',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
