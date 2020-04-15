@@ -19,7 +19,7 @@
         <select name="carId" id="carId" class="form-control">
           <option value="0">-</option>
         <?php foreach ($cars as $car): ?>
-          <option <?php echo isset($SelectedCar)?(($car['Id']==$SelectedCar['Id'])?'selected="selected"':''):''; ?> value="<?php echo $car['Id'];?>"><?php echo $car['code_name'].' (PhP '.number_format($car['RentPerDay'],2).' per day)';?></option>
+          <option <?php echo isset($SelectedCar)?(($car['Id']==$SelectedCar['Id'])?'selected="selected"':''):''; ?> value="<?php echo $car['Id'];?>"><?php echo $car['name'].' (PhP '.number_format($car['RentPerDay'],2).' per day)';?></option>
         <?php endforeach; ?>
         </select>
       </div>
@@ -33,7 +33,7 @@
     <div class="row pt-3">
       <div class="col">
         <div class="checkbox">
-          <input id="driver_checkbox" name="driver_checkbox" type="checkbox"><label> Add driver? (+PhP <?php echo number_format($driverpay['value'],2);?>)</label>
+          <input id="driver_checkbox" name="driver_checkbox" type="checkbox"><label> Add driver? (+PhP <?php echo number_format($driverpay['value'],2);?> per day)</label>
         </div>
       </div>
     </div>

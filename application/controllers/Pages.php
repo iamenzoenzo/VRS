@@ -49,7 +49,7 @@ class Pages extends CI_Controller {
     $noOfDays=$this->input->post('no_of_days');
     $car = $this->Car_model->get_cars($this->input->post('car_id'));
     if(isset($car['Id'])&&isset($noOfDays)){
-      echo number_format(($noOfDays * $car['RentPerDay'])+$driverpay,2);
+      echo number_format(($noOfDays * $car['RentPerDay'])+($driverpay*$noOfDays),2);
     }else{
       echo number_format(0,2);
     }

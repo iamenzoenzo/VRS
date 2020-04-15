@@ -22,9 +22,9 @@
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
                     <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                    <a class="btn btn-sm btn-outline-secondary" href="<?php echo base_url()?>pages/estimate/<?php echo $car['Id']?>" class="btn btn-info" role="button">Estimate Rent</a>
                     <?php if($this->session->userdata('logged_in')): ?>
                       <a class="btn btn-sm btn-outline-secondary" href="<?php echo base_url()?>cars/edit/<?php echo $car['Id']?>" class="btn btn-info" role="button">Edit</a>
-                      <a class="btn btn-sm btn-outline-secondary" href="<?php echo base_url()?>pages/estimate/<?php echo $car['Id']?>" class="btn btn-info" role="button">Estimate Rent</a>
                     <?php endif; ?>
                   </div>
                 </div>
