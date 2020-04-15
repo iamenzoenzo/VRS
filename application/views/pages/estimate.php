@@ -33,7 +33,7 @@
     <div class="row pt-3">
       <div class="col">
         <div class="checkbox">
-          <input id="driver_checkbox" name="driver_checkbox" type="checkbox"><label> Add driver? (+PhP <?php echo number_format($driverpay['value'],2);?>)</label>
+          <input id="driver_checkbox" name="driver_checkbox" type="checkbox"><label> Add driver? (+PhP <?php echo number_format($driverpay['value'],2);?> per day)</label>
         </div>
       </div>
     </div>
