@@ -4,11 +4,15 @@
 			$this->load->database();
 		}
 
-		public function get_cars(){
-      $this->db->join('images', 'cars.image_id = images.id', 'left');
+		public function get_cars($id){
 			$this->db->order_by('name');
-			$query = $this->db->get('cars');
-			return $query->result_array();
+			if(isset($id)){
+				$query=$this->db->get_where('cars', array('Id' => $id));
+				return $query->row_array();
+			}else {
+				$query = $this->db->get('cars');
+				return $query->result_array();
+			}
 		}
 
 		public function get_distinct_cars(){

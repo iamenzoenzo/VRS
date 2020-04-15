@@ -22,13 +22,35 @@ class Pages extends CI_Controller {
 
   public function estimate($carId=0)
   {
+    $days=$this->input->post('NumberOfDays');
+    if(isset($days)){
+      $days=$this->input->post('NumberOfDays');
+    }else{
+      $days=1;
+    }
     $data['title'] = 'Rent Estimate';
     $data['driverpay'] = $this->Setting_model->get_settings(null,'Driver_Per_Day');
-    $data['SelectedCarId']=$carId;
-    $data['cars'] = $this->Car_model->get_cars();
+    $data['SelectedCar'] = $this->Car_model->get_cars($carId);
+    $data['cars'] = $this->Car_model->get_cars(null);
     $this->load->view('templates/header', $data);
     $this->load->view('pages/estimate',$data);
     $this->load->view('templates/footer', $data);
+  }
+
+  public function computeEstimatedRent()
+  {
+    $adddriver=$this->input->post('add_driver');
+    if($adddriver=='true'){
+      $res = $this->Setting_model->get_settings(null,'Driver_Per_Day');
+      $driverpay=$res['value'];
+    }else{
+      $driverpay=0;
+    }
+
+    $car = $this->Car_model->get_cars($this->input->post('car_id'));
+
+    echo number_format(($this->input->post('no_of_days') * $car['RentPerDay'])+$driverpay,2);
+
   }
 
   public function contact()

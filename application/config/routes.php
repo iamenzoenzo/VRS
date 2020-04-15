@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'pages/view';
 
 $route['estimate'] = 'pages/estimate';
+$route['estimate/(:any)'] = 'pages/estimate/$1';
 
 $route['contact'] = 'pages/contact';
 
