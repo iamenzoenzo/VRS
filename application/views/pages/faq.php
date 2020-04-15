@@ -1,4 +1,4 @@
-<title>FAQ</title>
+<title><?php echo $title?></title>
 <h2>Frequently asked questions</h2>
 <p><strong>Note:</strong> Click the question to reveal the answer.</p>
 <div id="accordion">
