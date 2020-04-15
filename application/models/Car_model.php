@@ -5,11 +5,12 @@
 		}
 
 		public function get_cars($id){
-			$this->db->order_by('name');
 			if(isset($id)){
+				$this->db->order_by('name');
 				$query=$this->db->get_where('cars', array('Id' => $id));
 				return $query->row_array();
 			}else {
+				$this->db->order_by('name');
 				$query = $this->db->get('cars');
 				return $query->result_array();
 			}

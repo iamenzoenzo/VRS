@@ -19,7 +19,7 @@
         <select name="carId" id="carId" class="form-control">
           <option value="0">-</option>
         <?php foreach ($cars as $car): ?>
-          <option <?php echo isset($SelectedCar)?(($car['Id']==$SelectedCar['Id'])?'selected="selected"':''):''; ?> value="<?php echo $car['Id'];?>"><?php echo $car['code_name'].' (PhP '.number_format($car['RentPerDay'],2).' per day)';?></option>
+          <option <?php echo isset($SelectedCar)?(($car['Id']==$SelectedCar['Id'])?'selected="selected"':''):''; ?> value="<?php echo $car['Id'];?>"><?php echo $car['name'].' (PhP '.number_format($car['RentPerDay'],2).' per day)';?></option>
         <?php endforeach; ?>
         </select>
       </div>
