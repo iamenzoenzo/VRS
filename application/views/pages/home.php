@@ -3,13 +3,13 @@
 <div id="carouselExampleIndicators" class="carousel slide border box-shadow text-center mt-3" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img style="width:100%;height:100%;object-fit: cover;" class="d-block" src="<?php echo base_url();?>assets/images/homepage_carousel/slide-1.jpg">
+      <img style="width:100%;height:50%;object-fit: cover;" class="d-block" src="<?php echo base_url();?>assets/images/homepage_carousel/slide-1.jpg">
     </div>
     <div class="carousel-item">
-      <img style="width:100%;height:100%;object-fit: cover;" class="d-block" src="<?php echo base_url();?>assets/images/homepage_carousel/slide-2.jpg">
+      <img style="width:100%;height:50%;object-fit: cover;" class="d-block" src="<?php echo base_url();?>assets/images/homepage_carousel/slide-2.jpg">
     </div>
     <div class="carousel-item">
-      <img style="width:100%;height:100%;object-fit: cover;" class="d-block" src="<?php echo base_url();?>assets/images/homepage_carousel/slide-3.jpg">
+      <img style="width:100%;height:50%;object-fit: cover;" class="d-block" src="<?php echo base_url();?>assets/images/homepage_carousel/slide-3.jpg">
     </div>
   </div>
   <a class="carousel-control-prev shadow rounded" href="#carouselExampleIndicators" role="button" data-slide="prev">
