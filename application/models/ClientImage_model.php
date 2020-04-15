@@ -1,5 +1,5 @@
 <?php
-	class UserImage_model extends CI_Model{
+	class ClientImage_model extends CI_Model{
 		public function __construct(){
 			$this->load->database();
 		}
@@ -29,8 +29,16 @@
 		}
 
 		public function delete_client_photo($id){
+			$clientImage = $this->ClientImage_model->get_images($id,null);
+			$path_to_file = './assets/images/client_images/'.$clientImage['file_name'];
 			$this->db->where('Id', $id);
 			$this->db->delete('clientsphotos');
-			return true;
+			$affectedRows=$this->db->affected_rows();
+			if($affectedRows>0){
+				$this->File_model->dete_photo_from_directory($path_to_file);
+				return true;
+			}else {
+				return false;
+			}
 		}
 	}

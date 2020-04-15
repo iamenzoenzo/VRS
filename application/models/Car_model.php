@@ -17,7 +17,6 @@
 		}
 
 		public function get_distinct_cars(){
-			$this->db->join('images', 'cars.image_id = images.id', 'left');
 			$this->db->order_by('name');
 			$this->db->group_by(array("cars.model", "cars.manufacturer"));
 			$query = $this->db->get('cars');
@@ -34,7 +33,7 @@
         'plate_number' => $this->input->post('car-plate-number'),
         'RentPerDay' => $this->input->post('car-rent-per-day'),
         'Capacity' => $this->input->post('car-capacity'),
-				'car_image_path' => $car_image,
+				'file_name' => $car_image,
 				'Is_Active' => 1
 
 			);
@@ -65,9 +64,15 @@
 			return $query->row();
 		}
 
-		public function delete_category($id){
+		public function delete_car($id){
+			$car = $this->Car_model->get_cars($id);
 			$this->db->where('id', $id);
-			$this->db->delete('categories');
+			$this->db->delete('cars');
+			$rowsAffected = $this->db->affected_rows();
+			$path_to_file="./assets/images/cars_images/".$car['file_name'];
+			if($rowsAffected>0){
+				$this->File_model->delete_photo_from_directory($path_to_file);
+			}
 			return true;
 		}
 	}

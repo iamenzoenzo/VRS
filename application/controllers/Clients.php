@@ -14,7 +14,7 @@ date_default_timezone_set('Asia/Manila');
 		public function view($id){
 			$data['title'] = 'Client Information';
 			$data['clients'] = $this->Client_model->get_clients($id);
-			$data['images'] = $this->UserImage_model->get_images(null,$id);
+			$data['images'] = $this->ClientImage_model->get_images(null,$id);
 			if(empty($data['clients'])){
 				show_404();
 			}
@@ -78,7 +78,7 @@ date_default_timezone_set('Asia/Manila');
 				$this->Client_model->create_client($fileNames);
 
 				// Set message
-				$this->session->set_flashdata('clients_created', 'You have added a new client');
+				$this->session->set_flashdata('client_created', 'You have added a new client');
 
 				redirect('clients/index');
 			}
@@ -108,12 +108,15 @@ date_default_timezone_set('Asia/Manila');
     }
 
     public function delete($id){
-      $this->Client_model->delete_client($id);
+      $result = $this->Client_model->delete_client($id);
+			if($result){
+				$this->session->set_flashdata('client_deleted', 'Client has been deleted');
+	      redirect('clients/index');
+			}else{
+				$this->session->set_flashdata('client_deleted_error', 'Error encountered while deleting client');
+				redirect('clients/view/'.$id);
+			}
 
-      // Set message
-      $this->session->set_flashdata('client_deleted', 'Client has been deleted');
-
-      redirect('clients/index');
     }
 
 	}

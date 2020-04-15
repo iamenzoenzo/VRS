@@ -78,6 +78,19 @@
 
     }
 
+		public function view($id){
+			$data['title'] = 'Vehicle Information';
+			$data['cars'] = $this->Car_model->get_cars($id);
+
+			if(empty($data['cars'])){
+				show_404();
+			}
+				$this->load->view('templates/header');
+				$this->load->view('cars/view', $data);
+				$this->load->view('templates/footer');
+
+		}
+
 		public function update(){
 
 			$this->Car_model->update_car();
@@ -94,11 +107,14 @@
 				redirect('users/login');
 			}
 
-			$this->category_model->delete_category($id);
+			$result = $this->Car_model->delete_car($id);
+			if($result){
+				$this->session->set_flashdata('car_deleted', 'Vehicle has been deleted');
+				redirect('cars/index');
+			}else{
+				$this->session->set_flashdata('car_deleted_error', 'Error encountered while deleting vehicle');
+				redirect('cars/view/'.$id);
+			}
 
-			// Set message
-			$this->session->set_flashdata('category_deleted', 'Your category has been deleted');
-
-			redirect('categories');
 		}
 	}
