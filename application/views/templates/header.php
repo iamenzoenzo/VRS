@@ -17,7 +17,7 @@
         <h5 class="my-0 mr-md-auto font-weight-normal">
           <a class="nav-link text-dark"href="<?php echo base_url(); ?>">Wheels Automarket and Car Rental</a>
         </h5>
-        <nav class="navbar navbar-expand-lg navbar-light">
+        <nav class="navbar navbar-expand navbar-light">
           <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item">
@@ -33,7 +33,7 @@
                 <a class="nav-link" href="<?php echo base_url(); ?>cars/availablecars">Available Vehicles</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url(); ?>#">Estimate Rent</a>
+                <a class="nav-link" href="<?php echo base_url(); ?>estimate">Estimate Rent</a>
               </li>
               <?php if($this->session->userdata('logged_in')): ?>
               <li class="nav-item dropdown">

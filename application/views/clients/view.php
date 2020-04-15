@@ -71,11 +71,11 @@
       $counter++;
       echo '
       <div class="carousel-item '.($counter===1 ? 'active' : ' ' ).'">
-        <a data-toggle="modal" href="#exampleModal" data-whatever="'.base_url().'assets/images/client_images/'.$image['file_name'].'">
+        <a title="Click image to view full screen" data-toggle="modal" href="#exampleModal" data-whatever="'.base_url().'assets/images/client_images/'.$image['file_name'].'">
           <img style="width:100%;height:100%;object-fit: cover;" class="d-block" src="'.base_url().'assets/images/client_images/'.$image['file_name'].'">
         </a>
         <div class="carousel-caption d-none d-md-block">
-        <h5>Click image to view full screen</h5>
+        <h5><span class="shadow-sm bg-secondary rounded p-1 text-white">Click image to view full screen</span></h5>
         <p>'.$image['file_name'].'</p>
       </div>
       </div>
@@ -102,6 +102,16 @@ $('#exampleModal').on('show.bs.modal', function (event) {
     //modal.find('.ImageContainer').text('Reserve a Unit ' + recipient)
     var htmlText='<img style="width:100%;height=100%;object-fit:cover;" src="'+recipient+'">';
     document.getElementById("ImageContainer").innerHTML=htmlText;
+});
+
+$('#btnViewFullScreen').on('click', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var recipient = button.data('whatever2')
+
+    //modal.find('.ImageContainer').text('Reserve a Unit ' + recipient)
+    var htmlText='<img style="width:100%;height=100%;object-fit:cover;" src="'+recipient+'">';
+    document.getElementById("ImageContainer").innerHTML=htmlText;
+
 });
 
 </script>
