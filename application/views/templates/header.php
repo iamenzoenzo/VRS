@@ -74,19 +74,27 @@
             </ul>
           </div>
         </nav>
-        <?php
-        if(!$this->session->userdata('logged_in')){
-          echo '<a class="btn btn-outline-primary" href="'.base_url().'/users/login">Login</a>';
-        }else{
-          echo '<a class="btn btn-outline-danger" href="'.base_url().'/users/logout">Logout</a>';
-        }
-        ?>
+        <?php if(!$this->session->userdata('logged_in')): ?>
+          <a class="btn btn-outline-primary" href="<?php echo base_url()?>users/login">Login</a>
+        <?php else: ?>
+          <a class="btn btn-outline-danger" href="<?php echo base_url()?>users/logout">Logout</a>
+        <?php endif; ?>
+
   </div>
 <div class="container pb-5">
 <!-- flash messages -->
 <?php if($this->session->flashdata('car_created')): ?>
   <div class="alert alert-success alert-dismissible fade show" role="alert">
   <?php echo $this->session->flashdata('car_created'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('car_updated')): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('car_updated'); ?>
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
