@@ -6,6 +6,9 @@
     <meta charset="UTF-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <!-- favicon -->
+     <link rel="icon" href="<?php echo base_url();?>assets/images/system_images/vrslogo.png" type="image/gif" sizes="16x16"> 
+
     <!-- script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script -->
     <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/bootstrap-4.4.1/css/bootstrap.min.css">
@@ -13,11 +16,11 @@
     <script src="<?php echo base_url(); ?>assets/bootstrap-4.4.1/js/bootstrap.min.js" ></script>
 </head>
 <body class="pb-5">
-  <div class="bg-light d-flex flex-column flex-md-row align-items-center pb-1 px-md-4 mb-3 bg-white border-bottom box-shadow sticky-top">
+  <div class="bg-light d-flex flex-column flex-md-row align-items-center pb-1 px-md-4 mb-3 bg-dark border-bottom box-shadow sticky-top">
         <h5 class="my-0 mr-md-auto font-weight-normal">
-          <a class="nav-link text-dark"href="<?php echo base_url(); ?>">Wheels Automarket and Car Rental</a>
+          <a class="nav-link text-light" href="<?php echo base_url(); ?>"><img src="<?php echo base_url();?>assets/images/system_images/vrslogo.png">&nbsp;VRS</a>
         </h5>
-        <nav class="navbar navbar-expand-lg navbar-light">
+        <nav class="navbar navbar-expand-lg navbar-dark">
           <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item">
