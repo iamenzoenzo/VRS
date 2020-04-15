@@ -6,6 +6,9 @@
     <meta charset="UTF-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <!-- favicon -->
+     <link rel="icon" href="<?php echo base_url();?>assets/images/system_images/vrslogo.png" type="image/gif" sizes="16x16">
+
     <!-- script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script -->
     <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/bootstrap-4.4.1/css/bootstrap.min.css">
@@ -13,11 +16,12 @@
     <script src="<?php echo base_url(); ?>assets/bootstrap-4.4.1/js/bootstrap.min.js" ></script>
 </head>
 <body class="pb-5">
-  <div class="bg-light d-flex flex-column flex-md-row align-items-center pb-1 px-md-4 mb-3 bg-white border-bottom box-shadow sticky-top">
+  <div class="bg-light d-flex flex-column flex-md-row align-items-center pb-1 px-md-4 mb-3 bg-dark border-bottom box-shadow sticky-top">
         <h5 class="my-0 mr-md-auto font-weight-normal">
-          <a class="nav-link text-dark"href="<?php echo base_url(); ?>">Wheels Automarket and Car Rental</a>
+          <a class="nav-link text-light" href="<?php echo base_url(); ?>"><img src="<?php echo base_url();?>assets/images/system_images/vrslogo.png">&nbsp;VRS</a>
         </h5>
         <nav class="navbar navbar-expand navbar-light">
+        <nav class="navbar navbar-expand-lg navbar-dark">
           <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item">
@@ -70,19 +74,27 @@
             </ul>
           </div>
         </nav>
-        <?php
-        if(!$this->session->userdata('logged_in')){
-          echo '<a class="btn btn-outline-primary" href="'.base_url().'/users/login">Login</a>';
-        }else{
-          echo '<a class="btn btn-outline-danger" href="'.base_url().'/users/logout">Logout</a>';
-        }
-        ?>
+        <?php if(!$this->session->userdata('logged_in')): ?>
+          <a class="btn btn-outline-primary" href="<?php echo base_url()?>users/login">Login</a>
+        <?php else: ?>
+          <a class="btn btn-outline-danger" href="<?php echo base_url()?>users/logout">Logout</a>
+        <?php endif; ?>
+
   </div>
 <div class="container pb-5">
 <!-- flash messages -->
 <?php if($this->session->flashdata('car_created')): ?>
   <div class="alert alert-success alert-dismissible fade show" role="alert">
   <?php echo $this->session->flashdata('car_created'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('car_updated')): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('car_updated'); ?>
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>

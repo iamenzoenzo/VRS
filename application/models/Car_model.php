@@ -41,6 +41,24 @@
 			return $this->db->insert('cars', $data);
 		}
 
+		public function update_car(){
+			$data = array(
+				'name' => $this->input->post('car-name'),
+				'code_name' => $this->input->post('car-code-name'),
+				'model' => $this->input->post('car-model-name'),
+				'manufacturer' => $this->input->post('car-manufacturer'),
+				'year' => $this->input->post('car-model-year'),
+				'plate_number' => $this->input->post('car-plate-number'),
+				'RentPerDay' => $this->input->post('car-rent-per-day'),
+				'Capacity' => $this->input->post('car-capacity'),
+				//'car_image_path' => $car_image,
+				'Is_Active' => 1
+			);
+
+			$this->db->where('id', $this->input->post('id'));
+			return $this->db->update('cars', $data);
+		}
+
 		public function get_category($id){
 			$query = $this->db->get_where('categories', array('id' => $id));
 			return $query->row();
