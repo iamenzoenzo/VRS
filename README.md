@@ -2,6 +2,12 @@
 Wheels Automarket and Car Rental
 
 # Readme
+
+# AWS instance
+```
+http://ec2-54-91-146-112.compute-1.amazonaws.com/projectvrs/
+```
+
 ## Install apache
 ```sh
 $    sudo apt update
