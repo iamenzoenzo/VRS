@@ -47,7 +47,7 @@
           Booking
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="<?php echo base_url(); ?>cars/index">View Booking</a>
+          <a class="dropdown-item" href="<?php echo base_url(); ?>bookings/index">View Booking</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -76,9 +76,9 @@
       <li>
         <?php
         if(!$this->session->userdata('logged_in')){
-          echo '<a class="btn btn-outline-primary" href="'.base_url().'/users/login">Login</a>';
+          echo '<a class="btn btn-outline-primary" href="'.base_url().'users/login">Login</a>';
         }else{
-          echo '<a class="btn btn-outline-danger" href="'.base_url().'/users/logout">Logout</a>';
+          echo '<a class="btn btn-outline-danger" href="'.base_url().'users/logout">Logout</a>';
         }
         ?>
       </li>
@@ -239,6 +239,15 @@
 <?php if($this->session->flashdata('client_updated')): ?>
   <div class="alert alert-success alert-dismissible fade show" role="alert">
   <?php echo $this->session->flashdata('client_updated'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('booking_created')): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('booking_created'); ?>
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
