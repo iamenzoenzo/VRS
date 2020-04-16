@@ -52,7 +52,8 @@
   </div>
 <div class="pt-3">
   <?php if($this->session->userdata('logged_in')): ?>
-	<a href="<?php echo base_url(); ?>cars/delete/<?php echo $cars['Id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this vehicle?')">Delete Vehicle</a>
-<?php endif; ?>
+    <a href="<?php echo base_url(); ?>cars/edit/<?php echo $cars['Id']; ?>" class="btn btn-success">Edit</a>
+    <a href="<?php echo base_url(); ?>cars/delete/<?php echo $cars['Id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this vehicle?')">Delete</a>
+  <?php endif; ?>
 </div>
 </div>
