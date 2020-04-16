@@ -29,7 +29,7 @@
 			);
 			$this->db->insert('clients', $data);
 			$id=$this->db->insert_id();
-			$this->UserImage_model->create_client_photos($id,$filesdata);
+			$this->ClientImage_model->create_client_photos($id,$filesdata);
 			return true;
 		}
 
@@ -44,11 +44,12 @@
     }
 
 		public function delete_client($id){
-			$userImages=$this->UserImage_model->get_images(null,$id);
+			$userImages=$this->ClientImage_model->get_images(null,$id);
 			foreach ($userImages as $key) {
 				$path_to_file = './assets/images/client_images/'.$key['file_name'];
+				$this->File_model->delete_photo_from_directory($path_to_file);
 				if(unlink($path_to_file)) {
-				     $this->UserImage_model->delete_client_photo($key['Id']);
+				     $this->ClientImage_model->delete_client_photo($key['Id']);
 				}
 			}
 			$this->db->where('id', $id);
