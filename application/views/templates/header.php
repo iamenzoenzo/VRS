@@ -36,7 +36,7 @@
         <a class="nav-link" href="<?php echo base_url(); ?>faq">FAQs</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url(); ?>cars/availablecars">Available Vehicles</a>
+        <a class="nav-link" href="<?php echo base_url(); ?>cars/index">Available Vehicles</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="<?php echo base_url(); ?>estimate">Estimate Rent</a>
