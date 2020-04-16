@@ -1,6 +1,14 @@
 <title><?php echo $title ?></title>
-<h2><?php echo $title ?></h2>
-<?php //echo form_open('pages/estimate'); ?>
+
+<div class="row">
+  <div class="col">
+    <h2><?php echo $title ?></h2>
+  </div>
+    <div class="float-right pl-3">
+      <a href="<?php echo base_url(); ?>cars/index" class="btn btn-primary">Back to available vehicles</a>
+    </div>
+</div>
+
 <div class="card sm-col-12 lg-col-8">
   <div class="card-body">
     <div class="row text-center">
@@ -39,11 +47,10 @@
     </div>
     <div class="row mt-2">
       <div class="col">
-        <button type="submit" name="btnCompute" id="btnCompute" class="btn btn-primary sm-col-12">Compute</button>
-        </div>
+        <button type="submit" name="btnCompute" id="btnCompute" class="btn btn-primary sm-col-12">Compute</button>        
+      </div>
       </div>
   </div>
-
 </div>
 
 
