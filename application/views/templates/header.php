@@ -101,6 +101,33 @@
 </div>
 <?php endif; ?>
 
+<?php if($this->session->flashdata('car_updated')): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('car_updated'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('car_deleted')): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('car_deleted'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('car_deleted_error')): ?>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('car_deleted_error'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
 <?php if($this->session->flashdata('setting_created')): ?>
   <div class="alert alert-success alert-dismissible fade show" role="alert">
   <?php echo $this->session->flashdata('setting_created'); ?>
@@ -182,9 +209,9 @@
 </div>
 <?php endif; ?>
 
-<?php if($this->session->flashdata('clients_created')): ?>
+<?php if($this->session->flashdata('client_created')): ?>
   <div class="alert alert-success alert-dismissible fade show" role="alert">
-  <?php echo $this->session->flashdata('clients_created'); ?>
+  <?php echo $this->session->flashdata('client_created'); ?>
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -200,9 +227,18 @@
 </div>
 <?php endif; ?>
 
-<?php if($this->session->flashdata('client_updates')): ?>
+<?php if($this->session->flashdata('client_deleted_error')): ?>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('client_deleted_error'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('client_updated')): ?>
   <div class="alert alert-success alert-dismissible fade show" role="alert">
-  <?php echo $this->session->flashdata('client_updates'); ?>
+  <?php echo $this->session->flashdata('client_updated'); ?>
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
