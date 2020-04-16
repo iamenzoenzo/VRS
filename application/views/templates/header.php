@@ -5,83 +5,92 @@
   <head>
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon -->
      <link rel="icon" href="<?php echo base_url();?>assets/images/system_images/vrslogo.png" type="image/gif" sizes="16x16">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script -->
     <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/bootstrap-4.4.1/css/bootstrap.min.css">
     <script src="<?php echo base_url(); ?>assets/bootstrap-4.4.1/js/jquery.min.js" ></script>
     <script src="<?php echo base_url(); ?>assets/bootstrap-4.4.1/js/bootstrap.min.js" ></script>
+    <script src="<?php echo base_url(); ?>assets/bootstrap-4.4.1/js/popper.min.js" ></script>
 </head>
 <body class="pb-5">
-  <div class="bg-light d-flex flex-column flex-md-row align-items-center pb-1 px-md-4 mb-3 bg-dark border-bottom box-shadow sticky-top">
-        <h5 class="my-0 mr-md-auto font-weight-normal">
-          <a class="nav-link text-light" href="<?php echo base_url(); ?>"><img src="<?php echo base_url();?>assets/images/system_images/vrslogo.png">&nbsp;VRS</a>
-        </h5>
-        <nav class="navbar navbar-expand navbar-light">
-        <nav class="navbar navbar-expand-lg navbar-dark">
-          <div class="collapse navbar-collapse">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url(); ?>about">About Us</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url(); ?>contact">Contact Us</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url(); ?>faq">FAQs</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url(); ?>cars/availablecars">Available Vehicles</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url(); ?>estimate">Estimate Rent</a>
-              </li>
-              <?php if($this->session->userdata('logged_in')): ?>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Booking
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="<?php echo base_url(); ?>cars/index">View Booking</a>
-                </div>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Client
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="<?php echo base_url(); ?>clients/index">View Clients</a>
-                </div>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Admin
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="<?php echo base_url(); ?>users/index">View Users</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="<?php echo base_url(); ?>cars/index">View Vehicles</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="<?php echo base_url(); ?>settings/index">View Settings</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="<?php echo base_url(); ?>status/index">View Status</a>
-                </div>
-              </li>
-              <?php endif; ?>
-            </ul>
-          </div>
-        </nav>
-        <?php if(!$this->session->userdata('logged_in')): ?>
-          <a class="btn btn-outline-primary" href="<?php echo base_url()?>users/login">Login</a>
-        <?php else: ?>
-          <a class="btn btn-outline-danger" href="<?php echo base_url()?>users/logout">Logout</a>
-        <?php endif; ?>
-
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+    <div class="navbar-header">
+    <p class="my-0 mr-md-auto font-weight-normal">
+      <a class="nav-link text-light" href="<?php echo base_url(); ?>"><img src="<?php echo base_url();?>assets/images/system_images/vrslogo.png">&nbsp;VRS</a>
+    </p>
+    </div>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo base_url(); ?>about">About Us</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo base_url(); ?>contact">Contact Us</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo base_url(); ?>faq">FAQs</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo base_url(); ?>cars/index">Available Vehicles</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo base_url(); ?>estimate">Estimate Rent</a>
+      </li>
+      <?php if($this->session->userdata('logged_in')): ?>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Booking
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="<?php echo base_url(); ?>cars/index">View Booking</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Client
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="<?php echo base_url(); ?>clients/index">View Clients</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Admin
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="<?php echo base_url(); ?>users/index">View Users</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="<?php echo base_url(); ?>cars/index">View Vehicles</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="<?php echo base_url(); ?>settings/index">View Settings</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="<?php echo base_url(); ?>status/index">View Status</a>
+        </div>
+      </li>
+      <?php endif; ?>
+      <li>
+        <?php
+        if(!$this->session->userdata('logged_in')){
+          echo '<a class="btn btn-outline-primary" href="'.base_url().'/users/login">Login</a>';
+        }else{
+          echo '<a class="btn btn-outline-danger" href="'.base_url().'/users/logout">Logout</a>';
+        }
+        ?>
+      </li>
+    </ul>
   </div>
-<div class="container pb-5">
+  </nav>
+  <br>
+<div class="container">
+  <hr>
+</div>
+
+<div class="container">
 <!-- flash messages -->
 <?php if($this->session->flashdata('car_created')): ?>
   <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -95,6 +104,24 @@
 <?php if($this->session->flashdata('car_updated')): ?>
   <div class="alert alert-success alert-dismissible fade show" role="alert">
   <?php echo $this->session->flashdata('car_updated'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('car_deleted')): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('car_deleted'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('car_deleted_error')): ?>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('car_deleted_error'); ?>
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -182,9 +209,9 @@
 </div>
 <?php endif; ?>
 
-<?php if($this->session->flashdata('clients_created')): ?>
+<?php if($this->session->flashdata('client_created')): ?>
   <div class="alert alert-success alert-dismissible fade show" role="alert">
-  <?php echo $this->session->flashdata('clients_created'); ?>
+  <?php echo $this->session->flashdata('client_created'); ?>
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -200,9 +227,18 @@
 </div>
 <?php endif; ?>
 
-<?php if($this->session->flashdata('client_updates')): ?>
+<?php if($this->session->flashdata('client_deleted_error')): ?>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('client_deleted_error'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('client_updated')): ?>
   <div class="alert alert-success alert-dismissible fade show" role="alert">
-  <?php echo $this->session->flashdata('client_updates'); ?>
+  <?php echo $this->session->flashdata('client_updated'); ?>
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>

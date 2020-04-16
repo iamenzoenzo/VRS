@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 14, 2020 at 12:50 PM
+-- Generation Time: Apr 15, 2020 at 06:47 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -37,8 +37,7 @@ CREATE TABLE `cars` (
   `plate_number` varchar(10) NOT NULL,
   `RentPerDay` double(18,2) NOT NULL,
   `Capacity` int(2) NOT NULL,
-  `image_id` int(11) NOT NULL,
-  `car_image_path` varchar(255) NOT NULL,
+  `file_name` varchar(255) NOT NULL,
   `Is_Active` bit(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -46,11 +45,13 @@ CREATE TABLE `cars` (
 -- Dumping data for table `cars`
 --
 
-INSERT INTO `cars` (`Id`, `name`, `code_name`, `model`, `manufacturer`, `year`, `plate_number`, `RentPerDay`, `Capacity`, `image_id`, `car_image_path`, `Is_Active`) VALUES
-(5, 'Toyota Innova', 'Radiant Innova', 'Innova', 'Toyota', 2019, 'MIS-2020', 3500.00, 6, 4, 'no-image.jpg', b'1'),
-(9, '', 'Makoy Vios', 'Vios', 'Toyota', 2000, 'LAX-2020', 2500.00, 4, 3, 'no-image.jpg', b'1'),
-(13, '', 'Radiant Vios', 'Vios', 'Toyota', 2000, 'MBS-2020', 2500.00, 4, 3, 'no-image.jpg', b'1'),
-(40, 'Toyota Grandia', 'Toyota Grandia Radiant', 'Grandia', 'Toyota', 1990, 'TBS-7634', 1232131.00, 4, 0, '1586654715-Capture.PNG', b'1');
+INSERT INTO `cars` (`Id`, `name`, `code_name`, `model`, `manufacturer`, `year`, `plate_number`, `RentPerDay`, `Capacity`, `file_name`, `Is_Active`) VALUES
+(5, 'Toyota Innova 2020 Red', 'Radiant Innova', 'Innova', 'Toyota', 2010, 'MIS-2020', 3600.00, 6, 'no-image.jpg', b'1'),
+(13, '', 'Radiant Vios', 'Vios', 'Toyota', 2000, 'MBS-2020', 2500.00, 4, 'no-image.jpg', b'1'),
+(40, 'Toyota Grandia', 'Toyota Grandia Radiant', 'Grandia', 'Toyota', 1990, 'TBS-7634', 5000.00, 4, '1586654715-Capture.PNG', b'1'),
+(49, 'Hyundai Tucson (Yellow)', 'Radiant Hyundai', 'Tucson', 'Hyundai', 1990, 'XTR-3425', 4800.00, 4, 'v1starex1.jpg', b'1'),
+(50, 'BMW M3 (Silver)', 'BMW M3 Radiant', 'BMW M3', 'BMW', 2013, 'TRX-0987', 10000.00, 7, '1586954874-.jpg', b'1'),
+(51, 'BMW Z4 (Silver)', 'BMW Z4 Radiant', 'BMW Z4', 'BMW', 1990, 'TBS-7764', 20000.00, 2, '1586955163-Capture.PNG', b'1');
 
 -- --------------------------------------------------------
 
@@ -108,7 +109,8 @@ INSERT INTO `clients` (`Id`, `name`, `email_address`, `contact_number`, `address
 (97, 'Jeffry Manhulad', 'jcmanhulad@up.edu.ph', '09268406884', 'Musuan, Dologon, Maramag, Bukidnon', '', '', '', '', '2020-04-13 10:00:47', '0000-00-00', b'1'),
 (98, 'asdsa', 'jbbatedio@up.edu.ph', 'asdsa', 'sadsa', '', '', '', '', '2020-04-13 12:26:00', '0000-00-00', b'1'),
 (99, 'Jym Bartolaba Batedio', 'jbbatedio@up.edu.ph', '091231231231', 'Barra Opol Misamis Oriental', '', '', '', '', '2020-04-13 13:24:10', '0000-00-00', b'1'),
-(100, 'Mary Jeziel Cavan', 'johndue@gmail.com', '34324242', 'Musuan', '', '', '', '', '2020-04-13 21:54:53', '0000-00-00', b'1');
+(100, 'Mary Jeziel Cavan', 'johndue@gmail.com', '34324242', 'Musuan', '', '', '', '', '2020-04-13 21:54:53', '0000-00-00', b'1'),
+(101, 'MJ Cavan', 'admin@webdamn.com', '34534534', 'Address', '', '', '', '', '2020-04-15 19:13:12', '0000-00-00', b'1');
 
 -- --------------------------------------------------------
 
@@ -136,33 +138,11 @@ INSERT INTO `clientsphotos` (`Id`, `client_id`, `file_name`, `created_date`, `Is
 (78, 100, '1586786092-MVIMG_20191117_163234.jpg', '2020-04-13 21:54:53', b'1'),
 (79, 100, '1586786092-100_1991.JPG', '2020-04-13 21:54:53', b'1'),
 (80, 100, '1586786092-MVIMG_20200215_105930_1.jpg', '2020-04-13 21:54:53', b'1'),
-(81, 100, '1586786092-00100lrPORTRAIT_00100_BURST20200215105941635_COVER.jpg', '2020-04-13 21:54:54', b'1');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `images`
---
-
-CREATE TABLE `images` (
-  `Id` int(11) NOT NULL,
-  `file_path` varchar(255) NOT NULL,
-  `file_extension` varchar(10) NOT NULL,
-  `description` varchar(255) NOT NULL,
-  `type` varchar(20) NOT NULL,
-  `created_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `Is_deleted` bit(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `images`
---
-
-INSERT INTO `images` (`Id`, `file_path`, `file_extension`, `description`, `type`, `created_date`, `Is_deleted`) VALUES
-(1, 'images/user_image_data/starex', '.jpg', 'this is the image of the government id', 'id', '2020-04-05 15:33:02', b'0'),
-(2, 'images/user_image_data/no-image', '.jpg', 'the default image if no image', 'default image', '2020-04-05 15:33:02', b'0'),
-(3, 'images/user_image_data/toyota-vios-g', '.png', 'toyota', 'car', '2020-04-05 15:33:02', b'0'),
-(4, 'images/user_image_data/toyota-innova', '.jpg', 'innova', 'car', '2020-04-05 15:33:02', b'0');
+(81, 100, '1586786092-00100lrPORTRAIT_00100_BURST20200215105941635_COVER.jpg', '2020-04-13 21:54:54', b'1'),
+(82, 101, '1586949192-starex.jpg', '2020-04-15 19:13:12', b'1'),
+(83, 101, '1586949192-v1starex.jpg', '2020-04-15 19:13:13', b'1'),
+(84, 103, '1586966723-SAM_0745.JPG', '2020-04-16 00:05:23', b'1'),
+(85, 103, '1586966723-lbO17hkK_400x400.jpg', '2020-04-16 00:05:23', b'1');
 
 -- --------------------------------------------------------
 
@@ -183,7 +163,7 @@ CREATE TABLE `settings` (
 --
 
 INSERT INTO `settings` (`Id`, `name`, `value`, `type`, `Is_Active`) VALUES
-(6, 'Driver_Per_Day', '800', 'system', b'1'),
+(6, 'Driver_Per_Day', '1000', 'system', b'1'),
 (7, 'telephone', '+63 917 638 1707', 'contact', b'1'),
 (8, 'Email Address', 'inquiry@carrental.com / customer@carrental.com', 'contact', b'1'),
 (9, 'Address', 'Poblacion Hagkol Sayre Highway (infront of new bus terminal), Valencia City, Bukidnon 8709', 'contact', b'1'),
@@ -270,12 +250,6 @@ ALTER TABLE `clientsphotos`
   ADD PRIMARY KEY (`Id`);
 
 --
--- Indexes for table `images`
---
-ALTER TABLE `images`
-  ADD PRIMARY KEY (`Id`);
-
---
 -- Indexes for table `settings`
 --
 ALTER TABLE `settings`
@@ -301,7 +275,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `cars`
 --
 ALTER TABLE `cars`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `clientbookings`
@@ -313,19 +287,13 @@ ALTER TABLE `clientbookings`
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- AUTO_INCREMENT for table `clientsphotos`
 --
 ALTER TABLE `clientsphotos`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
-
---
--- AUTO_INCREMENT for table `images`
---
-ALTER TABLE `images`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT for table `settings`
