@@ -4,13 +4,6 @@
 			$this->load->database();
 		}
 
-		public function get_cars(){
-      $this->db->join('images', 'cars.image_id = images.id', 'left');
-			$this->db->order_by('name');
-			$query = $this->db->get('cars');
-			return $query->result_array();
-		}
-
 		public function create_setting(){
 			$data = array(
 				'name' => trim($this->input->post('name')),
@@ -51,7 +44,7 @@
 		}
 
 		public function get_settings_by_type($type){
-				$query=$this->db->get_where('settings', array('type LIKE '=>'%'.$type.'%'));
+				$query=$this->db->get_where('settings', array('type'=>$type));
 				return $query->result_array();
 
 		}

@@ -17,7 +17,8 @@ $route['users'] = 'users/index';
 $route['status'] = 'status/index';
 
 $route['clients'] = 'clients/index';
-//$route['clients/(:any)'] = 'clients/index/$1';
+
+$route['bookings'] = 'bookings/index';
 
 $route['(:any)'] = 'pages/view/$1';
 $route['404_override'] = '';
