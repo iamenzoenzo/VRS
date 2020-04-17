@@ -17,6 +17,7 @@
 		public function create_status(){
 			$data = array(
 				'label' => $this->input->post('label'),
+				'bootstrap_bg_color' => $this->input->post('color'),
 				'Is_Active' => 1
 
 			);
@@ -26,6 +27,7 @@
     public function update_status(){
       $data = array(
 				'label' => $this->input->post('label'),
+				'bootstrap_bg_color' => $this->input->post('color'),
 				'Is_Active' => (($this->input->post('is_active_checkbox')=='on') ? 1 : 0)
       );
 

@@ -6,6 +6,17 @@
   		<label>label</label>
   		<input type="text" class="form-control" value="<?php echo $status['label']; ?>" name="label" placeholder="Enter setting name">
   	</div>
+    <div class="col">
+      <label>Bootstrap Background Color</label>
+      <select class="form-control" name="color">
+        <option value="primary">Blue (Primary)</option>
+        <option value="secondary">Gray (Secondary)</option>
+        <option value="success">Green (Success)</option>
+        <option value="danger">Red (Danger)</option>
+        <option value="warning">Yellow (Warning)</option>
+        <option value="info">Light Blue (Info)</option>
+      </select>
+    </div>
   </div>
   <div class="row pt-3">
     <div class="col-2">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 16, 2020 at 06:25 PM
+-- Generation Time: Apr 17, 2020 at 04:00 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -58,7 +58,7 @@ INSERT INTO `cars` (`Id`, `name`, `code_name`, `model`, `manufacturer`, `year`, 
 --
 
 CREATE TABLE `clientbookings` (
-  `Id` int(11) NOT NULL,
+  `BookingId` int(11) NOT NULL,
   `clientId` int(11) NOT NULL,
   `carId` int(11) NOT NULL,
   `start_date` date NOT NULL,
@@ -75,11 +75,13 @@ CREATE TABLE `clientbookings` (
 -- Dumping data for table `clientbookings`
 --
 
-INSERT INTO `clientbookings` (`Id`, `clientId`, `carId`, `start_date`, `pick_up_time`, `number_of_days`, `end_date`, `return_time`, `created_date`, `updated_date`, `statusId`) VALUES
+INSERT INTO `clientbookings` (`BookingId`, `clientId`, `carId`, `start_date`, `pick_up_time`, `number_of_days`, `end_date`, `return_time`, `created_date`, `updated_date`, `statusId`) VALUES
 (5, 1, 5, '2020-01-29', '00:00:00', 0, '2020-01-31', '00:00:00', '2020-01-26 19:56:08', '0000-00-00 00:00:00', 2),
 (17, 97, 50, '2020-04-16', '00:00:00', 3, '2020-04-19', '00:00:00', '2020-04-16 23:25:09', '0000-00-00 00:00:00', 1),
 (18, 97, 50, '2020-04-16', '00:00:00', 3, '2020-04-19', '00:00:00', '2020-04-16 23:26:02', '0000-00-00 00:00:00', 1),
-(19, 99, 49, '2020-04-28', '00:00:00', 5, '2020-05-03', '00:00:00', '2020-04-17 00:00:34', '0000-00-00 00:00:00', 1);
+(19, 99, 49, '2020-04-28', '00:00:00', 5, '2020-05-03', '00:00:00', '2020-04-17 00:00:34', '0000-00-00 00:00:00', 2),
+(20, 97, 40, '2020-04-25', '00:00:00', 5, '2020-04-30', '00:00:00', '2020-04-17 08:43:53', '0000-00-00 00:00:00', 1),
+(21, 97, 40, '2020-04-25', '00:00:00', 5, '2020-04-30', '00:00:00', '2020-04-17 08:44:56', '0000-00-00 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -101,7 +103,9 @@ CREATE TABLE `clientbookingsphotos` (
 
 INSERT INTO `clientbookingsphotos` (`Id`, `booking_id`, `file_name`, `created_date`, `Is_Active`) VALUES
 (1, 18, '1587050762-lbO17hkK_400x400.jpg', '2020-04-16 23:26:02', b'1'),
-(2, 19, '1587052834-Capture.PNG', '2020-04-17 00:00:34', b'1');
+(2, 19, '1587052834-Capture.PNG', '2020-04-17 00:00:34', b'1'),
+(3, 21, '1587084295-CHARM.PNG', '2020-04-17 08:44:56', b'1'),
+(4, 21, '1587084295-ESCS_SCMC.PNG', '2020-04-17 08:44:56', b'1');
 
 -- --------------------------------------------------------
 
@@ -205,6 +209,7 @@ INSERT INTO `settings` (`Id`, `name`, `value`, `type`, `Is_Active`) VALUES
 CREATE TABLE `status` (
   `Id` int(11) NOT NULL,
   `label` varchar(50) NOT NULL,
+  `bootstrap_bg_color` varchar(100) NOT NULL,
   `Is_Active` bit(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -212,11 +217,10 @@ CREATE TABLE `status` (
 -- Dumping data for table `status`
 --
 
-INSERT INTO `status` (`Id`, `label`, `Is_Active`) VALUES
-(1, 'Reserved', b'1'),
-(2, 'In Progress', b'1'),
-(3, 'Done', b'1'),
-(8, 'Returned', b'1');
+INSERT INTO `status` (`Id`, `label`, `bootstrap_bg_color`, `Is_Active`) VALUES
+(1, 'Reserved', 'warning', b'1'),
+(2, 'In Progress', 'danger', b'1'),
+(8, 'Returned', 'secondary', b'1');
 
 -- --------------------------------------------------------
 
@@ -261,7 +265,7 @@ ALTER TABLE `cars`
 -- Indexes for table `clientbookings`
 --
 ALTER TABLE `clientbookings`
-  ADD PRIMARY KEY (`Id`);
+  ADD PRIMARY KEY (`BookingId`);
 
 --
 -- Indexes for table `clientbookingsphotos`
@@ -313,13 +317,13 @@ ALTER TABLE `cars`
 -- AUTO_INCREMENT for table `clientbookings`
 --
 ALTER TABLE `clientbookings`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `BookingId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `clientbookingsphotos`
 --
 ALTER TABLE `clientbookingsphotos`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `clients`

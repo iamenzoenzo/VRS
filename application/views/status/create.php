@@ -5,6 +5,17 @@
   		<label>Label</label>
   		<input type="text" class="form-control" name="label" placeholder="Enter status label">
   	</div>
+    <div class="col">
+      <label>Bootstrap Background Color</label>
+      <select class="form-control" name="color">
+        <option value="primary">Blue (Primary)</option>
+        <option value="secondary">Gray (Secondary)</option>
+        <option value="success">Green (Success)</option>
+        <option value="danger">Red (Danger)</option>
+        <option value="warning">Yellow (Warning)</option>
+        <option value="info">Light Blue (Info)</option>
+      </select>
+    </div>
   </div>
 <div class="pt-3">
 	<button type="submit" class="btn btn-primary">Submit</button>
