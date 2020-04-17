@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2020 at 06:47 PM
+-- Generation Time: Apr 17, 2020 at 04:00 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -46,8 +46,6 @@ CREATE TABLE `cars` (
 --
 
 INSERT INTO `cars` (`Id`, `name`, `code_name`, `model`, `manufacturer`, `year`, `plate_number`, `RentPerDay`, `Capacity`, `file_name`, `Is_Active`) VALUES
-(5, 'Toyota Innova 2020 Red', 'Radiant Innova', 'Innova', 'Toyota', 2010, 'MIS-2020', 3600.00, 6, 'no-image.jpg', b'1'),
-(13, '', 'Radiant Vios', 'Vios', 'Toyota', 2000, 'MBS-2020', 2500.00, 4, 'no-image.jpg', b'1'),
 (40, 'Toyota Grandia', 'Toyota Grandia Radiant', 'Grandia', 'Toyota', 1990, 'TBS-7634', 5000.00, 4, '1586654715-Capture.PNG', b'1'),
 (49, 'Hyundai Tucson (Yellow)', 'Radiant Hyundai', 'Tucson', 'Hyundai', 1990, 'XTR-3425', 4800.00, 4, 'v1starex1.jpg', b'1'),
 (50, 'BMW M3 (Silver)', 'BMW M3 Radiant', 'BMW M3', 'BMW', 2013, 'TRX-0987', 10000.00, 7, '1586954874-.jpg', b'1'),
@@ -60,7 +58,7 @@ INSERT INTO `cars` (`Id`, `name`, `code_name`, `model`, `manufacturer`, `year`, 
 --
 
 CREATE TABLE `clientbookings` (
-  `Id` int(11) NOT NULL,
+  `BookingId` int(11) NOT NULL,
   `clientId` int(11) NOT NULL,
   `carId` int(11) NOT NULL,
   `start_date` date NOT NULL,
@@ -77,8 +75,37 @@ CREATE TABLE `clientbookings` (
 -- Dumping data for table `clientbookings`
 --
 
-INSERT INTO `clientbookings` (`Id`, `clientId`, `carId`, `start_date`, `pick_up_time`, `number_of_days`, `end_date`, `return_time`, `created_date`, `updated_date`, `statusId`) VALUES
-(5, 1, 5, '2020-01-29', '00:00:00', 0, '2020-01-31', '00:00:00', '2020-01-26 19:56:08', '0000-00-00 00:00:00', 2);
+INSERT INTO `clientbookings` (`BookingId`, `clientId`, `carId`, `start_date`, `pick_up_time`, `number_of_days`, `end_date`, `return_time`, `created_date`, `updated_date`, `statusId`) VALUES
+(5, 1, 5, '2020-01-29', '00:00:00', 0, '2020-01-31', '00:00:00', '2020-01-26 19:56:08', '0000-00-00 00:00:00', 2),
+(17, 97, 50, '2020-04-16', '00:00:00', 3, '2020-04-19', '00:00:00', '2020-04-16 23:25:09', '0000-00-00 00:00:00', 1),
+(18, 97, 50, '2020-04-16', '00:00:00', 3, '2020-04-19', '00:00:00', '2020-04-16 23:26:02', '0000-00-00 00:00:00', 1),
+(19, 99, 49, '2020-04-28', '00:00:00', 5, '2020-05-03', '00:00:00', '2020-04-17 00:00:34', '0000-00-00 00:00:00', 2),
+(20, 97, 40, '2020-04-25', '00:00:00', 5, '2020-04-30', '00:00:00', '2020-04-17 08:43:53', '0000-00-00 00:00:00', 1),
+(21, 97, 40, '2020-04-25', '00:00:00', 5, '2020-04-30', '00:00:00', '2020-04-17 08:44:56', '0000-00-00 00:00:00', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `clientbookingsphotos`
+--
+
+CREATE TABLE `clientbookingsphotos` (
+  `Id` int(11) NOT NULL,
+  `booking_id` int(11) NOT NULL,
+  `file_name` varchar(255) NOT NULL,
+  `created_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `Is_Active` bit(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `clientbookingsphotos`
+--
+
+INSERT INTO `clientbookingsphotos` (`Id`, `booking_id`, `file_name`, `created_date`, `Is_Active`) VALUES
+(1, 18, '1587050762-lbO17hkK_400x400.jpg', '2020-04-16 23:26:02', b'1'),
+(2, 19, '1587052834-Capture.PNG', '2020-04-17 00:00:34', b'1'),
+(3, 21, '1587084295-CHARM.PNG', '2020-04-17 08:44:56', b'1'),
+(4, 21, '1587084295-ESCS_SCMC.PNG', '2020-04-17 08:44:56', b'1');
 
 -- --------------------------------------------------------
 
@@ -169,7 +196,9 @@ INSERT INTO `settings` (`Id`, `name`, `value`, `type`, `Is_Active`) VALUES
 (9, 'Address', 'Poblacion Hagkol Sayre Highway (infront of new bus terminal), Valencia City, Bukidnon 8709', 'contact', b'1'),
 (10, 'Do I need to register before I can reserve a vehicle?', 'No. Registration is not required before making a reservation. However, information such as name, address, contact details and valid ID will be required upon reservation.', 'faq', b'1'),
 (11, 'Mobile phone', '09268406884', 'contact', b'1'),
-(12, 'Year founded', '2016', 'other', b'0');
+(12, 'Year founded', '2016', 'other', b'0'),
+(13, 'What is the process of reservation?', '<b>Step 1</b> Select the desired vehicle in our portal.\r\n\r\n<b>Step 2</b> Contact VRS and inform your preferred vehicle and number of days of reservation.\r\n\r\n<b>Step 3</b> Provide the required details to VRS Support.\r\n\r\n<b>Step 4</b> Wait for the email confirmation.', 'faq', b'1'),
+(14, 'Is it possible to extend the duration of reservation?', 'Depending on the availability of the vehicle, you can extend the reservation by calling our VRS support.', 'faq', b'1');
 
 -- --------------------------------------------------------
 
@@ -180,6 +209,7 @@ INSERT INTO `settings` (`Id`, `name`, `value`, `type`, `Is_Active`) VALUES
 CREATE TABLE `status` (
   `Id` int(11) NOT NULL,
   `label` varchar(50) NOT NULL,
+  `bootstrap_bg_color` varchar(100) NOT NULL,
   `Is_Active` bit(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -187,10 +217,10 @@ CREATE TABLE `status` (
 -- Dumping data for table `status`
 --
 
-INSERT INTO `status` (`Id`, `label`, `Is_Active`) VALUES
-(2, 'In Progress', b'1'),
-(3, 'Done', b'1'),
-(8, 'Returned', b'1');
+INSERT INTO `status` (`Id`, `label`, `bootstrap_bg_color`, `Is_Active`) VALUES
+(1, 'Reserved', 'warning', b'1'),
+(2, 'In Progress', 'danger', b'1'),
+(8, 'Returned', 'secondary', b'1');
 
 -- --------------------------------------------------------
 
@@ -235,6 +265,12 @@ ALTER TABLE `cars`
 -- Indexes for table `clientbookings`
 --
 ALTER TABLE `clientbookings`
+  ADD PRIMARY KEY (`BookingId`);
+
+--
+-- Indexes for table `clientbookingsphotos`
+--
+ALTER TABLE `clientbookingsphotos`
   ADD PRIMARY KEY (`Id`);
 
 --
@@ -281,7 +317,13 @@ ALTER TABLE `cars`
 -- AUTO_INCREMENT for table `clientbookings`
 --
 ALTER TABLE `clientbookings`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `BookingId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `clientbookingsphotos`
+--
+ALTER TABLE `clientbookingsphotos`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `clients`
@@ -299,7 +341,7 @@ ALTER TABLE `clientsphotos`
 -- AUTO_INCREMENT for table `settings`
 --
 ALTER TABLE `settings`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `status`

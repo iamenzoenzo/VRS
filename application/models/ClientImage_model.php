@@ -35,7 +35,7 @@
 			$this->db->delete('clientsphotos');
 			$affectedRows=$this->db->affected_rows();
 			if($affectedRows>0){
-				$this->File_model->dete_photo_from_directory($path_to_file);
+				$this->File_model->delete_photo_from_directory($path_to_file);
 				return true;
 			}else {
 				return false;
