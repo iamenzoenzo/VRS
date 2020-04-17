@@ -13,8 +13,9 @@ date_default_timezone_set('Asia/Manila');
 		}
 
 		public function view($id){
-			$data['title'] = 'Booking Information';
+			$data['title'] = 'View Booking';
 			$data['bookings'] = $this->Booking_model->get_bookings($id);
+			$data['images'] = $this->BookingImage_model->get_images(null,$id);
 			if(empty($data['bookings'])){
 				show_404();
 			}

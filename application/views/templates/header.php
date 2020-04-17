@@ -47,7 +47,8 @@
           Booking
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="<?php echo base_url(); ?>bookings/index">View Booking</a>
+          <a class="dropdown-item" href="<?php echo base_url(); ?>bookings/create">Add booking</a>
+          <a class="dropdown-item" href="<?php echo base_url(); ?>bookings/index">View bookings</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -55,7 +56,8 @@
           Client
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="<?php echo base_url(); ?>clients/index">View Clients</a>
+          <a class="dropdown-item" href="<?php echo base_url(); ?>clients/create">Add client</a>
+          <a class="dropdown-item" href="<?php echo base_url(); ?>clients/index">View clients</a>
         </div>
       </li>
       <li class="nav-item dropdown">

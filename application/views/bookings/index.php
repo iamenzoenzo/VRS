@@ -34,16 +34,16 @@
   </thead>
   <tbody>
     <?php $counter=1; foreach ($bookings as $booking):?>
-        <tr>
+        <tr class='clickable-row' title="Click to view this booking" data-href="<?php echo base_url().'bookings/view/'.$booking['BookingId'];?>">
         <td><?php echo $counter ;?></td>
         <td><?php echo $booking['name'] ;?></td>
         <td><?php echo $booking['code_name'].' ('.$booking['plate_number'].')' ;?></td>
         <td><?php echo $booking['start_date'] ;?></td>
         <td><?php echo $booking['end_date'] ;?></td>
         <td><?php echo $booking['number_of_days'] ;?></td>
-        <td class="<?php echo ($booking['statusId']==1?'bg-success':'bg-default');?>"><?php echo $booking['label'] ;?></td>
+        <td class="bg-<?php echo $booking['bootstrap_bg_color'];?>"><?php echo $booking['label'] ;?></td>
         <td>
-          <a class="btn btn-info" href="<?php echo base_url().'bookings/view/'.$booking['Id'];?>">View</a>
+          <a class="btn btn-info" href="<?php echo base_url().'bookings/view/'.$booking['BookingId'];?>">View</a>
         </td>
         </tr>
         <?php $counter++;?>
@@ -53,3 +53,11 @@
     <?php endforeach;?>
   </tbody>
 </table>
+
+<script type="text/javascript">
+  jQuery(document).ready(function($) {
+      $(".clickable-row").click(function() {
+          window.location = $(this).data("href");
+      });
+  });
+</script>

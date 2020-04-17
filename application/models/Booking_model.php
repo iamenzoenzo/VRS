@@ -9,7 +9,7 @@
 				$this->db->join('status a', 'a.Id=clientbookings.statusId', 'inner');
 				$this->db->join('cars b', 'b.Id=clientbookings.carId', 'inner');
 				$this->db->join('clients c', 'c.Id=clientbookings.clientId', 'inner');
-        $query=$this->db->get_where('clientbookings', array('clientbookings.Id' => $id));
+        $query=$this->db->get_where('clientbookings', array('clientbookings.BookingId' => $id));
         return $query->row_array();
       }else {
 				$this->db->join('status a', 'a.Id=clientbookings.statusId', 'inner');
@@ -33,7 +33,7 @@
 			);
 			$this->db->insert('clientbookings', $data);
 			$BookingId=$this->db->insert_id();
-			$this->ClientImage_model->create_client_booking_photos($BookingId,$filesdata);
+			$this->BookingImage_model->create_booking_photos($BookingId,$filesdata);
 			return true;
 		}
 

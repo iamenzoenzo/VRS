@@ -14,6 +14,7 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col-4">Label</th>
+      <th scope="col">Color</th>
       <th scope="col">Is Active</th>
       <th scope="col">Actions</th>
     </tr>
@@ -26,6 +27,7 @@
         echo '<tr>';
         echo '<th scope="row">'.$counter.'</th>';
         echo '<td>'.$stat['label'].'</td>';
+        echo '<td>'.$stat['bootstrap_bg_color'].'</td>';
         echo '<td>'.($stat['Is_Active']==1 ? 'True' : 'False').'</td>';
         echo '
         <td>

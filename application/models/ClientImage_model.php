@@ -28,17 +28,6 @@
 			}
 		}
 
-		public function create_client_booking_photos($BookingId,$filesdata){
-			foreach ($filesdata as $fd) {
-				$data = array(
-					'booking_id' => $BookingId,
-					'file_name' => $fd,
-					'Is_Active' => 1
-				);
-				$this->db->insert('clientbookingsphotos', $data);
-			}
-		}
-
 		public function delete_client_photo($id){
 			$clientImage = $this->ClientImage_model->get_images($id,null);
 			$path_to_file = './assets/images/client_images/'.$clientImage['file_name'];
@@ -46,7 +35,7 @@
 			$this->db->delete('clientsphotos');
 			$affectedRows=$this->db->affected_rows();
 			if($affectedRows>0){
-				$this->File_model->dete_photo_from_directory($path_to_file);
+				$this->File_model->delete_photo_from_directory($path_to_file);
 				return true;
 			}else {
 				return false;
