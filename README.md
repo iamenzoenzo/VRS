@@ -7,19 +7,30 @@ Wheels Automarket and Car Rental
 
 ##    End-User 
 UC-01 - View the list of available vehicles for reservation (/cars)
+
 UC-02 - View contact information of the company (/contact)
+
 UC-03 - View frequently asked questions (/faq)
+
 UC-04 - View estimated rental cost (/estimate)
 
 ##    VRS Internal User 
 UC-05 - Add rental booking (/bookings/create) (with 1 issue)
+
 ```UC-06 - Modify rental booking ```
+
 UC-07 - View rental booking (/bookings)
+
 ```UC-08 - Delete rental booking ```
+
 UC-09 - Add vehicle information (/cars/create)
+
 ```UC-10 - Modify vehicle information ```
+
 UC-11 - View vehicle information (/cars)
+
 ```UC-12 - Delete vehicle information ```
+
 UC-13 - Add client information (/clients/create)
 UC-14 - Modify client information (/clients/edit)
 UC-15 - View client information (/clients)
