@@ -32,17 +32,26 @@ UC-11 - View vehicle information (/cars)
 ```UC-12 - Delete vehicle information ```
 
 UC-13 - Add client information (/clients/create)
+
 UC-14 - Modify client information (/clients/edit)
+
 UC-15 - View client information (/clients)
+
 UC-16 - Delete client information (/clients/delete)
 
 ##    VRS Administrator 
 UC-17 - View to Admin portal
+
 UC-18 - Add VRS Internal Users (/users/create)
+
 UC-19 - Modify VRS Internal Users (/users/edit)
+
 UC-20 - View VRS Internal Users (/users)
+
 UC-21 - Delete VRS Internal Users (users/delete)
+
 ```UC-22 - View Reservation Report ```
+
 ```UC-23 - View Earnings Report ```
 
 # AWS instance
