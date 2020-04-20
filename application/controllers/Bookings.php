@@ -16,6 +16,8 @@ date_default_timezone_set('Asia/Manila');
 			$data['title'] = 'View Booking';
 			$data['bookings'] = $this->Booking_model->get_bookings($id);
 			$data['images'] = $this->BookingImage_model->get_images(null,$id);
+			$data['logs'] = $this->BookingLogs_model->get_logs_by_booking_id($id);
+			
 			if(empty($data['bookings'])){
 				show_404();
 			}
@@ -32,6 +34,7 @@ date_default_timezone_set('Asia/Manila');
 
 			$data['title'] = 'Add New Booking';
 			$data['cars'] = $this->Car_model->get_cars(null);
+			$data['driver_pay'] = $this->Setting_model->get_settings(null,'Driver_Per_Day');
 			$data['clients'] = $this->Client_model->get_clients(null);
 
 			$this->form_validation->set_rules('clientId', 'Client', 'required');

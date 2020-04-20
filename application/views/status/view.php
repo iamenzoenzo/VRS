@@ -1,14 +1,12 @@
-<h2><?= $title ;?></h2>
-<?php echo form_open('status/update'); ?>
-<input type="hidden" name="id" value="<?php echo $status['Id']; ?>">
+<title><?= $title ;?></title>
   <div class="row">
   	<div class="col">
   		<label>label</label>
-  		<input type="text" class="form-control" value="<?php echo $status['label']; ?>" name="label" placeholder="Enter setting name">
+  		<input readonly type="text" class="form-control" value="<?php echo $status['label']; ?>" name="label" placeholder="Enter setting name">
   	</div>
     <div class="col">
       <label>Bootstrap Background Color</label>
-      <select class="form-control" name="color">
+      <select disabled class="form-control" name="color">
         <option value="primary">Blue (Primary)</option>
         <option value="secondary">Gray (Secondary)</option>
         <option value="success">Green (Success)</option>
@@ -26,7 +24,6 @@
     </div>
   </div>
 <div>
-	<button type="submit" class="btn btn-warning">Save Update</button>
-  <a href="<?php echo base_url()?>status/index" class="btn btn-danger">Cancel</a>
+	<a href="<?php echo base_url(); ?>status/edit/<?php echo $status['Id']; ?>" class="btn btn-warning">Edit</a>
+  <a href="<?php echo base_url(); ?>status/delete/<?php echo $status['Id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this status?')">Delete</a>
 </div>
-</form>

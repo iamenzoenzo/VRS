@@ -32,27 +32,20 @@
     </tr>
   </thead>
   <tbody>
-    <?php
-    $counter=0;
-      foreach($users as $user){
-        $counter++;
-        echo '<tr>';
-        echo '<th scope="row">'.$counter.'</th>';
-        echo '<td>'.$user['firstname'].' '.$user['lastname'].'</td>';
-        echo '<td>'.$user['email'].'</td>';
-        echo '<td>'.$user['user_type'].'</td>';
-        echo '
-        <td>
-        <a class="btn btn-warning" href="'.base_url().'users/edit/'.$user['id'].'">Edit</a>
-        <a class="btn btn-danger" href="'.base_url().'users/delete/'.$user['id'].'">Delete</a>
-        </td>';
-        echo '</tr> ';
-      }
-      if($counter==0){
-        echo '<tr><td colspan="5">No data to show for '.$filter.'</td></tr>';
-      }
-    ?>
-
+    <?php $counter=0; foreach($users as $user):?>
+        <tr>
+          <th scope="row"><?php $counter++; echo $counter;?></th>
+          <td><?php echo $user['firstname'].' '.$user['lastname'];?></td>
+          <td><?php echo $user['email'];?></td>
+          <td><?php echo $user['user_type'];?></td>
+          <td>
+          <a class="btn btn-info" href="<?php echo base_url().'users/view/'.$user['id'];$counter++?>">View</a>
+          </td>
+        </tr>
+      <?php endforeach;?>
+      <?php if($counter==0):?>
+        <tr><td colspan="5">No data to show for '<?php echo $filter?>'</td></tr>
+      <?php endif; ?>
   </tbody>
 </table>
 </div>

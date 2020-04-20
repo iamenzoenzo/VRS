@@ -8,7 +8,9 @@
     </div>
 </div>
 
-<div class="card mt-3">
+<div class="row">
+  <div class="col-lg-6 col-sm-12 mt-3">
+    <div class="card">
   <div class="card-header">
     <h5>Booking Information <span class="p-1 text-white bg-<?php echo $bookings['bootstrap_bg_color'];?>"><?php echo $bookings['label'];?></span></h5>
   </div>
@@ -18,13 +20,15 @@
         <label>Vehicle</label>
         <input readonly type="text" min="1" class="form-control" value="<?php echo $bookings['code_name'];?>">
     	</div>
+      </div>
+      <div class="row">
       <div class="col">
         <label>Client</label>
         <input readonly type="text" min="1" class="form-control" value="<?php echo $bookings['name'];?>">
       </div>
     </div>
     <div class="row">
-      <div class="col-6">
+      <div class="col">
         <label>Start Date</label>
         <input readonly type="text" min="1" class="form-control" value="<?php echo $bookings['start_date'];?>">
       </div>
@@ -32,21 +36,46 @@
         <label>End Date</label>
         <input readonly type="text" min="1" class="form-control" value="<?php echo $bookings['end_date'];?>">
       </div>
-      <div class="col">
-        <label>Number of days</label>
-        <input readonly type="text" min="1" class="form-control" value="<?php echo $bookings['number_of_days'];?>">
-      </div>
     </div>
-    <div class="row mt-2">
-      <div class="col">
-        <?php if($this->session->userdata('logged_in')): ?>
-          <a href="<?php echo base_url(); ?>bookings/edit/<?php echo $bookings['BookingId']; ?>" class="btn btn-success">Edit</a>
-          <a href="<?php echo base_url(); ?>bookings/delete/<?php echo $bookings['BookingId']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this booking?')">Delete</a>
-        <?php endif; ?>
+      <div class="row">
+        <div class="col">
+          <label>Number of days</label>
+          <input readonly type="text" min="1" class="form-control" value="<?php echo $bookings['number_of_days'];?>">
+        </div>
       </div>
+      <div class="row mt-2">
+        <div class="col">
+          <?php if($this->session->userdata('logged_in')): ?>
+            <a href="<?php echo base_url(); ?>bookings/edit/<?php echo $bookings['BookingId']; ?>" class="btn btn-success">Edit</a>
+            <a href="<?php echo base_url(); ?>bookings/delete/<?php echo $bookings['BookingId']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this booking?')">Delete</a>
+          <?php endif; ?>
+        </div>
+      </div>
+    </div> <!-- end card body -->
+
+  </div>
+</div>
+<div class="col-lg-6 col-sm-12 mt-3">
+  <div class="card">
+    <div class="card-header">
+      <h5>Transaction logs</h5>
+    </div>
+    <div class="card-body">
+      <?php if(count($logs)>0):?>
+        <ul>
+          <?php foreach ($logs as $log):?>
+            <li> <b><?php echo $log['fullname'].'</b> '.$log['description'].' on '.date_format(date_create($log['created_date']),'F d, Y h:i A (l)');?></li>
+          <?php endforeach;?>
+        </ul>
+      <?php else:?>
+        <p>No transaction logs to show</p>
+      <?php endif;?>
     </div>
   </div>
 </div>
+  </div>
+
+
 
 <!-- start of modal popup -->
 <div class="modal fade bd-example-modal-xl" role="dialog" id="exampleModal" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -111,6 +140,8 @@
 <?php else:?>
   <p>No attachments to show</p>
 <?php endif; //don't display containers if no images of client?>
+
+
 
 <script type="text/javascript">
 $('#exampleModal').on('show.bs.modal', function (event) {

@@ -2,6 +2,11 @@
 	class Users extends CI_Controller{
 
 		public function index(){
+			if(!$this->session->userdata('logged_in')){
+				redirect('users/login');
+			}elseif (!$this->session->userdata('is_admin')) {
+				redirect('users/invalid');
+			}
 			$data['title'] = 'Users';
 			$data['users'] = $this->User_model->get_users(null);
 			$data['filter'] = $this->input->post('users_filter');
@@ -11,6 +16,11 @@
 		}
 
 		public function create(){
+			if(!$this->session->userdata('logged_in')){
+				redirect('users/login');
+			}elseif (!$this->session->userdata('is_admin')) {
+				redirect('users/invalid');
+			}
 			$data['title'] = 'Add New User';
 			$this->form_validation->set_rules('fname', 'First Name', 'required');
       $this->form_validation->set_rules('lname', 'Last Name', 'required');
@@ -53,13 +63,13 @@
 
 				// Login user
 				$user_id = $this->User_model->login($username, $password);
-
 				if($user_id){
 					// Create session
 					$user_data = array(
 						'user_id' => $user_id,
 						'username' => $username,
-						'logged_in' => true
+						'logged_in' => true,
+						'is_admin'=> $this->User_model->user_is_admin($user_id)
 					);
 
 					$this->session->set_userdata($user_data);
@@ -83,6 +93,7 @@
 			$this->session->unset_userdata('logged_in');
 			$this->session->unset_userdata('user_id');
 			$this->session->unset_userdata('username');
+			$this->session->unset_userdata('is_admin');
 
 			// Set message
 			$this->session->set_flashdata('user_loggedout', 'You are now logged out');
@@ -91,6 +102,11 @@
 		}
 
     public function edit($id){
+			if(!$this->session->userdata('logged_in')){
+				redirect('users/login');
+			}elseif (!$this->session->userdata('is_admin')) {
+				redirect('users/invalid');
+			}
       $data['title'] = 'Edit User';
       $data['users'] = $this->User_model->get_users($id);
 
@@ -103,7 +119,38 @@
 
     }
 
+		public function view($id){
+			if(!$this->session->userdata('logged_in')){
+				redirect('users/login');
+			}elseif (!$this->session->userdata('is_admin')) {
+				redirect('users/invalid');
+			}
+			$data['title'] = 'View User Information';
+			$data['users'] = $this->User_model->get_users($id);
+
+			if(empty($data['users'])){
+				show_404();
+			}
+				$this->load->view('templates/header');
+				$this->load->view('users/view', $data);
+				$this->load->view('templates/footer');
+
+		}
+
+		public function invalid(){
+			$data['title'] = 'Invalid Permission';
+			$this->load->view('templates/header');
+			$this->load->view('users/invalid', $data);
+			$this->load->view('templates/footer');
+
+		}
+
     public function update(){
+			if(!$this->session->userdata('logged_in')){
+				redirect('users/login');
+			}elseif (!$this->session->userdata('is_admin')) {
+				redirect('users/invalid');
+			}
 
       $this->User_model->update_user();
 
@@ -114,6 +161,12 @@
     }
 
     public function delete($id){
+			if(!$this->session->userdata('logged_in')){
+				redirect('users/login');
+			}elseif (!$this->session->userdata('is_admin')) {
+				redirect('users/invalid');
+			}
+
       $this->User_model->delete_user($id);
 
       // Set message

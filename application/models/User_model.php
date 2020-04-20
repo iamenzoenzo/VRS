@@ -19,6 +19,16 @@
 				return $query->row_array();
 		}
 
+		public function user_is_admin($id){
+			$query=$this->db->get_where('users', array('id' => $id));
+			$userInfo = $query->row_array();
+			if($userInfo['user_type']=='admin'){
+				return true;
+			}else{
+				return false;
+			}
+		}
+
 		public function create_user(){
 			$data = array(
 				'firstname' => $this->input->post('fname'),
