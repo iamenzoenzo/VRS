@@ -33,27 +33,21 @@
     </tr>
   </thead>
   <tbody>
-    <?php
-    $counter=0;
-      foreach($settings as $setting){
-        $counter++;
-        echo '<tr>';
-        echo '<td>'.$counter.'</td>';
-        echo '<td>'.$setting['name'].'</td>';
-        echo '<td>'.$setting['value'].'</td>';
-        echo '<td>'.$setting['type'].'</td>';
-        echo '<td>'.($setting['Is_Active']==1 ? 'True' : 'False').'</td>';
-        echo '
-        <td>
-        <a class="btn btn-warning" href="'.base_url().'settings/edit/'.$setting['Id'].'">Edit</a>
-        <a class="btn btn-danger" href="'.base_url().'settings/delete/'.$setting['Id'].'">Delete</a>
-        </td>';
-        echo '</tr> ';
-      }
-      if($counter==0){
-        echo '<tr><td colspan="6">No data to show for '.$filter.'</td></tr>';
-      }
-    ?>
+    <?php $counter=0; foreach($settings as $setting):?>
+        <tr>
+          <td><?php $counter++; echo $counter;?></td>
+          <td><?php echo $setting['name'];?></td>
+          <td><?php echo $setting['value'];?></td>
+          <td><?php echo $setting['type'];?></td>
+          <td><?php echo ($setting['Is_Active']==1 ? 'True' : 'False');?></td>
+          <td>
+            <a class="btn btn-info" href="<?php echo base_url().'settings/view/'.$setting['Id'];$counter++;?>">View</a>
+          </td>
+        </tr>
+    <?php endforeach; ?>
+    <?php if($counter==0):?>
+      <tr><td colspan="6">No data to show for '<?php echo $filter;?></td></tr>
+    <?php endif;?>
 
   </tbody>
 </table>

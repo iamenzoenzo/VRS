@@ -2,6 +2,10 @@
 	class Cars extends CI_Controller{
 
 		public function index(){
+			if(!$this->session->userdata('logged_in')){
+				redirect('users/login');
+			}
+
 			$data['title'] = 'Vehicles';
 			$data['cars'] = $this->Car_model->get_cars(null);
 			$this->load->view('templates/header');
@@ -9,15 +13,10 @@
 			$this->load->view('templates/footer');
 		}
 
-		public function availablecars(){
-			$data['title'] = 'Available Vehicles Types For Rent';
-			$data['cars'] = $this->Car_model->get_distinct_cars();
-			$this->load->view('templates/header');
-			$this->load->view('cars/availablecars', $data);
-			$this->load->view('templates/footer');
-		}
-
 		public function create(){
+			if(!$this->session->userdata('logged_in')){
+				redirect('users/login');
+			}
 
 			$data['title'] = 'Add New Vehicle';
 
@@ -66,6 +65,10 @@
 		}
 
 		public function edit($id){
+			if(!$this->session->userdata('logged_in')){
+				redirect('users/login');
+			}
+
       $data['title'] = 'Update Vehicle Information';
       $data['cars'] = $this->Car_model->get_cars($id);
 
@@ -79,6 +82,10 @@
     }
 
 		public function view($id){
+			if(!$this->session->userdata('logged_in')){
+				redirect('users/login');
+			}
+
 			$data['title'] = 'Vehicle Information';
 			$data['cars'] = $this->Car_model->get_cars($id);
 
@@ -92,6 +99,9 @@
 		}
 
 		public function update(){
+			if(!$this->session->userdata('logged_in')){
+				redirect('users/login');
+			}
 
 			$this->Car_model->update_car();
 
@@ -102,11 +112,10 @@
 		}
 
 		public function delete($id){
-			// Check login
 			if(!$this->session->userdata('logged_in')){
 				redirect('users/login');
 			}
-
+			
 			$result = $this->Car_model->delete_car($id);
 			if($result){
 				$this->session->set_flashdata('car_deleted', 'Vehicle has been deleted');
