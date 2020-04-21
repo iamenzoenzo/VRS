@@ -3,7 +3,6 @@ Wheels Automarket and Car Rental
 
 # Readme
 
-
 # Use Cases by Stakeholders 
 
 ##    End-User 
