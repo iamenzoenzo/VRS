@@ -1,4 +1,4 @@
-<title><?= $title ;?></title>
+<title><?= $title.' - '.$bookings['reference_number'] ;?></title>
 <div class="row">
   <div class="col">
     <h2><?= $title ;?></h2>
@@ -62,11 +62,12 @@
     </div>
     <div class="card-body">
       <?php if(count($logs)>0):?>
-        <ul>
           <?php foreach ($logs as $log):?>
-            <li> <b><?php echo $log['fullname'].'</b> '.$log['description'].' on '.date_format(date_create($log['created_date']),'F d, Y h:i A (l)');?></li>
+            <div class="alert alert-warning" role="alert">
+              <b><?php echo $log['fullname'].'</b>: <i>'.$log['remarks'].'</i> </br><small>'.date_format(date_create($log['created_date']),'F d, Y h:i A (l)').'</small>';?>
+            </div>
+
           <?php endforeach;?>
-        </ul>
       <?php else:?>
         <p>No transaction logs to show</p>
       <?php endif;?>

@@ -3,9 +3,11 @@
   <div class="col">
     <h2><?= $title; ?></h2>
   </div>
+  <?php if($this->session->userdata('logged_in') && $this->session->userdata('is_admin')):?>
     <div class="float-right pl-3">
       <a href="<?php echo base_url(); ?>cars/create" class="btn btn-primary">Add New Vehicle</a>
     </div>
+  <?php endif;?>
 </div>
 <div class="album pb-5">
     <div class="container">
@@ -19,7 +21,7 @@
               <!--img class="img-fluid img-thumbnail" height="100%" width="100%" src="<?php echo base_url()."assets/images/cars_images/".$car['car_image_path']; ?>" -->
               <div class="card-body">
               <h4><?php echo $car['manufacturer']." ".$car['model']." (".$car['year'].")"; ?></h4>
-                <p class="card-text">Test Paragraph</p>
+                <p class="card-text">With a maximum capacity of <b><?php echo $car['Capacity']; ?> persons</b> including driver. Drive now for a minimum rent of <b>₱<?php echo number_format($car['RentPerDay'],2); ?></b> for 24 hours.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
                     <?php if($this->session->userdata('logged_in')): ?>

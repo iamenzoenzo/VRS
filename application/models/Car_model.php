@@ -16,6 +16,15 @@
 			}
 		}
 
+		public function get_available_cars_on_date($start_date,$end_date){
+			//$this->db->order_by('name');
+			$this->db->where('Is_Active',1);
+			$where = "cars.id NOT IN (SELECT DISTINCT clientbookings.carId from clientbookings WHERE (clientbookings.start_date BETWEEN '".$start_date."' AND '".$end_date."') OR (clientbookings.end_date BETWEEN '".$start_date."' AND '".$end_date."'))";
+			$this->db->where($where);
+			$query=$this->db->get('cars');
+			return $query->result_array();
+		}
+
 		public function get_distinct_cars(){
 			$this->db->order_by('name');
 			$this->db->group_by(array("cars.model", "cars.manufacturer"));

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 20, 2020 at 03:28 AM
+-- Generation Time: Apr 21, 2020 at 04:42 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -48,8 +48,8 @@ CREATE TABLE `cars` (
 INSERT INTO `cars` (`Id`, `name`, `code_name`, `model`, `manufacturer`, `year`, `plate_number`, `RentPerDay`, `Capacity`, `file_name`, `Is_Active`) VALUES
 (40, 'Toyota Grandia', 'Toyota Grandia Radiant', 'Grandia', 'Toyota', 1990, 'TBS-7634', 5000.00, 4, '1586654715-Capture.PNG', b'1'),
 (49, 'Hyundai Tucson (Yellow)', 'Radiant Hyundai', 'Tucson', 'Hyundai', 1990, 'XTR-3425', 4800.00, 4, 'v1starex1.jpg', b'1'),
-(50, 'BMW M3 (Silver)', 'BMW M3 Radiant', 'BMW M3', 'BMW', 2013, 'TRX-0987', 10000.00, 7, '1586954874-.jpg', b'1'),
-(51, 'BMW Z4 (Silver)', 'BMW Z4 Radiant', 'BMW Z4', 'BMW', 1990, 'TBS-7764', 20000.00, 2, '1586955163-Capture.PNG', b'1');
+(50, 'BMW M3 (Silver)', 'BMW M3 Radiant', 'M3', 'BMW', 1990, 'TRX-0987', 10000.00, 7, '1586954874-.jpg', b'1'),
+(51, 'BMW Z4 (Silver)', 'BMW Z4 Radiant', 'Z4', 'BMW', 1990, 'TBS-7764', 20000.00, 2, '1586955163-Capture.PNG', b'1');
 
 -- --------------------------------------------------------
 
@@ -66,10 +66,10 @@ CREATE TABLE `clientbookings` (
   `pick_up_datetime` datetime NOT NULL,
   `number_of_days` int(2) NOT NULL,
   `add_driver` bit(1) DEFAULT NULL,
-  `driver_name` varchar(255) NOT NULL,
+  `driver_name` varchar(255) DEFAULT NULL,
   `driver_fee_current` decimal(10,0) NOT NULL,
   `rental_fee_current` decimal(10,0) NOT NULL,
-  `rental_discount` decimal(10,0) NOT NULL,
+  `rental_discount` decimal(10,0) DEFAULT NULL,
   `end_date` date NOT NULL,
   `return_datetime` datetime NOT NULL,
   `created_by` int(11) NOT NULL,
@@ -84,20 +84,13 @@ CREATE TABLE `clientbookings` (
 --
 
 INSERT INTO `clientbookings` (`BookingId`, `clientId`, `carId`, `reference_number`, `start_date`, `pick_up_datetime`, `number_of_days`, `add_driver`, `driver_name`, `driver_fee_current`, `rental_fee_current`, `rental_discount`, `end_date`, `return_datetime`, `created_by`, `updated_by`, `created_date`, `updated_date`, `statusId`) VALUES
-(5, 1, 5, '', '2020-01-29', '2020-04-19 00:00:00', 0, b'0', '', '0', '0', '0', '2020-01-31', '2020-04-19 00:00:00', 0, 0, '2020-01-26 19:56:08', '0000-00-00 00:00:00', 2),
-(17, 97, 50, '', '2020-04-16', '2020-04-19 00:00:00', 3, b'0', '', '0', '0', '0', '2020-04-19', '2020-04-19 00:00:00', 0, 0, '2020-04-16 23:25:09', '0000-00-00 00:00:00', 1),
-(18, 97, 50, '', '2020-04-16', '2020-04-19 00:00:00', 3, b'0', '', '0', '0', '0', '2020-04-19', '2020-04-19 00:00:00', 0, 0, '2020-04-16 23:26:02', '0000-00-00 00:00:00', 1),
-(19, 99, 49, '', '2020-04-28', '2020-04-19 00:00:00', 5, b'0', '', '0', '0', '0', '2020-05-03', '2020-04-19 00:00:00', 0, 0, '2020-04-17 00:00:34', '0000-00-00 00:00:00', 2),
-(20, 97, 40, '', '2020-04-25', '2020-04-19 00:00:00', 5, b'0', '', '0', '0', '0', '2020-04-30', '2020-04-19 00:00:00', 0, 0, '2020-04-17 08:43:53', '0000-00-00 00:00:00', 1),
-(21, 97, 40, '', '2020-04-25', '2020-04-19 00:00:00', 5, b'0', '', '0', '0', '0', '2020-04-30', '2020-04-19 00:00:00', 0, 0, '2020-04-17 08:44:56', '0000-00-00 00:00:00', 1),
-(22, 100, 49, '', '2020-04-17', '2020-04-19 00:00:00', 2, b'1', 'Jan Hope', '4800', '0', '0', '2020-04-19', '2020-04-19 00:00:00', 0, 0, '2020-04-17 23:30:37', '0000-00-00 00:00:00', 1),
-(23, 101, 51, '', '2020-04-17', '2020-04-19 00:00:00', 3, b'1', 'Jan Hope', '1000', '20000', '0', '2020-04-20', '2020-04-19 00:00:00', 0, 0, '2020-04-17 23:36:27', '0000-00-00 00:00:00', 1),
-(24, 99, 49, '', '2020-05-08', '2020-04-19 00:00:00', 3, b'1', 'Jan Hope', '1000', '4800', '100', '2020-05-11', '2020-04-19 00:00:00', 0, 0, '2020-04-17 23:37:44', '0000-00-00 00:00:00', 1),
-(25, 98, 51, 'VRS-2020Apr-0JDFy', '2020-04-17', '2020-04-19 00:00:00', 5, b'1', 'Jan Hope', '1000', '20000', '20', '2020-04-22', '2020-04-19 00:00:00', 0, 0, '2020-04-17 23:48:07', '0000-00-00 00:00:00', 1),
-(26, 99, 51, 'VRS-2020AprAprA53PS', '2020-04-17', '2020-04-19 00:00:00', 4, b'1', 'Jan Hope', '1000', '20000', '30', '2020-04-21', '2020-04-19 00:00:00', 0, 0, '2020-04-17 23:51:25', '0000-00-00 00:00:00', 1),
-(27, 98, 49, 'VRS-2004041GZWS', '2020-04-17', '2020-04-19 00:00:00', 3, b'1', 'Jan Hope', '1000', '4800', '0', '2020-04-20', '2020-04-19 00:00:00', 0, 0, '2020-04-17 23:52:40', '0000-00-00 00:00:00', 1),
-(28, 98, 49, 'VRS-2004ZB8TE', '2020-04-17', '2020-04-19 00:00:00', 1, b'1', '', '1000', '4800', '0', '2020-04-18', '2020-04-19 00:00:00', 0, 0, '2020-04-17 23:53:49', '0000-00-00 00:00:00', 1),
-(29, 99, 49, 'VRS-2004SEVS4', '2020-04-19', '2020-04-19 00:00:00', 1, b'1', '', '1000', '4800', '0', '2020-04-20', '2020-04-19 00:00:00', 0, 0, '2020-04-19 15:27:35', '0000-00-00 00:00:00', 1);
+(34, 97, 40, 'VRS-20041BQ2T', '2020-04-21', '0000-00-00 00:00:00', 2, b'1', '', '1000', '5000', '0', '2020-04-23', '0000-00-00 00:00:00', 12, 0, '2020-04-21 20:44:31', '0000-00-00 00:00:00', 1),
+(35, 99, 49, 'VRS-2004CMLZG', '2020-04-21', '0000-00-00 00:00:00', 1, b'1', 'Jan Hope', '1000', '4800', '50', '2020-04-22', '0000-00-00 00:00:00', 12, 0, '2020-04-21 21:11:30', '0000-00-00 00:00:00', 1),
+(36, 100, 50, 'VRS-2004EOG26', '2020-04-21', '0000-00-00 00:00:00', 1, b'1', '', '1000', '10000', '200', '2020-04-22', '0000-00-00 00:00:00', 12, 0, '2020-04-21 21:16:47', '0000-00-00 00:00:00', 1),
+(37, 99, 51, 'VRS-2004W795F', '2020-04-21', '0000-00-00 00:00:00', 2, b'1', '', '1000', '20000', '0', '2020-04-23', '0000-00-00 00:00:00', 12, 0, '2020-04-21 21:18:30', '0000-00-00 00:00:00', 1),
+(38, 99, 49, 'VRS-2004SETNI', '2020-04-23', '0000-00-00 00:00:00', 2, b'1', 'Jan Hope', '1000', '4800', '500', '2020-04-25', '0000-00-00 00:00:00', 12, 0, '2020-04-21 22:32:27', '0000-00-00 00:00:00', 1),
+(39, 98, 50, 'VRS-2004ZRQGQ', '2020-04-23', '0000-00-00 00:00:00', 1, b'0', '', '1000', '10000', '0', '2020-04-24', '0000-00-00 00:00:00', 12, 0, '2020-04-21 22:38:49', '0000-00-00 00:00:00', 1),
+(40, 97, 40, 'VRS-20047VXT8', '2020-04-24', '0000-00-00 00:00:00', 1, b'0', '', '1000', '5000', '0', '2020-04-25', '0000-00-00 00:00:00', 12, 0, '2020-04-21 22:41:17', '0000-00-00 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -108,7 +101,7 @@ INSERT INTO `clientbookings` (`BookingId`, `clientId`, `carId`, `reference_numbe
 CREATE TABLE `clientbookingslogs` (
   `Id` int(11) NOT NULL,
   `clientbookings_id` int(11) NOT NULL,
-  `description` varchar(255) NOT NULL,
+  `remarks` text DEFAULT NULL,
   `created_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_by` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -117,8 +110,16 @@ CREATE TABLE `clientbookingslogs` (
 -- Dumping data for table `clientbookingslogs`
 --
 
-INSERT INTO `clientbookingslogs` (`Id`, `clientbookings_id`, `description`, `created_date`, `created_by`) VALUES
-(1, 29, 'added this booking', '2020-04-19 07:27:35', 12);
+INSERT INTO `clientbookingslogs` (`Id`, `clientbookings_id`, `remarks`, `created_date`, `created_by`) VALUES
+(3, 34, NULL, '2020-04-21 12:44:32', 12),
+(4, 35, NULL, '2020-04-21 13:11:30', 12),
+(5, 36, NULL, '2020-04-21 13:16:47', 12),
+(6, 37, 'client paid 500 for reservation', '2020-04-21 13:18:30', 12),
+(7, 38, 'Created this booking', '2020-04-21 14:32:28', 12),
+(8, 38, 'client paid 1,000 for this reservation. Please see attached file', '2020-04-21 14:32:28', 12),
+(9, 39, 'Created this booking', '2020-04-21 14:38:49', 12),
+(10, 39, '', '2020-04-21 14:38:49', 12),
+(11, 40, 'Created this booking', '2020-04-21 14:41:17', 12);
 
 -- --------------------------------------------------------
 
@@ -139,21 +140,9 @@ CREATE TABLE `clientbookingsphotos` (
 --
 
 INSERT INTO `clientbookingsphotos` (`Id`, `booking_id`, `file_name`, `created_date`, `Is_Active`) VALUES
-(1, 18, '1587050762-lbO17hkK_400x400.jpg', '2020-04-16 23:26:02', b'1'),
-(2, 19, '1587052834-Capture.PNG', '2020-04-17 00:00:34', b'1'),
-(3, 21, '1587084295-CHARM.PNG', '2020-04-17 08:44:56', b'1'),
-(4, 21, '1587084295-ESCS_SCMC.PNG', '2020-04-17 08:44:56', b'1'),
-(5, 22, '1587137437-CHARM.PNG', '2020-04-17 23:30:37', b'1'),
-(6, 22, '1587137437-ESCS_SCMC.PNG', '2020-04-17 23:30:37', b'1'),
-(7, 23, '1587137787-CHARM.PNG', '2020-04-17 23:36:27', b'1'),
-(8, 23, '1587137787-ESCS_SCMC.PNG', '2020-04-17 23:36:27', b'1'),
-(9, 24, '1587137864-CHARM.PNG', '2020-04-17 23:37:44', b'1'),
-(10, 24, '1587137864-ESCS_SCMC.PNG', '2020-04-17 23:37:44', b'1'),
-(11, 25, '1587138487-CHARM.PNG', '2020-04-17 23:48:07', b'1'),
-(12, 25, '1587138487-ESCS_SCMC.PNG', '2020-04-17 23:48:07', b'1'),
-(13, 26, '1587138685-CHARM.PNG', '2020-04-17 23:51:25', b'1'),
-(14, 26, '1587138685-ESCS_SCMC.PNG', '2020-04-17 23:51:25', b'1'),
-(15, 29, '1587281255-CHARM.PNG', '2020-04-19 15:27:35', b'1');
+(20, 34, '1587473071-CHARM.PNG', '2020-04-21 20:44:31', b'1'),
+(21, 35, '1587474690-ESCS_SCMC.PNG', '2020-04-21 21:11:30', b'1'),
+(22, 38, '1587479547-CHARM.PNG', '2020-04-21 22:32:27', b'1');
 
 -- --------------------------------------------------------
 
@@ -367,19 +356,19 @@ ALTER TABLE `cars`
 -- AUTO_INCREMENT for table `clientbookings`
 --
 ALTER TABLE `clientbookings`
-  MODIFY `BookingId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `BookingId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `clientbookingslogs`
 --
 ALTER TABLE `clientbookingslogs`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `clientbookingsphotos`
 --
 ALTER TABLE `clientbookingsphotos`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `clients`

@@ -33,9 +33,9 @@
     </tr>
   </thead>
   <tbody>
-    <?php $counter=1; foreach ($bookings as $booking):?>
+    <?php $counter=0; foreach ($bookings as $booking):?>
         <tr class='clickable-row' title="Click to view this booking" data-href="<?php echo base_url().'bookings/view/'.$booking['BookingId'];?>">
-        <td><?php echo $counter ;?></td>
+        <td><?php $counter++; echo $counter ;?></td>
         <td><?php echo $booking['name'] ;?></td>
         <td><?php echo $booking['code_name'].' ('.$booking['plate_number'].')' ;?></td>
         <td><?php echo $booking['start_date'] ;?></td>
@@ -46,11 +46,11 @@
           <a class="btn btn-info" href="<?php echo base_url().'bookings/view/'.$booking['BookingId'];?>">View</a>
         </td>
         </tr>
-        <?php $counter++;?>
-      <?php if($counter==0):?>
-        <tr><td colspan="8">No data to show for</td></tr>
-      <?php endif;?>
     <?php endforeach;?>
+
+    <?php if($counter==0):?>
+      <tr><td colspan="8">No data to show</td></tr>
+    <?php endif;?>
   </tbody>
 </table>
 

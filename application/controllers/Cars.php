@@ -2,9 +2,6 @@
 	class Cars extends CI_Controller{
 
 		public function index(){
-			if(!$this->session->userdata('logged_in')){
-				redirect('users/login');
-			}
 
 			$data['title'] = 'Vehicles';
 			$data['cars'] = $this->Car_model->get_cars(null);
@@ -115,7 +112,7 @@
 			if(!$this->session->userdata('logged_in')){
 				redirect('users/login');
 			}
-			
+
 			$result = $this->Car_model->delete_car($id);
 			if($result){
 				$this->session->set_flashdata('car_deleted', 'Vehicle has been deleted');
