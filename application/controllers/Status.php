@@ -2,6 +2,12 @@
 	class Status extends CI_Controller{
 
 		public function index(){
+			if(!$this->session->userdata('logged_in')){
+				redirect('users/login');
+			}elseif (!$this->session->userdata('is_admin')) {
+				redirect('users/invalid');
+			}
+
 			$data['title'] = 'Status';
 			$data['status'] = $this->Status_model->get_status(null);
 			$this->load->view('templates/header');
@@ -10,6 +16,12 @@
 		}
 
 		public function create(){
+			if(!$this->session->userdata('logged_in')){
+				redirect('users/login');
+			}elseif (!$this->session->userdata('is_admin')) {
+				redirect('users/invalid');
+			}
+
 			$data['title'] = 'Add New Status';
 			$this->form_validation->set_rules('label', 'First Name', 'required');
 
@@ -28,6 +40,12 @@
 		}
 
     public function edit($id){
+			if(!$this->session->userdata('logged_in')){
+				redirect('users/login');
+			}elseif (!$this->session->userdata('is_admin')) {
+				redirect('users/invalid');
+			}
+
       $data['title'] = 'Edit Status';
       $data['status'] = $this->Status_model->get_status($id);
 
@@ -40,7 +58,32 @@
 
     }
 
+		public function view($id){
+			if(!$this->session->userdata('logged_in')){
+				redirect('users/login');
+			}elseif (!$this->session->userdata('is_admin')) {
+				redirect('users/invalid');
+			}
+
+			$data['title'] = 'View Status';
+			$data['status'] = $this->Status_model->get_status($id);
+
+			if(empty($data['status'])){
+				show_404();
+			}
+				$this->load->view('templates/header');
+				$this->load->view('status/view', $data);
+				$this->load->view('templates/footer');
+
+		}
+
+
     public function update(){
+			if(!$this->session->userdata('logged_in')){
+				redirect('users/login');
+			}elseif (!$this->session->userdata('is_admin')) {
+				redirect('users/invalid');
+			}
 
       $this->Status_model->update_status();
 
@@ -51,6 +94,12 @@
     }
 
     public function delete($id){
+			if(!$this->session->userdata('logged_in')){
+				redirect('users/login');
+			}elseif (!$this->session->userdata('is_admin')) {
+				redirect('users/invalid');
+			}
+			
       $this->Status_model->delete_status($id);
 
       // Set message

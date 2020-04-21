@@ -30,27 +30,21 @@
     </tr>
   </thead>
   <tbody>
-    <?php
-    $counter=0;
-      foreach($clients as $client){
-        $counter++;
-        echo '<tr>';
-        echo '<td>'.$counter.'</td>';
-        echo '<td>'.$client['name'].'</td>';
-        echo '<td>'.$client['email_address'].'</br>#'.$client['contact_number'].'</br>'.$client['address'].'</td>';
-        echo '<td>'.($client['Is_Active']==1 ? 'True' : 'False').'</td>';
-        echo '
-        <td>
-        <a class="btn btn-info" href="'.base_url().'clients/view/'.$client['Id'].'">View</a>
-        <a class="btn btn-warning" href="'.base_url().'clients/edit/'.$client['Id'].'">Edit</a>
-        <a class="btn btn-danger" href="'.base_url().'clients/delete/'.$client['Id'].'">Delete</a>
-        </td>';
-        echo '</tr> ';
-      }
-      if($counter==0){
-        echo '<tr><td colspan="5">No data to show for '.$filter.'</td></tr>';
-      }
-    ?>
-
+    <?php $counter=0; foreach($clients as $client):?>
+        <tr>
+          <td><?php $counter++; echo $counter; ?></td>
+          <td><?php echo $client['name']; ?></td>
+          <td><?php echo $client['email_address'].'</br>#'.$client['contact_number'].'</br>'.$client['address']; ?></td>
+          <td><?php echo ($client['Is_Active']==1 ? 'True' : 'False'); ?></td>
+          <td>
+          <a class="btn btn-info" href="<?php echo base_url().'clients/view/'.$client['Id']; ?>">View</a>
+          <a class="btn btn-warning" href="<?php echo base_url().'clients/edit/'.$client['Id']; ?>">Edit</a>
+          <a class="btn btn-danger" href="<?php echo base_url().'clients/delete/'.$client['Id']; $counter++; ?>">Delete</a>
+          </td>
+        </tr>
+      <?php endforeach; ?>
+      <?php if($counter==0):?>
+        <tr><td colspan="5">No data to show for '<?php echo $filter; ?>'</td></tr>
+      <?php endif; ?>
   </tbody>
 </table>

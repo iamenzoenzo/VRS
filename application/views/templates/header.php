@@ -7,15 +7,16 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon -->
-     <link rel="icon" href="<?php echo base_url();?>assets/images/system_images/vrslogo.png" type="image/gif" sizes="16x16">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="<?php echo base_url();?>assets/images/system_images/vrslogo.png" type="image/gif" sizes="16x16">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <!-- script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script -->
-    <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" -->
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/bootstrap-4.4.1/css/bootstrap.min.css">
-    <script src="<?php echo base_url(); ?>assets/bootstrap-4.4.1/js/jquery.min.js" ></script>
-    <script src="<?php echo base_url(); ?>assets/bootstrap-4.4.1/js/bootstrap.min.js" ></script>
-    <script src="<?php echo base_url(); ?>assets/bootstrap-4.4.1/js/popper.min.js" ></script>
+   <!-- script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script -->
+   <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" -->
+   <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/bootstrap-4.4.1/css/bootstrap.min.css">
+   <script src="<?php echo base_url(); ?>assets/bootstrap-4.4.1/js/jquery.min.js" ></script>
+   <script src="<?php echo base_url(); ?>assets/bootstrap-4.4.1/js/bootstrap.min.js" ></script>
+   <script src="<?php echo base_url(); ?>assets/bootstrap-4.4.1/js/popper.min.js" ></script>
+
 </head>
 <body class="pb-5">
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -64,14 +65,12 @@
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Admin
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="<?php echo base_url(); ?>users/index">View Users</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="<?php echo base_url(); ?>cars/index">View Vehicles</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="<?php echo base_url(); ?>settings/index">View Settings</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="<?php echo base_url(); ?>status/index">View Status</a>
+        <div class="dropdown-menu dropleft" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item <?php echo (($this->session->userdata('logged_in')) && ($this->session->userdata('is_admin')))?'':'disabled'?>" href="<?php echo base_url(); ?>users/index">Users Management</a>
+          <a class="dropdown-item" href="<?php echo base_url(); ?>cars/index">Vehicle Management</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item <?php echo (($this->session->userdata('logged_in')) && ($this->session->userdata('is_admin')))?'':'disabled'?>" href="<?php echo base_url(); ?>status/index">Status Management</a>
+            <a class="dropdown-item <?php echo (($this->session->userdata('logged_in')) && ($this->session->userdata('is_admin')))?'':'disabled'?>" href="<?php echo base_url(); ?>settings/index">System Settings</a>
         </div>
       </li>
       <?php endif; ?>
@@ -94,6 +93,16 @@
 
 <div class="container">
 <!-- flash messages -->
+
+<?php if($this->session->flashdata('global_error')): ?>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('global_error'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
 <?php if($this->session->flashdata('car_created')): ?>
   <div class="alert alert-success alert-dismissible fade show" role="alert">
   <?php echo $this->session->flashdata('car_created'); ?>

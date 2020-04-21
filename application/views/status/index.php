@@ -13,32 +13,28 @@
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col-4">Label</th>
+      <th scope="col">Label</th>
       <th scope="col">Color</th>
       <th scope="col">Is Active</th>
       <th scope="col">Actions</th>
     </tr>
   </thead>
   <tbody>
-    <?php
-    $counter=0;
-      foreach($status as $stat){
-        $counter++;
-        echo '<tr>';
-        echo '<th scope="row">'.$counter.'</th>';
-        echo '<td>'.$stat['label'].'</td>';
-        echo '<td>'.$stat['bootstrap_bg_color'].'</td>';
-        echo '<td>'.($stat['Is_Active']==1 ? 'True' : 'False').'</td>';
-        echo '
-        <td>
-        <a class="btn btn-warning" href="'.base_url().'status/edit/'.$stat['Id'].'">Edit</a>
-        <a class="btn btn-danger" href="'.base_url().'status/delete/'.$stat['Id'].'">Delete</a>
-        </td>';
-        echo '</tr> ';
-      }
-    ?>
-
+    <?php $counter=0; foreach($status as $stat):?>
+        <tr>
+          <th scope="row"><?php $counter++; echo $counter;?></th>
+          <td><?php echo $stat['label'];?></td>
+          <td><?php echo $stat['bootstrap_bg_color'];?></td>
+          <td><?php echo ($stat['Is_Active']==1 ? 'True' : 'False');?></td>
+          <td>
+            <a class="btn btn-info" href="<?php echo base_url().'status/view/'.$stat['Id'];$counter++;?>">View</a>
+          </td>
+        </tr>
+    <?php endforeach; ?>
   </tbody>
+  <?php if($counter==0):?>
+    <tr><td colspan="5">No data to show</td></tr>
+  <?php endif; ?>
 </table>
 </div>
 </div>

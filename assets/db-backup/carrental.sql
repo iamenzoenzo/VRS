@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 17, 2020 at 04:00 AM
+-- Generation Time: Apr 20, 2020 at 03:28 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -61,11 +61,19 @@ CREATE TABLE `clientbookings` (
   `BookingId` int(11) NOT NULL,
   `clientId` int(11) NOT NULL,
   `carId` int(11) NOT NULL,
+  `reference_number` varchar(25) NOT NULL,
   `start_date` date NOT NULL,
-  `pick_up_time` time NOT NULL,
+  `pick_up_datetime` datetime NOT NULL,
   `number_of_days` int(2) NOT NULL,
+  `add_driver` bit(1) DEFAULT NULL,
+  `driver_name` varchar(255) NOT NULL,
+  `driver_fee_current` decimal(10,0) NOT NULL,
+  `rental_fee_current` decimal(10,0) NOT NULL,
+  `rental_discount` decimal(10,0) NOT NULL,
   `end_date` date NOT NULL,
-  `return_time` time NOT NULL,
+  `return_datetime` datetime NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `updated_by` int(11) NOT NULL,
   `created_date` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_date` datetime NOT NULL,
   `statusId` int(11) NOT NULL
@@ -75,13 +83,42 @@ CREATE TABLE `clientbookings` (
 -- Dumping data for table `clientbookings`
 --
 
-INSERT INTO `clientbookings` (`BookingId`, `clientId`, `carId`, `start_date`, `pick_up_time`, `number_of_days`, `end_date`, `return_time`, `created_date`, `updated_date`, `statusId`) VALUES
-(5, 1, 5, '2020-01-29', '00:00:00', 0, '2020-01-31', '00:00:00', '2020-01-26 19:56:08', '0000-00-00 00:00:00', 2),
-(17, 97, 50, '2020-04-16', '00:00:00', 3, '2020-04-19', '00:00:00', '2020-04-16 23:25:09', '0000-00-00 00:00:00', 1),
-(18, 97, 50, '2020-04-16', '00:00:00', 3, '2020-04-19', '00:00:00', '2020-04-16 23:26:02', '0000-00-00 00:00:00', 1),
-(19, 99, 49, '2020-04-28', '00:00:00', 5, '2020-05-03', '00:00:00', '2020-04-17 00:00:34', '0000-00-00 00:00:00', 2),
-(20, 97, 40, '2020-04-25', '00:00:00', 5, '2020-04-30', '00:00:00', '2020-04-17 08:43:53', '0000-00-00 00:00:00', 1),
-(21, 97, 40, '2020-04-25', '00:00:00', 5, '2020-04-30', '00:00:00', '2020-04-17 08:44:56', '0000-00-00 00:00:00', 1);
+INSERT INTO `clientbookings` (`BookingId`, `clientId`, `carId`, `reference_number`, `start_date`, `pick_up_datetime`, `number_of_days`, `add_driver`, `driver_name`, `driver_fee_current`, `rental_fee_current`, `rental_discount`, `end_date`, `return_datetime`, `created_by`, `updated_by`, `created_date`, `updated_date`, `statusId`) VALUES
+(5, 1, 5, '', '2020-01-29', '2020-04-19 00:00:00', 0, b'0', '', '0', '0', '0', '2020-01-31', '2020-04-19 00:00:00', 0, 0, '2020-01-26 19:56:08', '0000-00-00 00:00:00', 2),
+(17, 97, 50, '', '2020-04-16', '2020-04-19 00:00:00', 3, b'0', '', '0', '0', '0', '2020-04-19', '2020-04-19 00:00:00', 0, 0, '2020-04-16 23:25:09', '0000-00-00 00:00:00', 1),
+(18, 97, 50, '', '2020-04-16', '2020-04-19 00:00:00', 3, b'0', '', '0', '0', '0', '2020-04-19', '2020-04-19 00:00:00', 0, 0, '2020-04-16 23:26:02', '0000-00-00 00:00:00', 1),
+(19, 99, 49, '', '2020-04-28', '2020-04-19 00:00:00', 5, b'0', '', '0', '0', '0', '2020-05-03', '2020-04-19 00:00:00', 0, 0, '2020-04-17 00:00:34', '0000-00-00 00:00:00', 2),
+(20, 97, 40, '', '2020-04-25', '2020-04-19 00:00:00', 5, b'0', '', '0', '0', '0', '2020-04-30', '2020-04-19 00:00:00', 0, 0, '2020-04-17 08:43:53', '0000-00-00 00:00:00', 1),
+(21, 97, 40, '', '2020-04-25', '2020-04-19 00:00:00', 5, b'0', '', '0', '0', '0', '2020-04-30', '2020-04-19 00:00:00', 0, 0, '2020-04-17 08:44:56', '0000-00-00 00:00:00', 1),
+(22, 100, 49, '', '2020-04-17', '2020-04-19 00:00:00', 2, b'1', 'Jan Hope', '4800', '0', '0', '2020-04-19', '2020-04-19 00:00:00', 0, 0, '2020-04-17 23:30:37', '0000-00-00 00:00:00', 1),
+(23, 101, 51, '', '2020-04-17', '2020-04-19 00:00:00', 3, b'1', 'Jan Hope', '1000', '20000', '0', '2020-04-20', '2020-04-19 00:00:00', 0, 0, '2020-04-17 23:36:27', '0000-00-00 00:00:00', 1),
+(24, 99, 49, '', '2020-05-08', '2020-04-19 00:00:00', 3, b'1', 'Jan Hope', '1000', '4800', '100', '2020-05-11', '2020-04-19 00:00:00', 0, 0, '2020-04-17 23:37:44', '0000-00-00 00:00:00', 1),
+(25, 98, 51, 'VRS-2020Apr-0JDFy', '2020-04-17', '2020-04-19 00:00:00', 5, b'1', 'Jan Hope', '1000', '20000', '20', '2020-04-22', '2020-04-19 00:00:00', 0, 0, '2020-04-17 23:48:07', '0000-00-00 00:00:00', 1),
+(26, 99, 51, 'VRS-2020AprAprA53PS', '2020-04-17', '2020-04-19 00:00:00', 4, b'1', 'Jan Hope', '1000', '20000', '30', '2020-04-21', '2020-04-19 00:00:00', 0, 0, '2020-04-17 23:51:25', '0000-00-00 00:00:00', 1),
+(27, 98, 49, 'VRS-2004041GZWS', '2020-04-17', '2020-04-19 00:00:00', 3, b'1', 'Jan Hope', '1000', '4800', '0', '2020-04-20', '2020-04-19 00:00:00', 0, 0, '2020-04-17 23:52:40', '0000-00-00 00:00:00', 1),
+(28, 98, 49, 'VRS-2004ZB8TE', '2020-04-17', '2020-04-19 00:00:00', 1, b'1', '', '1000', '4800', '0', '2020-04-18', '2020-04-19 00:00:00', 0, 0, '2020-04-17 23:53:49', '0000-00-00 00:00:00', 1),
+(29, 99, 49, 'VRS-2004SEVS4', '2020-04-19', '2020-04-19 00:00:00', 1, b'1', '', '1000', '4800', '0', '2020-04-20', '2020-04-19 00:00:00', 0, 0, '2020-04-19 15:27:35', '0000-00-00 00:00:00', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `clientbookingslogs`
+--
+
+CREATE TABLE `clientbookingslogs` (
+  `Id` int(11) NOT NULL,
+  `clientbookings_id` int(11) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `created_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_by` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `clientbookingslogs`
+--
+
+INSERT INTO `clientbookingslogs` (`Id`, `clientbookings_id`, `description`, `created_date`, `created_by`) VALUES
+(1, 29, 'added this booking', '2020-04-19 07:27:35', 12);
 
 -- --------------------------------------------------------
 
@@ -105,7 +142,18 @@ INSERT INTO `clientbookingsphotos` (`Id`, `booking_id`, `file_name`, `created_da
 (1, 18, '1587050762-lbO17hkK_400x400.jpg', '2020-04-16 23:26:02', b'1'),
 (2, 19, '1587052834-Capture.PNG', '2020-04-17 00:00:34', b'1'),
 (3, 21, '1587084295-CHARM.PNG', '2020-04-17 08:44:56', b'1'),
-(4, 21, '1587084295-ESCS_SCMC.PNG', '2020-04-17 08:44:56', b'1');
+(4, 21, '1587084295-ESCS_SCMC.PNG', '2020-04-17 08:44:56', b'1'),
+(5, 22, '1587137437-CHARM.PNG', '2020-04-17 23:30:37', b'1'),
+(6, 22, '1587137437-ESCS_SCMC.PNG', '2020-04-17 23:30:37', b'1'),
+(7, 23, '1587137787-CHARM.PNG', '2020-04-17 23:36:27', b'1'),
+(8, 23, '1587137787-ESCS_SCMC.PNG', '2020-04-17 23:36:27', b'1'),
+(9, 24, '1587137864-CHARM.PNG', '2020-04-17 23:37:44', b'1'),
+(10, 24, '1587137864-ESCS_SCMC.PNG', '2020-04-17 23:37:44', b'1'),
+(11, 25, '1587138487-CHARM.PNG', '2020-04-17 23:48:07', b'1'),
+(12, 25, '1587138487-ESCS_SCMC.PNG', '2020-04-17 23:48:07', b'1'),
+(13, 26, '1587138685-CHARM.PNG', '2020-04-17 23:51:25', b'1'),
+(14, 26, '1587138685-ESCS_SCMC.PNG', '2020-04-17 23:51:25', b'1'),
+(15, 29, '1587281255-CHARM.PNG', '2020-04-19 15:27:35', b'1');
 
 -- --------------------------------------------------------
 
@@ -194,11 +242,8 @@ INSERT INTO `settings` (`Id`, `name`, `value`, `type`, `Is_Active`) VALUES
 (7, 'telephone', '+63 917 638 1707', 'contact', b'1'),
 (8, 'Email Address', 'inquiry@carrental.com / customer@carrental.com', 'contact', b'1'),
 (9, 'Address', 'Poblacion Hagkol Sayre Highway (infront of new bus terminal), Valencia City, Bukidnon 8709', 'contact', b'1'),
-(10, 'Do I need to register before I can reserve a vehicle?', 'No. Registration is not required before making a reservation. However, information such as name, address, contact details and valid ID will be required upon reservation.', 'faq', b'1'),
 (11, 'Mobile phone', '09268406884', 'contact', b'1'),
-(12, 'Year founded', '2016', 'other', b'0'),
-(13, 'What is the process of reservation?', '<b>Step 1</b> Select the desired vehicle in our portal.\r\n\r\n<b>Step 2</b> Contact VRS and inform your preferred vehicle and number of days of reservation.\r\n\r\n<b>Step 3</b> Provide the required details to VRS Support.\r\n\r\n<b>Step 4</b> Wait for the email confirmation.', 'faq', b'1'),
-(14, 'Is it possible to extend the duration of reservation?', 'Depending on the availability of the vehicle, you can extend the reservation by calling our VRS support.', 'faq', b'1');
+(15, 'Rental_Pickup_Time', '10:00', 'system', b'1');
 
 -- --------------------------------------------------------
 
@@ -218,9 +263,9 @@ CREATE TABLE `status` (
 --
 
 INSERT INTO `status` (`Id`, `label`, `bootstrap_bg_color`, `Is_Active`) VALUES
-(1, 'Reserved', 'warning', b'1'),
+(1, 'Reserved', 'success', b'1'),
 (2, 'In Progress', 'danger', b'1'),
-(8, 'Returned', 'secondary', b'1');
+(9, 'Returned', 'primary', b'1');
 
 -- --------------------------------------------------------
 
@@ -247,7 +292,6 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `fullname`, `email`, `username`, `password`, `user_type`, `created_at`, `Is_Active`) VALUES
 (4, 'Enzo', 'Cerbas', 'Enzo Cerbas', 'bvcerbas@up.edu.ph', 'enzo', 'd41d8cd98f00b204e9800998ecf8427e', 'user', '2020-02-01 05:18:35', b'1'),
-(11, 'Jeffry', 'Manhulad', 'Jeffry Manhulad', 'jeff.manhulad@gmail.com', 'jeffman', 'd41d8cd98f00b204e9800998ecf8427e', 'user', '2020-04-12 14:37:28', b'1'),
 (12, 'Arvin', 'Reyes', 'Arvin Reyes', 'arvin@gmail.com', 'arvinreyes', '5f4dcc3b5aa765d61d8327deb882cf99', 'admin', '2020-04-14 15:38:23', b'1'),
 (13, 'Admin', 'Carrental', 'Admin Carrental', 'johndue@gmail.com', 'admin', '25d55ad283aa400af464c76d713c07ad', 'admin', '2020-04-14 15:45:03', b'1');
 
@@ -266,6 +310,12 @@ ALTER TABLE `cars`
 --
 ALTER TABLE `clientbookings`
   ADD PRIMARY KEY (`BookingId`);
+
+--
+-- Indexes for table `clientbookingslogs`
+--
+ALTER TABLE `clientbookingslogs`
+  ADD PRIMARY KEY (`Id`);
 
 --
 -- Indexes for table `clientbookingsphotos`
@@ -317,13 +367,19 @@ ALTER TABLE `cars`
 -- AUTO_INCREMENT for table `clientbookings`
 --
 ALTER TABLE `clientbookings`
-  MODIFY `BookingId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `BookingId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT for table `clientbookingslogs`
+--
+ALTER TABLE `clientbookingslogs`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `clientbookingsphotos`
 --
 ALTER TABLE `clientbookingsphotos`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `clients`
@@ -341,13 +397,13 @@ ALTER TABLE `clientsphotos`
 -- AUTO_INCREMENT for table `settings`
 --
 ALTER TABLE `settings`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `status`
 --
 ALTER TABLE `status`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `users`

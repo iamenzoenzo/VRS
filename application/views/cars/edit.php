@@ -44,7 +44,7 @@
     </div>
   </div>
 <div class="pt-3">
-	<button type="submit" class="btn btn-primary">Submit</button>
+	<button type="submit" class="btn btn-warning">Save Edit</button>
   <a href="<?php echo base_url()?>cars/index" class="btn btn-danger">Cancel</a>
 </div>
 </form>

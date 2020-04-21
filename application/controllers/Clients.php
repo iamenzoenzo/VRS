@@ -3,6 +3,10 @@ date_default_timezone_set('Asia/Manila');
 	class Clients extends CI_Controller{
 
 		public function index(){
+			if(!$this->session->userdata('logged_in')){
+				redirect('users/login');
+			}
+
 			$data['title'] = 'Clients';
 			$data['clients'] = $this->Client_model->get_clients(null);
 			$data['filter'] = $this->input->post('name_filter');
@@ -12,6 +16,10 @@ date_default_timezone_set('Asia/Manila');
 		}
 
 		public function view($id){
+			if(!$this->session->userdata('logged_in')){
+				redirect('users/login');
+			}
+
 			$data['title'] = 'Client Information';
 			$data['clients'] = $this->Client_model->get_clients($id);
 			$data['images'] = $this->ClientImage_model->get_images(null,$id);
@@ -85,6 +93,10 @@ date_default_timezone_set('Asia/Manila');
 		}
 
     public function edit($id){
+			if(!$this->session->userdata('logged_in')){
+				redirect('users/login');
+			}
+
       $data['title'] = 'Edit Client Information';
       $data['clients'] = $this->Client_model->get_clients($id);
 
@@ -98,6 +110,9 @@ date_default_timezone_set('Asia/Manila');
     }
 
     public function update(){
+			if(!$this->session->userdata('logged_in')){
+				redirect('users/login');
+			}
 
       $this->Client_model->update_client();
 
@@ -108,6 +123,10 @@ date_default_timezone_set('Asia/Manila');
     }
 
     public function delete($id){
+			if(!$this->session->userdata('logged_in')){
+				redirect('users/login');
+			}
+			
       $result = $this->Client_model->delete_client($id);
 			if($result){
 				$this->session->set_flashdata('client_deleted', 'Client has been deleted');
