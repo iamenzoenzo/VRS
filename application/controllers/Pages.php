@@ -57,9 +57,6 @@ class Pages extends CI_Controller {
     }else{
       echo number_format(0,2);
     }
-
-
-
   }
 
   public function contact()

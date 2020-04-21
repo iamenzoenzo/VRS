@@ -54,6 +54,10 @@
 				$this->BookingLogs_model->create_log($BookingId,$remarks,$this->session->userdata('user_id'));
 			}
 
+			if(!empty($this->input->post('discount'))){
+				$this->BookingLogs_model->create_log($BookingId,'applied a discount amount of '.$this->input->post('discount'),$this->session->userdata('user_id'));
+			}
+
 			return true;
 		}
 

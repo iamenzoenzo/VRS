@@ -36,7 +36,7 @@
     <?php $counter=0; foreach ($bookings as $booking):?>
         <tr class='clickable-row' title="Click to view this booking" data-href="<?php echo base_url().'bookings/view/'.$booking['BookingId'];?>">
         <td><?php $counter++; echo $counter ;?></td>
-        <td><?php echo $booking['name'] ;?></td>
+        <td><?php echo '<b>'.$booking['name'].'</b></br><small>'.$booking['email_address'].'</br>#'.$booking['contact_number'].'</br>'.$booking['address'].'</small>' ;?></td>
         <td><?php echo $booking['code_name'].' ('.$booking['plate_number'].')' ;?></td>
         <td><?php echo $booking['start_date'] ;?></td>
         <td><?php echo $booking['end_date'] ;?></td>

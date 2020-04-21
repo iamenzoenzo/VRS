@@ -128,6 +128,24 @@ date_default_timezone_set('Asia/Manila');
 
 		}
 
+		public function computeRent()
+		{
+			$adddriver=$this->input->post('add_driver');
+			if($adddriver=='true'){
+				$res = $this->Setting_model->get_settings(null,'Driver_Per_Day');
+				$driverpay=$res['value'];
+			}else{
+				$driverpay=0;
+			}
+			$noOfDays=$this->input->post('no_of_days');
+			$car = $this->Car_model->get_cars($this->input->post('car_id'));
+			if(!empty($car['Id']) && !empty($noOfDays)){
+				echo number_format((($noOfDays * $car['RentPerDay'])+($driverpay*$noOfDays))-$this->input->post('discount'),2);
+			}else{
+				echo number_format(0,2);
+			}
+		}
+
     public function update(){
 
       $this->Client_model->update_client();

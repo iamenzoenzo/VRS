@@ -17,6 +17,12 @@
         <h5><?= $title ;?></h5>
       </div>
       <div class="card-body">
+        <div class="row mt-2 text-center">
+          <div class="col">
+            <h1 id="for_total_rent">₱0.00</h1>
+            <small>Total rent to pay in Pesos</small>
+          </div>
+        </div>
         <div class="row mt-2">
           <div class="col-lg-8 col-sm-12">
             <label>Start Date</label>
@@ -41,21 +47,10 @@
           <?php endif; ?>
       	</div>
       </div>
-      <div class="row">
-        <div class="col">
-          <label>Select client</label>
-          <select name="clientId" class="form-control">
-            <option value="0">-</option>
-            <?php foreach ($clients as $client): ?>
-             <option value="<?php echo $client['Id'];?>"><?php echo $client['name'];?></option>
-           <?php endforeach; ?>
-          </select>
-        </div>
-      </div>
         <div class="row mt-2">
           <div class="col">
             <div class="checkbox">
-                <input name="add_driver" type="checkbox"> Client need driver? Add ₱<?php echo number_format($driver_pay['value'],2);?> per day</label>
+                <input id="add_driver" name="add_driver" type="checkbox"> Client need driver? Add ₱<?php echo number_format($driver_pay['value'],2);?> per day</label>
             </div>
           </div>
         </div>
@@ -66,9 +61,24 @@
           </div>
         </div>
         <div class="row mt-2">
-          <div class="col">
+          <div class="col-lg-8 col-sm-12">
             <label>Discount amount (Optional)</label>
-            <input type="number" min="0" value="0" class="form-control col-lg-4 col-sm-12" name="discount">
+            <input type="number" min="0" value="0" class="form-control" id="discount" name="discount">
+          </div>
+          <div class="col-lg-4 col-sm-12">
+            <label> </br></label>
+            <input type="button" class="form-control btn-success" id="btnCompute" value="Compute">
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col">
+            <label>Select client</label>
+            <select name="clientId" class="form-control">
+              <option value="0">-</option>
+              <?php foreach ($clients as $client): ?>
+               <option value="<?php echo $client['Id'];?>"><?php echo $client['name'];?></option>
+             <?php endforeach; ?>
+            </select>
           </div>
         </div>
         <div class="row mt-2">
@@ -119,6 +129,29 @@
   }
 
 
+  $(document).ready(function() {
+      $('#btnCompute').click(function(e) {
+        var selectedCar = document.getElementById("carId");
+          var driver=$('#add_driver').is(":checked")
+          e.preventDefault();
+          $.ajax({
+              method: "post",
+              url: "<?php echo base_url(); ?>bookings/computeRent",
+              data: {
+                      no_of_days: document.getElementById('number_of_days').value,
+                      car_id: selectedCar.options[selectedCar.selectedIndex].value,
+                      add_driver: driver,
+                      discount: document.getElementById('discount').value
+                  },
+              dataType: "html",
+              context: document.body,
+              success: function (response){
+                var myhtml='<h1 id="for_total_rent">₱'+response+'</h1>';
+                  $('#for_total_rent').html(myhtml);
+              }
+          });
+      })
+  });
 
   $( function() {
     $("#start_date")
