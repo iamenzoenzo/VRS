@@ -1,5 +1,5 @@
 #!/bin/bash
-mysql -u root -pnewpassword -h localhost <<EOF
+mysql -u admin -pTeamlaban! -h upoudb1.chioee9qrhwf.us-east-1.rds.amazonaws.com <<EOF
 DROP DATABASE IF EXISTS carrental;
 CREATE SCHEMA carrental ;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
