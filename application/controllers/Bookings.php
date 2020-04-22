@@ -17,7 +17,7 @@ date_default_timezone_set('Asia/Manila');
 			$data['bookings'] = $this->Booking_model->get_bookings($id);
 			$data['images'] = $this->BookingImage_model->get_images(null,$id);
 			$data['logs'] = $this->BookingLogs_model->get_logs_by_booking_id($id);
-			
+
 			if(empty($data['bookings'])){
 				show_404();
 			}
@@ -33,7 +33,9 @@ date_default_timezone_set('Asia/Manila');
 			}
 
 			$data['title'] = 'Add New Booking';
-			$data['cars'] = $this->Car_model->get_cars(null);
+			$startDate = date("Y-m-d");
+			$end_date = date('Y-m-d', strtotime($startDate. ' + 1 days'));
+			$data['cars'] = $this->Car_model->get_available_cars_on_date($startDate,$end_date);
 			$data['driver_pay'] = $this->Setting_model->get_settings(null,'Driver_Per_Day');
 			$data['clients'] = $this->Client_model->get_clients(null);
 
@@ -108,6 +110,42 @@ date_default_timezone_set('Asia/Manila');
 
     }
 
+		public function get_available_vehicles($today=null)
+		{
+			if(isset($today)){
+				$newDate = $today;
+				$numberofdays=1;
+			}else{
+				$start_date=$this->input->post('start_date');
+				$newDate = date("Y-m-d", strtotime($start_date));
+				$numberofdays=$this->input->post('number_of_days');
+			}
+
+			$end_date= date('Y-m-d', strtotime($start_date. ' + '.$numberofdays.' days'));
+			$car = $this->Car_model->get_available_cars_on_date($newDate,$end_date);
+
+			echo json_encode($car);
+
+		}
+
+		public function computeRent()
+		{
+			$adddriver=$this->input->post('add_driver');
+			if($adddriver=='true'){
+				$res = $this->Setting_model->get_settings(null,'Driver_Per_Day');
+				$driverpay=$res['value'];
+			}else{
+				$driverpay=0;
+			}
+			$noOfDays=$this->input->post('no_of_days');
+			$car = $this->Car_model->get_cars($this->input->post('car_id'));
+			if(!empty($car['Id']) && !empty($noOfDays)){
+				echo number_format((($noOfDays * $car['RentPerDay'])+($driverpay*$noOfDays))-$this->input->post('discount'),2);
+			}else{
+				echo number_format(0,2);
+			}
+		}
+
     public function update(){
 
       $this->Client_model->update_client();
@@ -119,13 +157,13 @@ date_default_timezone_set('Asia/Manila');
     }
 
     public function delete($id){
-      $result = $this->Client_model->delete_client($id);
+      $result = $this->Booking_model->delete_booking($id);
 			if($result){
-				$this->session->set_flashdata('client_deleted', 'Client has been deleted');
-	      redirect('clients/index');
+				$this->session->set_flashdata('booking_deleted', 'Client booking has been deleted');
+	      redirect('bookings/index');
 			}else{
-				$this->session->set_flashdata('client_deleted_error', 'Error encountered while deleting client');
-				redirect('clients/view/'.$id);
+				$this->session->set_flashdata('client_deleted_error', 'Error encountered while deleting client booking');
+				redirect('bookings/view/'.$id);
 			}
 
     }

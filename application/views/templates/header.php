@@ -265,6 +265,23 @@
 </div>
 <?php endif; ?>
 
+<?php if($this->session->flashdata('booking_deleted')): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('booking_deleted'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('booking_updated')): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('booking_updated'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
 
 <?php if($this->session->flashdata('user_loggedin')): ?>
   <div class="alert alert-success alert-dismissible fade show" role="alert">
