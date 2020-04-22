@@ -26,7 +26,7 @@
       <th scope="col-4">Name</th>
       <th scope="col-4">Contact Information</th>
       <th scope="col">Is Active</th>
-      <th scope="col">Actions</th>
+      <th class="text-center" scope="col">Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -36,10 +36,8 @@
           <td><?php echo $client['name']; ?></td>
           <td><?php echo $client['email_address'].'</br>#'.$client['contact_number'].'</br>'.$client['address']; ?></td>
           <td><?php echo ($client['Is_Active']==1 ? 'True' : 'False'); ?></td>
-          <td>
+          <td class="text-center">
           <a class="btn btn-info" href="<?php echo base_url().'clients/view/'.$client['Id']; ?>">View</a>
-          <a class="btn btn-warning" href="<?php echo base_url().'clients/edit/'.$client['Id']; ?>">Edit</a>
-          <a class="btn btn-danger" href="<?php echo base_url().'clients/delete/'.$client['Id']; $counter++; ?>">Delete</a>
           </td>
         </tr>
       <?php endforeach; ?>

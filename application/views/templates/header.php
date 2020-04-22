@@ -103,6 +103,15 @@
 </div>
 <?php endif; ?>
 
+<?php if($this->session->flashdata('attachment_deleted')): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <?php echo $this->session->flashdata('attachment_deleted'); ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php endif; ?>
+
 <?php if($this->session->flashdata('car_created')): ?>
   <div class="alert alert-success alert-dismissible fade show" role="alert">
   <?php echo $this->session->flashdata('car_created'); ?>

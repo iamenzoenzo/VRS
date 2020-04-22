@@ -1,5 +1,6 @@
 <h2><?= $title ;?></h2>
 <?php echo form_open_multipart('clients/update'); ?>
+<input type="hidden" name="id" value="<?php echo $clients['Id']; ?>">
   <div class="row">
   	<div class="col">
   		<label>Name</label>

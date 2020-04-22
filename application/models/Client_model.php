@@ -20,11 +20,6 @@
         'email_address' => $this->input->post('email'),
         'contact_number' => $this->input->post('contact_number'),
         'address' => $this->input->post('address'),
-        'address' => $this->input->post('address'),
-        'government_id_1_path' => '',
-        'government_id_2_path' => '',
-        'attachment_1_path' => '',
-        'attachment_2_path' => '',
 				'Is_Active' => 1
 			);
 			$this->db->insert('clients', $data);
@@ -33,14 +28,18 @@
 			return true;
 		}
 
-    public function update_status(){
+    public function update_client($filesdata){
       $data = array(
-				'label' => $this->input->post('label'),
-				'Is_Active' => (($this->input->post('is_active_checkbox')=='on') ? 1 : 0)
+				'name' => $this->input->post('name'),
+        'email_address' => $this->input->post('email'),
+        'contact_number' => $this->input->post('contact_number'),
+        'address' => $this->input->post('address')
       );
 
       $this->db->where('Id', $this->input->post('id'));
-      return $this->db->update('status', $data);
+      $this->db->update('clients', $data);
+			$this->ClientImage_model->create_client_photos($this->input->post('id'),$filesdata);
+			return $this->input->post('id');
     }
 
 		public function delete_client($id){
