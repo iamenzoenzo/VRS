@@ -9,21 +9,21 @@
   </ul>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="<?php echo base_url();?>assets/images/homepage_carousel/cbmwm3.jpg" alt="BMW M3" width="1100" height="400">
+      <img class="img-fluid" src="<?php echo base_url();?>assets/images/homepage_carousel/cbmwm3.jpg" alt="BMW M3" width="1100" height="400">
       <div class="carousel-caption">
         <h3>BMW M3</h3>
         <p>The BMW M3 is a high-performance version of the BMW 3 Series, developed by BMW's in-house motorsport division, BMW M GmbH. ... Since 2015 the M3 has been solely produced in the sedan body style, due to the coupé and convertible models being rebranded as the 4 Series range, making the high-performance variant the M4.</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="<?php echo base_url();?>assets/images/homepage_carousel/cbmwz4.jpg" alt="BMW Z4" width="1100" height="400">
+      <img class="img-fluid" src="<?php echo base_url();?>assets/images/homepage_carousel/cbmwz4.jpg" alt="BMW Z4" width="1100" height="400">
       <div class="carousel-caption">
         <h3>BMW Z4</h3>
         <p>The BMW Z models are a line of roadsters manufactured by German automaker BMW. The Z stands for zukunft (German for future),[1] and has been produced in four different series with six generations consisting of roadster, coupé, sports car, and concept variants. </p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="<?php echo base_url();?>assets/images/homepage_carousel/cgrandia.jpg" alt="Toyota Grandia" width="1100" height="400">
+      <img class="img-fluid" src="<?php echo base_url();?>assets/images/homepage_carousel/cgrandia.jpg" alt="Toyota Grandia" width="1100" height="400">
       <div class="carousel-caption">
         <h3>Toyota Hiace Grandia</h3>
         <p>EXPERIENCE A HIGHER LEVEL OF LUXURY</p>
@@ -31,7 +31,7 @@
       </div>
     </div>
     <div class="carousel-item">
-      <img src="<?php echo base_url();?>assets/images/homepage_carousel/ctucson.jpg" alt="Hyundai Tucson" width="1100" height="400">
+      <img class="img-fluid" src="<?php echo base_url();?>assets/images/homepage_carousel/ctucson.jpg" alt="Hyundai Tucson" width="1100" height="400">
       <div class="carousel-caption">
         <h3>Hyundai Tucson</h3>
         <p>The Hyundai Tucson (Korean: 현대 투싼) (pronounced Tu-són) is a compact crossover SUV produced by the South Korean manufacturer Hyundai since 2004. In the brand's lineup, the Tucson fits below the Santa Fe and Veracruz. It is named after the city of Tucson, Arizona.</p>
