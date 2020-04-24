@@ -12,12 +12,12 @@
   <div class="col-lg-6 col-sm-12 mt-3">
     <div class="card">
         <div class="card-header">
-          <h5>Booking Information <span class="p-1 text-white bg-<?php echo $bookings['bootstrap_bg_color'];?>"><?php echo $bookings['label'];?></span></h5>
+          <h5>Booking Information</h5>
         </div>
         <div class="card-body">
           <div class="row">
             <div class="col text-center">
-              <h1>₱<?php echo number_format((($bookings['number_of_days']*$bookings['rental_fee_current'])+($bookings['number_of_days']*$bookings['driver_fee_current'])-($bookings['rental_discount'])),2);?></h1>
+              <h1>₱<?php echo number_format((($bookings['number_of_days']*$bookings['rental_fee_current'])+($bookings['number_of_days']*$bookings['driver_fee_current'])-($bookings['rental_discount'])-($total_payments)),2);?></h1>
               <small>Unpaid Balance</small>
             </div>
           </div>
@@ -46,13 +46,37 @@
                 <?php echo $bookings['label'];?>
               </div>
             </div>
+            <div class="row">
+              <div class="col-lg-4 col-sm-12">
+                <b>Total Cost: </b>
+              </div>
+              <div class="col-lg-8 col-sm-12">
+                <span title="<?php echo 'Rental Cost: ₱'.number_format(($bookings['number_of_days']*$bookings['rental_fee_current']),2).'+ Driver Cost: ₱'.number_format(($bookings['number_of_days']*$bookings['driver_fee_current']),2);?>"><?php echo '₱'.number_format((($bookings['number_of_days']*$bookings['rental_fee_current'])+($bookings['number_of_days']*$bookings['driver_fee_current'])),2);?></span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4 col-sm-12">
+                <b>Total Payment: </b>
+              </div>
+              <div class="col-lg-8 col-sm-12">
+                <span><?php echo '₱'.number_format($total_payments,2);?></span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4 col-sm-12">
+                <b>Discount: </b>
+              </div>
+              <div class="col-lg-8 col-sm-12">
+                <?php echo '₱'.number_format($bookings['rental_discount'],2);?>
+              </div>
+            </div>
             </hr>
             <div class="row">
               <div class="col-lg-4 col-sm-12">
                 <b>Vehicle: </b>
               </div>
               <div class="col-lg-8 col-sm-12">
-              <?php echo $bookings['name'].' ('.$bookings['plate_number'].')';?>
+              <?php echo $bookings['car_description'].' ('.$bookings['plate_number'].')';?>
               </div>
             </div>
             <div class="row">
@@ -60,7 +84,7 @@
                 <b>Start Date: </b>
               </div>
               <div class="col-lg-8 col-sm-12">
-              <?php echo date_format(date_create($bookings['start_date']),'F d, Y h:i A (l)');?>
+              <?php echo date_format(date_create($bookings['start_date']),'F d, Y (l)');?>
               </div>
             </div>
             <div class="row">
@@ -68,7 +92,7 @@
                 <b>End Date: </b>
               </div>
               <div class="col-lg-8 col-sm-12">
-              <?php echo date_format(date_create($bookings['end_date']),'F d, Y h:i A (l)');?>
+              <?php echo date_format(date_create($bookings['end_date']),'F d, Y (l)');?>
               </div>
             </div>
             <div class="row">
@@ -134,16 +158,17 @@
     <div class="card-body">
       <div class="row">
         <div class="col text-center">
-          <h1>₱<?php echo number_format($bookings['rental_discount'],2);?></h1>
+          <h1>₱<?php echo number_format($total_payments,2);?></h1>
           <small>Total Payments</small>
         </div>
       </div>
+      <a class="btn btn-info"data-toggle="modal" href="#paymentModal">Add Payment</a>
       <div class="row">
         <div class="col">
           <?php if(count($payments)>0):?>
               <?php foreach ($payments as $payment):?>
                 <div class="alert alert-warning" role="alert">
-                  <b><?php echo $payment['fullname'].'</b>: <i>'.$payment['payment_remarks'].'</i> (<a target="_blank" href="'.base_url().'assets/images/client_bookings_payments/'.$payment['attachment_path'].'">'.$payment['attachment_path'].'</a>) </br><small>'.date_format(date_create($payment['created_date']),'F d, Y h:i A (l)').'</small>';?>
+                  <?php echo 'Client paid ₱'.number_format($payment['amount'],2).'. <i>'.$payment['payment_remarks'].'</i> (<a target="_blank" href="'.base_url().'assets/images/client_bookings_payments/'.$payment['attachment_path'].'">View attachment</a>) </br><small>'.'Added by '.$payment['fullname'].' on '.date_format(date_create($payment['created_date']),'F d, Y h:i A (l)').'</small>';?>
                 </div>
 
               <?php endforeach;?>
@@ -219,6 +244,48 @@
           <div class="modal-body">
             <div id="ImageContainer">
             </div>
+          </div> <!-- end of modal body -->
+      </div> <!-- end of modal content -->
+    </div>
+</div> <!-- end of modal popup -->
+
+<!-- start of modal popup -->
+<div class="modal fade bd-example-modal-md" role="dialog" id="paymentModal" tabindex="-1"  aria-labelledby="paymentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="paymentModalLabel">Add Payment</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+            <?php echo form_open_multipart('bookings/addPayement'); ?>
+            <input type="hidden" name="BookingId" value="<?php echo $bookings['BookingId']; ?>">
+              <div class="row">
+                <div class="col">
+                  <label>Amount</label>
+                  <input type="number" class="form-control" name="payment_amount" min="1" value="0">
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col">
+                  <label>Remarks</label>
+                  <input type="text" class="form-control" name="payment_remarks">
+                </div>
+              </div>
+              <div class="row pt-3">
+                <div class="col">
+                  <label>Payment attachment</label></br>
+                  <input type="file" name="paymentAttachment">
+                </div>
+              </div>
+              <div class="row pt-3">
+                <div class="col">
+                  <input type="submit" value="Save" class=" btn btn-primary">
+                </div>
+              </div>
+            </form>
           </div> <!-- end of modal body -->
       </div> <!-- end of modal content -->
     </div>

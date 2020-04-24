@@ -6,11 +6,11 @@
 
 		public function get_cars($id){
 			if(isset($id)){
-				$this->db->order_by('name');
+				$this->db->order_by('car_description');
 				$query=$this->db->get_where('cars', array('Id' => $id));
 				return $query->row_array();
 			}else {
-				$this->db->order_by('name');
+				$this->db->order_by('car_description');
 				$query = $this->db->get('cars');
 				return $query->result_array();
 			}
@@ -26,7 +26,7 @@
 		}
 
 		public function get_distinct_cars(){
-			$this->db->order_by('name');
+			$this->db->order_by('car_description');
 			$this->db->group_by(array("cars.model", "cars.manufacturer"));
 			$query = $this->db->get('cars');
 			return $query->result_array();
@@ -34,7 +34,7 @@
 
 		public function create_car($car_image){
 			$data = array(
-				'name' => $this->input->post('car-name'),
+				'car_description' => $this->input->post('car-name'),
         'code_name' => $this->input->post('car-code-name'),
 				'model' => $this->input->post('car-model-name'),
         'manufacturer' => $this->input->post('car-manufacturer'),
@@ -52,7 +52,7 @@
 
 		public function update_car(){
 			$data = array(
-				'name' => $this->input->post('car-name'),
+				'car_description' => $this->input->post('car-name'),
 				'code_name' => $this->input->post('car-code-name'),
 				'model' => $this->input->post('car-model-name'),
 				'manufacturer' => $this->input->post('car-manufacturer'),

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 24, 2020 at 08:44 AM
+-- Generation Time: Apr 24, 2020 at 11:33 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `cars` (
   `Id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `car_description` varchar(255) NOT NULL,
   `code_name` varchar(50) NOT NULL,
   `model` varchar(20) NOT NULL,
   `manufacturer` varchar(20) NOT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE `cars` (
 -- Dumping data for table `cars`
 --
 
-INSERT INTO `cars` (`Id`, `name`, `code_name`, `model`, `manufacturer`, `year`, `plate_number`, `RentPerDay`, `Capacity`, `file_name`, `Is_Active`) VALUES
+INSERT INTO `cars` (`Id`, `car_description`, `code_name`, `model`, `manufacturer`, `year`, `plate_number`, `RentPerDay`, `Capacity`, `file_name`, `Is_Active`) VALUES
 (40, 'Toyota Grandia', 'Toyota Grandia Radiant', 'Grandia', 'Toyota', 1990, 'TBS-7634', 5000.00, 4, '1586654715-Capture.PNG', b'1'),
 (49, 'Hyundai Tucson (Yellow)', 'Radiant Hyundai', 'Tucson', 'Hyundai', 1990, 'XTR-3425', 4800.00, 4, 'v1starex1.jpg', b'1'),
 (50, 'BMW M3 (Silver)', 'BMW M3 Radiant', 'M3', 'BMW', 1990, 'TRX-0987', 10000.00, 7, '1586954874-.jpg', b'1'),
@@ -159,7 +159,11 @@ CREATE TABLE `clientbookingspayments` (
 
 INSERT INTO `clientbookingspayments` (`PaymentId`, `Booking_Id`, `amount`, `payment_remarks`, `attachment_path`, `created_date`, `created_by`) VALUES
 (1, 44, '2500', 'added downpayment', '1587473071-CHARM.png', '2020-04-22 03:37:26', 12),
-(2, 45, '500', 'added downpayment', '', '2020-04-22 15:19:55', 12);
+(2, 45, '500', 'added downpayment', '', '2020-04-22 15:19:55', 12),
+(3, 48, '1000', 'downpayment', '', '2020-04-24 08:41:32', 12),
+(4, 48, '2000', 'payment', '1587718662-paper-receipt-icon-simple-style-vector-26801158.jpg', '2020-04-24 08:57:42', 12),
+(5, 48, '5000', 'Client transferred via BDO', '1587719956-profile-icon-female-user-person-avatar-symbol-vector-20910834.jpg', '2020-04-24 09:19:16', 12),
+(6, 48, '5000', 'paid via palawan', '1587720026-download.png', '2020-04-24 09:20:26', 12);
 
 -- --------------------------------------------------------
 
@@ -412,7 +416,7 @@ ALTER TABLE `clientbookingslogs`
 -- AUTO_INCREMENT for table `clientbookingspayments`
 --
 ALTER TABLE `clientbookingspayments`
-  MODIFY `PaymentId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `PaymentId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `clientbookingsphotos`

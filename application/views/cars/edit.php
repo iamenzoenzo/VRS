@@ -3,8 +3,8 @@
 <input type="hidden" name="id" value="<?php echo $cars['Id']; ?>">
   <div class="row">
   	<div class="col">
-  		<label>Name</label>
-  		<input type="text" class="form-control" name="car-name" placeholder="Enter name" value="<?php echo $cars['name']; ?>">
+  		<label>Description</label>
+  		<input type="text" class="form-control" name="car-name" placeholder="Enter name" value="<?php echo $cars['car_description']; ?>">
   	</div>
     <div class="col">
       <label>Code Name</label>

@@ -47,7 +47,7 @@
           <select id="carId" name="carId" class="form-control <?php echo (count($cars)==0)?'is-invalid':'';?>" value="<?php echo set_value('carId'); ?>">
             <option value="">-</option>
             <?php foreach ($cars as $car): ?>
-             <option value="<?php echo $car['Id'];?>"><?php echo $car['code_name'].' ('.$car['plate_number'].')';?></option>
+             <option value="<?php echo $car['Id'];?>"><?php echo $car['car_description'].' ('.$car['plate_number'].')';?></option>
            <?php endforeach; ?>
           </select>
           <?php if(count($cars)==0):?>

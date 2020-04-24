@@ -2,8 +2,8 @@
 <?php echo form_open_multipart('cars/create'); ?>
   <div class="row">
   	<div class="col">
-  		<label>Name</label>
-  		<input type="text" class="form-control" name="car-name" placeholder="Enter name">
+  		<label>Description</label>
+  		<input type="text" class="form-control" name="car-name" placeholder="Enter description">
   	</div>
     <div class="col">
       <label>Code Name</label>

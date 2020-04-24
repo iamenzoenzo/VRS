@@ -18,6 +18,7 @@ date_default_timezone_set('Asia/Manila');
 			$data['images'] = $this->BookingImage_model->get_images(null,$id);
 			$data['logs'] = $this->BookingLogs_model->get_logs_by_booking_id($id);
 			$data['payments'] = $this->BookingPayments_model->get_payments_by_booking_id($id);
+			$data['total_payments'] = $this->BookingPayments_model->get_payments_sum_by_booking_id($id);
 
 			if(empty($data['bookings'])){
 				show_404();
@@ -121,6 +122,42 @@ date_default_timezone_set('Asia/Manila');
         $this->load->view('templates/footer');
 
     }
+
+		public function addPayement(){
+			$timestamp = time();
+			// Upload Image
+			$config['upload_path'] = './assets/images/client_bookings_payments';
+			$config['allowed_types'] = 'jpg|jpeg|png|gif';
+			$config['max_size'] = '0';
+			$config['max_width'] = '0';
+			$config['max_height'] = '0';
+			$config['overwrite'] = FALSE;
+			$config['remove_spaces'] = TRUE;
+			$config['file_name'] = $timestamp.'-'.$_FILES['paymentAttachment']['name'];
+
+			$this->upload->initialize($config);
+
+			if(!$this->upload->do_upload('paymentAttachment')){
+				$this->session->set_flashdata('global_error', 'Error encountered: '.$this->upload->display_errors());
+				redirect('bookings/view/'.$this->input->post('BookingId'));
+			} else {
+				$data = $this->upload->data();
+				$payment_image = $data['file_name'];
+			}
+
+			$paymentId = $this->BookingPayments_model->create_payment($this->input->post('BookingId'),$this->input->post('payment_amount'),$this->input->post('payment_remarks'),$this->session->userdata('user_id'),$payment_image);
+			if(!$paymentId>0){
+				// Set message
+				$this->session->set_flashdata('global_error', 'Error encountered while saving the payment.');
+
+			}else{
+				// Set message
+				$this->session->set_flashdata('payment_created', 'You have added a new payment for this booking');
+			}
+
+			redirect('bookings/view/'.$this->input->post('BookingId'));
+
+		}
 
 		public function get_available_vehicles($today=null)
 		{
