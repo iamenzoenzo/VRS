@@ -17,6 +17,7 @@ date_default_timezone_set('Asia/Manila');
 			$data['bookings'] = $this->Booking_model->get_bookings($id);
 			$data['images'] = $this->BookingImage_model->get_images(null,$id);
 			$data['logs'] = $this->BookingLogs_model->get_logs_by_booking_id($id);
+			$data['payments'] = $this->BookingPayments_model->get_payments_by_booking_id($id);
 
 			if(empty($data['bookings'])){
 				show_404();
@@ -33,18 +34,29 @@ date_default_timezone_set('Asia/Manila');
 			}
 
 			$data['title'] = 'Add New Booking';
-			$startDate = date("Y-m-d");
-			$end_date = date('Y-m-d', strtotime($startDate. ' + 1 days'));
+
+			$startDate = $this->input->post('start_date');
+			if(!isset($startDate)){
+				$startDate = date("Y-m-d");
+			}
+
+			$numberofdays = $this->input->post('number_of_days');
+			if(!isset($numberofdays)){
+				$numberofdays = 1;
+			}
+			$end_date = date('Y-m-d', strtotime($startDate. ' + '.$numberofdays.' days'));
+
 			$data['cars'] = $this->Car_model->get_available_cars_on_date($startDate,$end_date);
 			$data['driver_pay'] = $this->Setting_model->get_settings(null,'Driver_Per_Day');
 			$data['clients'] = $this->Client_model->get_clients(null);
 
-			$this->form_validation->set_rules('clientId', 'Client', 'required');
-			$this->form_validation->set_rules('carId', 'Vehicle', 'required');
+			$this->form_validation->set_rules('clientId', 'Client', 'required|is_natural_no_zero');
+			$this->form_validation->set_rules('carId', 'Vehicle', 'required|is_natural_no_zero');
 			$this->form_validation->set_rules('start_date', 'Start date', 'required');
-			$this->form_validation->set_rules('number_of_days', 'Number of days', 'required');
+			$this->form_validation->set_rules('number_of_days', 'Number of days', 'required|greater_than[0]');
 
       if($this->form_validation->run() === FALSE){
+
 				$this->load->view('templates/header');
 				$this->load->view('bookings/create', $data);
 				$this->load->view('templates/footer');
@@ -88,12 +100,12 @@ date_default_timezone_set('Asia/Manila');
 				}
 
 
-				$this->Booking_model->create_booking($fileNames);
+				$BookingId = $this->Booking_model->create_booking($fileNames);
 
 				// Set message
 				$this->session->set_flashdata('booking_created', 'You have added a new booking');
 
-				redirect('bookings/index');
+				redirect('bookings/edit/'.$BookingId);
 			}
 		}
 

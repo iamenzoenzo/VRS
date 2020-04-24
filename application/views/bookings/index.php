@@ -1,4 +1,5 @@
 <title><?= $title; ?></title>
+
 <?php echo form_open('bookings/index'); ?>
   <div class="row">
     <div class="col">
@@ -19,6 +20,9 @@
       </div>
   </div>
 </form>
+
+
+
 <table class="table table-striped table-hover table-bordered">
   <thead>
     <tr>
@@ -65,4 +69,5 @@
           window.location = $(this).data("href");
       });
   });
+
 </script>

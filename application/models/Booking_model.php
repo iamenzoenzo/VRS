@@ -58,7 +58,11 @@
 				$this->BookingLogs_model->create_log($BookingId,'applied a discount amount of '.$this->input->post('discount'),$this->session->userdata('user_id'));
 			}
 
-			return true;
+			if(!empty($this->input->post('downpayment'))){
+				$this->BookingPayments_model->create_payment($BookingId,$this->input->post('downpayment'),'added downpayment',$this->session->userdata('user_id'));
+			}
+
+			return $BookingId;
 		}
 
     public function update_status(){
