@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2020 at 06:45 PM
+-- Generation Time: Apr 24, 2020 at 08:44 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -93,7 +93,10 @@ INSERT INTO `clientbookings` (`BookingId`, `clientId`, `carId`, `reference_numbe
 (40, 97, 40, 'VRS-20047VXT8', '2020-04-24', '0000-00-00 00:00:00', 1, b'0', '', '1000', '5000', '0', '2020-04-25', '0000-00-00 00:00:00', 12, 0, '2020-04-21 22:41:17', '0000-00-00 00:00:00', 2),
 (41, 99, 40, 'VRS-2004Q4CZQ', '2020-04-30', '0000-00-00 00:00:00', 2, b'1', '', '1000', '5000', '250', '2020-05-02', '0000-00-00 00:00:00', 12, 0, '2020-04-22 00:00:19', '0000-00-00 00:00:00', 1),
 (44, 97, 51, 'VRS-20042TC4V', '2020-04-24', '0000-00-00 00:00:00', 1, b'1', 'Jan Hope', '1000', '20000', '300', '2020-04-25', '0000-00-00 00:00:00', 12, 0, '2020-04-22 11:37:26', '0000-00-00 00:00:00', 1),
-(45, 99, 40, 'VRS-2004ZCOKE', '2020-05-07', '0000-00-00 00:00:00', 3, b'1', '', '1000', '5000', '0', '2020-05-10', '0000-00-00 00:00:00', 12, 0, '2020-04-22 23:19:55', '0000-00-00 00:00:00', 1);
+(45, 99, 40, 'VRS-2004ZCOKE', '2020-05-07', '0000-00-00 00:00:00', 3, b'1', '', '1000', '5000', '0', '2020-05-10', '0000-00-00 00:00:00', 12, 0, '2020-04-22 23:19:55', '0000-00-00 00:00:00', 1),
+(46, 0, 50, 'VRS-200479L18', '2020-04-30', '0000-00-00 00:00:00', 3, b'0', '', '1000', '10000', '0', '2020-05-03', '0000-00-00 00:00:00', 12, 0, '2020-04-23 21:17:59', '0000-00-00 00:00:00', 1),
+(47, 0, 51, 'VRS-2004HNPJC', '2020-04-30', '0000-00-00 00:00:00', 1, b'0', '', '1000', '20000', '0', '2020-05-01', '0000-00-00 00:00:00', 12, 0, '2020-04-23 21:20:00', '0000-00-00 00:00:00', 1),
+(48, 97, 49, 'VRS-2004KGFWH', '2020-04-29', '0000-00-00 00:00:00', 3, b'1', 'Jan Hope F. Cajelo', '1000', '4800', '0', '2020-05-02', '0000-00-00 00:00:00', 12, 0, '2020-04-23 23:51:45', '0000-00-00 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -129,7 +132,10 @@ INSERT INTO `clientbookingslogs` (`Id`, `clientbookings_id`, `remarks`, `created
 (21, 44, 'Created this booking', '2020-04-22 03:37:26', 12),
 (22, 44, 'client paid 2500 as downpayment', '2020-04-22 03:37:26', 12),
 (23, 44, 'applied a discount amount of 300', '2020-04-22 03:37:26', 12),
-(24, 45, 'Created this booking', '2020-04-22 15:19:55', 12);
+(24, 45, 'Created this booking', '2020-04-22 15:19:55', 12),
+(25, 46, 'Created this booking', '2020-04-23 13:17:59', 12),
+(26, 47, 'Created this booking', '2020-04-23 13:20:00', 12),
+(27, 48, 'Created this booking', '2020-04-23 15:51:46', 12);
 
 -- --------------------------------------------------------
 
@@ -177,7 +183,8 @@ INSERT INTO `clientbookingsphotos` (`Id`, `booking_id`, `file_name`, `created_da
 (20, 34, '1587473071-CHARM.PNG', '2020-04-21 20:44:31', b'1'),
 (21, 35, '1587474690-ESCS_SCMC.PNG', '2020-04-21 21:11:30', b'1'),
 (22, 38, '1587479547-CHARM.PNG', '2020-04-21 22:32:27', b'1'),
-(25, 44, '1587526646-ESCS_SCMC.PNG', '2020-04-22 11:37:26', b'1');
+(25, 44, '1587526646-ESCS_SCMC.PNG', '2020-04-22 11:37:26', b'1'),
+(26, 48, '1587657105-download.png', '2020-04-23 23:51:46', b'1');
 
 -- --------------------------------------------------------
 
@@ -227,16 +234,7 @@ CREATE TABLE `clientsphotos` (
 --
 
 INSERT INTO `clientsphotos` (`Id`, `client_id`, `file_name`, `created_date`, `Is_Active`) VALUES
-(73, 97, '1586743247-Capture.PNG', '2020-04-13 10:00:47', b'1'),
-(75, 99, '1586755450-pngtree-happy-birthday-background-of-stereo-creative-image_104875.jpg', '2020-04-13 13:24:10', b'1'),
-(76, 99, '1586755450-smoke-spreading-blue-background_23-2147785936.jpg', '2020-04-13 13:24:10', b'1'),
 (77, 99, '1586755450-unnamed.jpg', '2020-04-13 13:24:10', b'1'),
-(78, 100, '1586786092-MVIMG_20191117_163234.jpg', '2020-04-13 21:54:53', b'1'),
-(79, 100, '1586786092-100_1991.JPG', '2020-04-13 21:54:53', b'1'),
-(80, 100, '1586786092-MVIMG_20200215_105930_1.jpg', '2020-04-13 21:54:53', b'1'),
-(81, 100, '1586786092-00100lrPORTRAIT_00100_BURST20200215105941635_COVER.jpg', '2020-04-13 21:54:54', b'1'),
-(82, 101, '1586949192-starex.jpg', '2020-04-15 19:13:12', b'1'),
-(83, 101, '1586949192-v1starex.jpg', '2020-04-15 19:13:13', b'1'),
 (84, 103, '1586966723-SAM_0745.JPG', '2020-04-16 00:05:23', b'1'),
 (85, 103, '1586966723-lbO17hkK_400x400.jpg', '2020-04-16 00:05:23', b'1'),
 (86, 98, '1587572647-download.jpg', '2020-04-23 00:24:07', b'1'),
@@ -321,7 +319,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `fullname`, `email`, `username`, `password`, `user_type`, `created_at`, `Is_Active`) VALUES
 (4, 'Enzo', 'Cerbas', 'Enzo Cerbas', 'bvcerbas@up.edu.ph', 'enzo', 'd41d8cd98f00b204e9800998ecf8427e', 'user', '2020-02-01 05:18:35', b'1'),
 (12, 'Arvin', 'Reyes', 'Arvin Reyes', 'arvin@gmail.com', 'arvinreyes', '5f4dcc3b5aa765d61d8327deb882cf99', 'admin', '2020-04-14 15:38:23', b'1'),
-(13, 'Admin', 'Carrental', 'Admin Carrental', 'johndue@gmail.com', 'admin', '25d55ad283aa400af464c76d713c07ad', 'admin', '2020-04-14 15:45:03', b'1');
+(13, 'Admin', 'Carrental', 'Admin Carrental', 'johndue@gmail.com', 'admin', '25d55ad283aa400af464c76d713c07ad', 'admin', '2020-04-14 15:45:03', b'1'),
+(14, 'Admin', 'Admin 2', 'Admin Admin 2', 'test@fakemail.com', 'admin2', '5f4dcc3b5aa765d61d8327deb882cf99', 'admin', '2020-04-23 21:49:55', b'1');
 
 --
 -- Indexes for dumped tables
@@ -401,13 +400,13 @@ ALTER TABLE `cars`
 -- AUTO_INCREMENT for table `clientbookings`
 --
 ALTER TABLE `clientbookings`
-  MODIFY `BookingId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `BookingId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `clientbookingslogs`
 --
 ALTER TABLE `clientbookingslogs`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `clientbookingspayments`
@@ -419,7 +418,7 @@ ALTER TABLE `clientbookingspayments`
 -- AUTO_INCREMENT for table `clientbookingsphotos`
 --
 ALTER TABLE `clientbookingsphotos`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `clients`
@@ -449,7 +448,7 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
