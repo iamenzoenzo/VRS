@@ -34,43 +34,42 @@
     </div>
 </div>
 </form>
-
-<div class="card p-3 mt-3">
-  <?php if(count($cars)<1):?>
-    <div class="text-center text-lg text-center p-3">
-      <h6>Vehicles are fully-booked on the chosen date</h6>
-    </div>
-    </hr>
-  <?php else:?>
-    <div class="text-center text-lg text-center p-3">
-      <h6><?php echo count($cars).' vehicle(s) available for rent';?></h6>
-    </div>
-    </hr>
-  <?php endif;?>
-  <div class="album">
-      <div class="container">
-        <div class="row">
-          <?php foreach($cars as $car) : ?>
-            <div class="col-md-4">
-              <div class="card mb-4 shadow-sm">
-                <a data-toggle="modal" href="#exampleModal" title="Click image to view full image" data-filepath="<?php echo base_url()."assets/images/cars_images/".$car['file_name']; ?>">
-                  <img class="img-fluid img-thumbnail d-block" style="width:400px;height:300px;object-fit: cover;" src="<?php echo base_url()."assets/images/cars_images/".$car['file_name']; ?>">
-                </a>
-                <!--img class="img-fluid img-thumbnail" height="100%" width="100%" src="<?php echo base_url()."assets/images/cars_images/".$car['car_image_path']; ?>" -->
-                <div class="card-body">
-                <h4><?php echo $car['manufacturer']." ".$car['model']." (".$car['year'].")"; ?></h4>
-                  <p class="card-text">With a maximum capacity of <b><?php echo $car['Capacity']; ?> persons</b> including driver. Drive now for a minimum rent of <b>₱<?php echo number_format($car['RentPerDay'],2); ?></b> for 24 hours.</p>
-                  <div>
-                    <a data-toggle="modal" href="#rentModal" class="btn btn-md btn-success form-control" data-selectedcar="<?php echo $car['Id'].'|'.$car['RentPerDay'].'|'.$this->session->userdata('booking_days').'|'.$this->session->userdata('booking_add_driver').'|'.$driver_pay['value'];?>" href="<?php echo base_url()?>pages/estimate/<?php echo $car['Id']?>" role="button"><i class="fa fa-hand-rock-o"></i> Rent this!</a>
+<?php if(count($cars)<1):?>
+  <div class="bg-warning text-white text-center text-lg text-center p-3">
+    <h5>Vehicles are fully-booked on the chosen date</h5>
+  </div>
+  </hr>
+<?php else:?>
+  <div class="bg-warning text-white text-center text-lg text-center p-3">
+    <h5><?php echo count($cars).' vehicle(s) available for rent on <u>'.$this->session->userdata('booking_start_date').'</u> to <u>'.date('Y-m-d', strtotime($this->session->userdata('booking_start_date'). ' + '.$this->session->userdata('booking_days').' days')).'</u>';?></h5>
+  </div>
+  <div class="card p-4">
+    <div class="album">
+        <div class="container">
+          <div class="row">
+            <?php foreach($cars as $car) : ?>
+              <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                  <a data-toggle="modal" href="#exampleModal" title="Click image to view full image" data-filepath="<?php echo base_url()."assets/images/cars_images/".$car['file_name']; ?>">
+                    <img class="img-fluid img-thumbnail d-block" style="width:400px;height:300px;object-fit: cover;" src="<?php echo base_url()."assets/images/cars_images/".$car['file_name']; ?>">
+                  </a>
+                  <!--img class="img-fluid img-thumbnail" height="100%" width="100%" src="<?php echo base_url()."assets/images/cars_images/".$car['car_image_path']; ?>" -->
+                  <div class="card-body">
+                  <h4><?php echo $car['manufacturer']." ".$car['model']." (".$car['year'].")"; ?></h4>
+                    <p class="card-text">With a maximum capacity of <b><?php echo $car['Capacity']; ?> persons</b> including driver. Drive now for a minimum rent of <b>₱<?php echo number_format($car['RentPerDay'],2); ?></b> for 24 hours.</p>
+                    <div>
+                      <a data-toggle="modal" href="#rentModal" class="btn btn-md btn-success form-control" data-selectedcar="<?php echo $car['Id'].'|'.$car['RentPerDay'].'|'.$this->session->userdata('booking_days').'|'.$this->session->userdata('booking_add_driver').'|'.$driver_pay['value'];?>" href="<?php echo base_url()?>pages/estimate/<?php echo $car['Id']?>" role="button"><i class="fa fa-hand-rock-o"></i> Rent this!</a>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          <?php endforeach; ?>
+            <?php endforeach; ?>
+        </div>
       </div>
     </div>
   </div>
-</div>
+<?php endif;?>
+
 
 <!-- start of modal popup -->
 <div class="modal fade" role="dialog" id="exampleModal" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
