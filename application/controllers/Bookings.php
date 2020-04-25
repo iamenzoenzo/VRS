@@ -115,7 +115,7 @@ date_default_timezone_set('Asia/Manila');
 				// Set message
 				$this->session->set_flashdata('booking_created', 'You have added a new booking');
 
-				redirect('bookings/edit/'.$BookingId);
+				redirect('bookings/view/'.$BookingId);
 			}
 		}
 
