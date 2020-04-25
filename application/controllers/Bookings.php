@@ -152,12 +152,11 @@ date_default_timezone_set('Asia/Manila');
 			$data['cars'] = $this->Car_model->get_available_cars_on_date($startDate,$end_date,$id);
 			$data['driver_pay'] = $this->Setting_model->get_settings(null,'Driver_Per_Day');
 			$data['clients'] = $this->Client_model->get_clients(null);
+			$data['status'] = $this->Status_model->get_status(null);
 
-
-			$this->form_validation->set_rules('clientId', 'Client', 'required|is_natural_no_zero');
-			$this->form_validation->set_rules('carId', 'Vehicle', 'required|is_natural_no_zero');
-			$this->form_validation->set_rules('start_date', 'Start date', 'required');
-			$this->form_validation->set_rules('number_of_days', 'Number of days', 'required|greater_than[0]');
+			//$this->form_validation->set_rules('carId', 'Vehicle', 'required|is_natural_no_zero');
+			//$this->form_validation->set_rules('start_date', 'Start date', 'required');
+			//$this->form_validation->set_rules('number_of_days', 'Number of days', 'required|greater_than[0]');
 
       if($this->form_validation->run() === FALSE){
 
@@ -203,12 +202,12 @@ date_default_timezone_set('Asia/Manila');
 					}
 				}
 
-				$BookingId = $this->Booking_model->create_booking($fileNames);
+				$this->Booking_model->update_booking();
 
 				// Set message
-				$this->session->set_flashdata('booking_created', 'You have added a new booking');
+				$this->session->set_flashdata('booking_updated', 'Client booking updated');
 
-				redirect('bookings/view/'.$BookingId);
+				redirect('bookings/view/'.$id);
 			}
 
 		}

@@ -66,24 +66,25 @@
 		}
 
     public function update_booking(){
+
+			$startDate = $this->input->post('start_date');
+			$BookingId = $this->input->post('bookingid');
+
       $data = array(
-				'clientId' => $this->input->post('clientId'),
-        'carId' => $carid,
-        'start_date' => $startDate,
-				'end_date' => date('Y-m-d', strtotime($startDate. ' + '.$NumberOfDays.' days')),
-        'number_of_days' => $NumberOfDays,
+        //'carId' => $startDate,
+        //'start_date' => $this->input->post('start_date'),
+				//'end_date' => date('Y-m-d', strtotime($startDate. ' + '.$NumberOfDays.' days')),
+        //'number_of_days' => $NumberOfDays,
 				'add_driver' => (($this->input->post('add_driver')=='on') ? 1 : 0),
 				'driver_name' => $this->input->post('driver_name'),
-				'driver_fee_current' => $driverFee['value'],
-				'rental_fee_current' => $selectedCar['RentPerDay'],
-				'rental_discount' => $this->input->post('discount'),
-				'created_by' => $this->session->userdata('user_id'),
-				'reference_number' => 'VRS-'.date('ym',$timestamp).$this->generateRandomString(5),
-        'statusId' => 1
+				//'rental_discount' => $this->input->post('discount'),
+        'statusId' => $this->input->post('status_id')
       );
 
-      $this->db->where('Id', $this->input->post('id'));
-      return $this->db->update('status', $data);
+      $this->db->where('BookingId', $BookingId);
+			$this->db->update('clientbookings', $data);
+			$this->BookingLogs_model->create_log($BookingId,'updated this booking',$this->session->userdata('user_id'));
+      return true;
     }
 
 		public function delete_booking($id){
