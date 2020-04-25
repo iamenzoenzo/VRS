@@ -59,7 +59,7 @@
 			}
 
 			if(!empty($this->input->post('downpayment'))){
-				$this->BookingPayments_model->create_payment($BookingId,$this->input->post('downpayment'),'added downpayment',$this->session->userdata('user_id'));
+				$this->BookingPayments_model->create_payment($BookingId,$this->input->post('downpayment'),$this->input->post('remarks'),$this->session->userdata('user_id'),'');
 			}
 
 			return $BookingId;

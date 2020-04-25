@@ -5,7 +5,7 @@
     <h2><?= $title ;?></h2>
   </div>
     <div class="float-right pl-3">
-      <a href="<?php echo base_url()?>clients/index" class="btn btn-primary">Back to client list</a>
+      <a href="<?php echo base_url()?>clients/index" class="btn btn-info"><i class="fa fa-arrow-left"></i> Back to client list</a>
     </div>
 </div>
 
@@ -31,8 +31,8 @@
       </div>
       <div class="row mt-3">
         <div class="col">
-          <a title="Edit client information" href="<?php echo base_url()?>clients/edit/<?php echo $clients['Id']; ?>" class="btn btn-warning">Edit</a>
-          <a title="Delete client information" href="<?php echo base_url()?>clients/delete/<?php echo $clients['Id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this client?')">Delete</a>
+          <a title="Edit client information" href="<?php echo base_url()?>clients/edit/<?php echo $clients['Id']; ?>" class="btn btn-warning"><i class="fa fa-pencil-square-o"></i> Edit</a>
+          <a title="Delete client information" href="<?php echo base_url()?>clients/delete/<?php echo $clients['Id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this client?')"><i class="fa fa-trash-o"></i> Delete</a>
         </div>
       </div>
       <div class="row mt-3">
@@ -53,7 +53,7 @@
                     <th scope="row"><?php $counter++;echo $counter; ?></th>
                     <td><a data-toggle="modal" href="#exampleModal" data-whatever="<?php echo base_url().'assets/images/client_images/'.$image['file_name'];?>"><?php echo $image['file_name']; ?></a></td>
                     <td class="text-center">
-                      <a title="Delete attachment" href="<?php echo base_url()?>clientsphotos/delete/<?php echo $image['Id'].'/'.$clients['Id'];?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure you want to delete this attachment?')">Delete</a>
+                      <a title="Delete attachment" href="<?php echo base_url()?>clientsphotos/delete/<?php echo $image['Id'].'/'.$clients['Id'];?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure you want to delete this attachment?')"><i class="fa fa-trash-o"></i>  Delete</a>
                     </td>
                   </tr>
                 <?php endforeach;?>

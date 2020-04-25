@@ -28,19 +28,19 @@
     </div>
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url(); ?>about">About Us</a>
+        <a class="nav-link" href="<?php echo base_url(); ?>about"><i class="fa fa-user-secret"></i> About Us</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url(); ?>contact">Contact Us</a>
+        <a class="nav-link" href="<?php echo base_url(); ?>contact"><i class="fa fa-phone"></i> Contact Us</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url(); ?>faq">FAQs</a>
+        <a class="nav-link" href="<?php echo base_url(); ?>faq"><i class="fa fa-question-circle-o"></i> FAQs</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url(); ?>cars/index">Available Vehicles</a>
+        <a class="nav-link" href="<?php echo base_url(); ?>cars/index"><i class="fa fa-car"></i> Vehicles</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url(); ?>estimate">Estimate Rent</a>
+        <a class="nav-link" href="<?php echo base_url(); ?>estimate"><i class="fa fa-money"></i> Estimate Rent</a>
       </li>
       <?php if($this->session->userdata('logged_in')): ?>
       <li class="nav-item dropdown">
@@ -77,9 +77,9 @@
       <li>
         <?php
         if(!$this->session->userdata('logged_in')){
-          echo '<a class="btn btn-outline-primary" href="'.base_url().'users/login">Login</a>';
+          echo '<a class="btn btn-outline-primary" href="'.base_url().'users/login"><i class="fa fa-sign-in"></i> Login</a>';
         }else{
-          echo '<a class="btn btn-outline-danger" href="'.base_url().'users/logout">Logout</a>';
+          echo '<a class="btn btn-outline-danger" href="'.base_url().'users/logout"><i class="fa fa-sign-out"></i> Logout</a>';
         }
         ?>
       </li>

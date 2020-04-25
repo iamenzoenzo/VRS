@@ -11,12 +11,12 @@
           <input class="form-control" name="filter" value="<?= $filter;?>" type="search" placeholder="Search" aria-label="Search">
         </div class="col-lg-1">
         <div>
-          <button class="btn btn-outline-success lg-12" type="submit">Search</button>
+          <button class="btn btn-outline-success lg-12" type="submit"><i class="fa fa-search"></i> Search</button>
         </div>
       </div>
     </div>
       <div class="float-right pl-3">
-        <a href="<?php echo base_url(); ?>bookings/create" class="btn btn-primary">Add Booking</a>
+        <a href="<?php echo base_url(); ?>bookings/create" class="btn btn-primary"><i class="fa fa-plus"></i> Add Booking</a>
       </div>
   </div>
 </form>
@@ -52,7 +52,7 @@
         <td><?php echo '₱'.number_format(($booking['number_of_days'] * $booking['driver_fee_current'])+($booking['number_of_days'] * $booking['rental_fee_current'])-($booking['rental_discount']),2) ;?></td>
         <td class="bg-<?php echo $booking['bootstrap_bg_color'];?>"><?php echo $booking['label'] ;?></td>
         <td>
-          <a class="btn btn-info" href="<?php echo base_url().'bookings/view/'.$booking['BookingId'];?>">View</a>
+          <a class="btn btn-info" href="<?php echo base_url().'bookings/view/'.$booking['BookingId'];?>"><i class="fa fa-eye"></i> View</a>
         </td>
         </tr>
     <?php endforeach;?>

@@ -5,7 +5,7 @@
       <h2>Status List</h2>
     </div>
     <div class="col">
-      <a href="<?php echo base_url(); ?>status/create" class="btn float-right btn-primary">Add New Status</a>
+      <a href="<?php echo base_url(); ?>status/create" class="btn float-right btn-primary"><i class="fa fa-plus"></i> Add New Status</a>
     </div>
   </div>
 <div class="pt-2">
@@ -27,7 +27,7 @@
           <td><?php echo $stat['bootstrap_bg_color'];?></td>
           <td><?php echo ($stat['Is_Active']==1 ? 'True' : 'False');?></td>
           <td>
-            <a class="btn btn-info" href="<?php echo base_url().'status/view/'.$stat['Id'];$counter++;?>">View</a>
+            <a class="btn btn-info" href="<?php echo base_url().'status/view/'.$stat['Id'];$counter++;?>"><i class="fa fa-eye"></i> View</a>
           </td>
         </tr>
     <?php endforeach; ?>

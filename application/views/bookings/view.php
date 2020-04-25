@@ -2,10 +2,9 @@
 <div class="row">
   <div class="col">
     <h2><?= $title ;?></h2>
+    <a class="btn btn-info float-right" href="<?php echo base_url()?>bookings/index"><i class="fa fa-arrow-left"></i> Back to bookings</a>
   </div>
-    <div class="float-right pl-3">
-      <a href="<?php echo base_url()?>bookings/index" class="btn btn-primary">Back to bookings</a>
-    </div>
+
 </div>
 
 <div class="row">
@@ -123,8 +122,8 @@
             <div class="row mt-2">
               <div class="col">
                 <?php if($this->session->userdata('logged_in')): ?>
-                  <a href="<?php echo base_url(); ?>bookings/edit/<?php echo $bookings['BookingId']; ?>" class="btn btn-success">Edit</a>
-                  <a href="<?php echo base_url(); ?>bookings/delete/<?php echo $bookings['BookingId']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this booking?')">Delete</a>
+                  <a href="<?php echo base_url(); ?>bookings/edit/<?php echo $bookings['BookingId']; ?>" class="btn btn-success"><i class="fa fa-pencil-square-o"></i> Edit</a>
+                  <a href="<?php echo base_url(); ?>bookings/delete/<?php echo $bookings['BookingId']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this booking?')"><i class="fa fa-trash-o"></i> Delete</a>
                 <?php endif; ?>
               </div>
             </div>
@@ -162,13 +161,18 @@
           <small>Total Payments</small>
         </div>
       </div>
-      <a class="btn btn-info"data-toggle="modal" href="#paymentModal">Add Payment</a>
-      <div class="row">
+      <div class="row mt-3">
+        <div class="col">
+          <a class="btn btn-primary float-right"data-toggle="modal" href="#paymentModal"><i class="fa fa-credit-card"></i> Add Payment</a>
+        </div>
+      </div>
+
+      <div class="row mt-3">
         <div class="col">
           <?php if(count($payments)>0):?>
               <?php foreach ($payments as $payment):?>
                 <div class="alert alert-warning" role="alert">
-                  <?php echo 'Client paid ₱'.number_format($payment['amount'],2).'. <i>'.$payment['payment_remarks'].'</i> (<a target="_blank" href="'.base_url().'assets/images/client_bookings_payments/'.$payment['attachment_path'].'">View attachment</a>) </br><small>'.'Added by '.$payment['fullname'].' on '.date_format(date_create($payment['created_date']),'F d, Y h:i A (l)').'</small>';?>
+                  <?php echo '᛫ Client paid ₱'.number_format($payment['amount'],2).'. <i>'.$payment['payment_remarks'].'</i> '.(!empty($payment['attachment_path'])?'(<a data-toggle="modal" href="#exampleModal" data-whatever="'.base_url().'assets/images/client_bookings_payments/'.$payment['attachment_path'].'">View attachment</a>)':'').'</br><small>'.'Added by '.$payment['fullname'].' on '.date_format(date_create($payment['created_date']),'F d, Y h:i A (l)').'</small>';?>
                 </div>
 
               <?php endforeach;?>

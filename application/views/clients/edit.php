@@ -1,3 +1,4 @@
+<title><?= $title ;?></title>
 <h2><?= $title ;?></h2>
 <?php echo form_open_multipart('clients/update'); ?>
 <input type="hidden" name="id" value="<?php echo $clients['Id']; ?>">
@@ -28,7 +29,8 @@
     </div>
   </div>
 <div class="pt-3">
-	<button type="submit" class="btn btn-warning">Update</button>
-  <a href="<?php echo base_url()?>clients/index" class="btn btn-danger">Cancel</a>
+	<button type="submit" class="btn btn-warning"><i class="fa fa-floppy-o"></i> Update</button>
+  <a href="<?php echo base_url()?>clients/index" class="btn btn-danger">
+<i class="fa fa-ban"></i>  Cancel</a>
 </div>
 </form>

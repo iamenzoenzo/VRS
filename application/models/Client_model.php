@@ -6,9 +6,11 @@
 
 		public function get_clients($id){
 			if(isset($id)){
+				$this->db->order_by('name');
         $query=$this->db->get_where('clients', array('Id' => $id));
         return $query->row_array();
       }else {
+				$this->db->order_by('name');
 				$query=$this->db->get_where('clients', array('name LIKE '=>'%'.$this->input->post('name_filter').'%'));
   			return $query->result_array();
       }

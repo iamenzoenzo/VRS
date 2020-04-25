@@ -36,12 +36,21 @@ date_default_timezone_set('Asia/Manila');
 
 			$data['title'] = 'Add New Booking';
 
-			$startDate = $this->input->post('start_date');
+			$user_data = array(
+				'booking_client_id' => $this->input->post('clientId'),
+				'booking_start_date' => (!empty($this->input->post('start_date'))?$this->input->post('start_date'):date("Y-m-d")),
+				'booking_days' => (!empty($this->input->post('number_of_days'))?$this->input->post('number_of_days'):1),
+				'booking_add_driver'=> ($this->input->post('add_driver')=='on'?true:false)
+			);
+
+			$this->session->set_userdata($user_data);
+
+			$startDate = $this->session->userdata('booking_start_date');
 			if(!isset($startDate)){
 				$startDate = date("Y-m-d");
 			}
 
-			$numberofdays = $this->input->post('number_of_days');
+			$numberofdays = $this->session->userdata('booking_days');
 			if(!isset($numberofdays)){
 				$numberofdays = 1;
 			}
@@ -122,6 +131,45 @@ date_default_timezone_set('Asia/Manila');
         $this->load->view('templates/footer');
 
     }
+
+
+		public function initiatecreate(){
+			if(!$this->session->userdata('logged_in')){
+				redirect('users/login');
+			}
+
+			$data['title'] = 'Add New Booking';
+
+			$user_data = array(
+				'booking_client_id' => $this->input->post('clientId'),
+				'booking_start_date' => $this->input->post('start_date'),
+				'booking_days' => $this->input->post('number_of_days'),
+				'booking_add_driver'=> ($this->input->post('add_driver')=='on'?true:false)
+			);
+
+			$this->session->set_userdata($user_data);
+
+			$startDate = $this->session->userdata('booking_start_date');
+			if(!isset($startDate)){
+				$startDate = date("Y-m-d");
+			}
+
+			$numberofdays = $this->session->userdata('booking_days');
+			if(!isset($numberofdays)){
+				$numberofdays = 1;
+			}
+			$end_date = date('Y-m-d', strtotime($startDate. ' + '.$numberofdays.' days'));
+
+			$data['cars'] = $this->Car_model->get_available_cars_on_date($startDate,$end_date);
+			$data['driver_pay'] = $this->Setting_model->get_settings(null,'Driver_Per_Day');
+			$data['clients'] = $this->Client_model->get_clients(null);
+
+			$this->load->view('templates/header');
+			$this->load->view('bookings/create',$data);
+			$this->load->view('templates/footer');
+
+
+		}
 
 		public function addPayement(){
 			$timestamp = time();
