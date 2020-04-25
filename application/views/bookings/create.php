@@ -61,7 +61,7 @@
                 <h4><?php echo $car['manufacturer']." ".$car['model']." (".$car['year'].")"; ?></h4>
                   <p class="card-text">With a maximum capacity of <b><?php echo $car['Capacity']; ?> persons</b> including driver. Drive now for a minimum rent of <b>₱<?php echo number_format($car['RentPerDay'],2); ?></b> for 24 hours.</p>
                   <div>
-                    <a data-toggle="modal" href="#rentModal" class="btn btn-md btn-success form-control" data-selectedcar="<?php echo $car['Id']?>" href="<?php echo base_url()?>pages/estimate/<?php echo $car['Id']?>" role="button"><i class="fa fa-hand-rock-o"></i> Rent this!</a>
+                    <a data-toggle="modal" href="#rentModal" class="btn btn-md btn-success form-control" data-selectedcar="<?php echo $car['Id'].'|'.$car['RentPerDay'].'|'.$this->session->userdata('booking_days').'|'.$this->session->userdata('booking_add_driver').'|'.$driver_pay['value'];?>" href="<?php echo base_url()?>pages/estimate/<?php echo $car['Id']?>" role="button"><i class="fa fa-hand-rock-o"></i> Rent this!</a>
                   </div>
                 </div>
               </div>
@@ -96,7 +96,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-              <h5 class="modal-title" id="rentModalLabel">Full Image</h5>
+              <h5 class="modal-title" id="rentModalLabel">Booking Reservation</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
               </button>
@@ -157,6 +157,13 @@
 
 
 <script type="text/javascript">
+function thousands_separators(num)
+{
+  var num_parts = num.toString().split(".");
+  num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return num_parts.join(".");
+}
+
   $('#exampleModal').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget) // Button that triggered the modal
       var file_path = button.data('filepath')
@@ -168,9 +175,17 @@
 
   $('#rentModal').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget) // Button that triggered the modal
-      var selectedcarId = button.data('selectedcar');
+      var selectedcarId = button.data('selectedcar').toString();
+      var splitted = selectedcarId.split('|');
       var modal = $(this);
-      var htmlText='<input type="hidden" name="carId" value="'+selectedcarId+'">';
-      document.getElementById("forcarId").innerHTML=htmlText;
+      var htmlTextForCarId='<input type="hidden" name="carId" value="'+splitted[0]+'">';
+      document.getElementById("forcarId").innerHTML=htmlTextForCarId;
+      if(splitted[3]){
+        var driverCost = parseFloat(splitted[4])*parseFloat(splitted[2]);
+      }
+      var htmlTextForTotalRent='₱'+thousands_separators(((parseFloat(splitted[1])*parseFloat(splitted[2]))+driverCost).toFixed(2));
+      document.getElementById("for_total_rent").innerHTML=htmlTextForTotalRent;
+
   });
+
 </script>
