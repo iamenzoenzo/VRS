@@ -167,7 +167,6 @@ function thousands_separators(num)
       var button = $(event.relatedTarget) // Button that triggered the modal
       var file_path = button.data('filepath')
       var modal = $(this);
-      //modal.find('.ImageContainer').text('Reserve a Unit ' + recipient)
       var htmlText='<img style="width:100%;height=100%;object-fit:contain;" src="'+file_path+'">';
       document.getElementById("ImageContainer").innerHTML=htmlText;
   });
@@ -181,6 +180,8 @@ function thousands_separators(num)
       document.getElementById("forcarId").innerHTML=htmlTextForCarId;
       if(splitted[3]){
         var driverCost = parseFloat(splitted[4])*parseFloat(splitted[2]);
+      }else{
+        var driverCost=0;
       }
       var htmlTextForTotalRent='₱'+thousands_separators(((parseFloat(splitted[1])*parseFloat(splitted[2]))+driverCost).toFixed(2));
       document.getElementById("for_total_rent").innerHTML=htmlTextForTotalRent;
