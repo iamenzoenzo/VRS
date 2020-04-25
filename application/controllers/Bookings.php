@@ -286,7 +286,7 @@ date_default_timezone_set('Asia/Manila');
 			}
 		}
 
-    public function update(){
+    public function update($id){
 			if(!$this->session->userdata('logged_in')){
 				redirect('users/login');
 			}
@@ -296,7 +296,7 @@ date_default_timezone_set('Asia/Manila');
       // Set message
       $this->session->set_flashdata('booking_updated', 'Booking has been updated');
 
-      redirect('bookings/index');
+      redirect('bookings/view/'.$id);
     }
 
 		//delete booking

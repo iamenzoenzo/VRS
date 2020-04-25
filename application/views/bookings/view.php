@@ -194,7 +194,7 @@
       <?php if(count($logs)>0):?>
           <?php foreach ($logs as $log):?>
             <div class="alert alert-warning" role="alert">
-              <b><?php echo $log['fullname'].'</b>: <i>'.$log['remarks'].'</i> </br><small>'.date_format(date_create($log['created_date']),'F d, Y h:i A (l)').'</small>';?>
+              <b><?php echo $log['username'].'</b>: <i>'.$log['remarks'].'</i> </br><small>'.date_format(date_create($log['created_date']),'F d, Y h:i A (l)').'</small>';?>
             </div>
 
           <?php endforeach;?>

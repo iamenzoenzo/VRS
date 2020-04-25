@@ -10,7 +10,7 @@
     </div>
   </div>
 </div>
-<?php echo form_open('bookings/update'); ?>
+<?php echo form_open('bookings/update/'.$booking['BookingId']); ?>
 <div class="card p-4 bg-light mt-2">
   <div class="row">
     <div class="col">
@@ -49,6 +49,7 @@
   </div>
     <div class="text-right  mt-3 border-top">
       <button type="submit" class="btn btn-lg btn-warning col-lg-auto col-sm-12 mt-3" id="btnSearch"><i class="fa fa-floppy-o"></i> Save Edit</button>
+      <a class="btn btn-lg btn-danger col-lg-auto col-sm-12 mt-3" href="<?php echo base_url().'bookings/view/'.$booking['BookingId']; ?>"><i class="fa fa-ban"></i>  Cancel</a>
     </div>
     <!-- hidden fields -->
     <input type="hidden" name="bookingid" value="<?php echo $booking['BookingId']; ?>">
