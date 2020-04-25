@@ -65,10 +65,21 @@
 			return $BookingId;
 		}
 
-    public function update_status(){
+    public function update_booking(){
       $data = array(
-				'label' => $this->input->post('label'),
-				'Is_Active' => (($this->input->post('is_active_checkbox')=='on') ? 1 : 0)
+				'clientId' => $this->input->post('clientId'),
+        'carId' => $carid,
+        'start_date' => $startDate,
+				'end_date' => date('Y-m-d', strtotime($startDate. ' + '.$NumberOfDays.' days')),
+        'number_of_days' => $NumberOfDays,
+				'add_driver' => (($this->input->post('add_driver')=='on') ? 1 : 0),
+				'driver_name' => $this->input->post('driver_name'),
+				'driver_fee_current' => $driverFee['value'],
+				'rental_fee_current' => $selectedCar['RentPerDay'],
+				'rental_discount' => $this->input->post('discount'),
+				'created_by' => $this->session->userdata('user_id'),
+				'reference_number' => 'VRS-'.date('ym',$timestamp).$this->generateRandomString(5),
+        'statusId' => 1
       );
 
       $this->db->where('Id', $this->input->post('id'));

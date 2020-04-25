@@ -16,10 +16,14 @@
 			}
 		}
 
-		public function get_available_cars_on_date($start_date,$end_date){
+		public function get_available_cars_on_date($start_date,$end_date,$BookingId=0){
 			//$this->db->order_by('name');
 			$this->db->where('Is_Active',1);
-			$where = "cars.id NOT IN (SELECT DISTINCT clientbookings.carId from clientbookings WHERE (clientbookings.start_date BETWEEN '".$start_date."' AND '".$end_date."') OR (clientbookings.end_date BETWEEN '".$start_date."' AND '".$end_date."'))";
+			if($BookingId!=0){
+				$where = "cars.id NOT IN (SELECT DISTINCT clientbookings.carId from clientbookings WHERE ((clientbookings.start_date BETWEEN '".$start_date."' AND '".$end_date."') OR (clientbookings.end_date BETWEEN '".$start_date."' AND '".$end_date."')) AND clientbookings.BookingId<>".$BookingId.")";
+			}else{
+				$where = "cars.id NOT IN (SELECT DISTINCT clientbookings.carId from clientbookings WHERE (clientbookings.start_date BETWEEN '".$start_date."' AND '".$end_date."') OR (clientbookings.end_date BETWEEN '".$start_date."' AND '".$end_date."'))";
+			}
 			$this->db->where($where);
 			$query=$this->db->get('cars');
 			return $query->result_array();

@@ -9,16 +9,15 @@
     </div>
   </div>
 </div>
-<?php echo form_open('bookings/create'); ?>
-<!-- hidden fields -->
-<div class="card p-4 bg-light">
+<?php echo form_open('bookings/edit/'.$booking['BookingId']); ?>
+<div class="card p-4 bg-light mt-2">
   <div class="row">
     <div class="col-lg-3 col-sm-12 mt-3">
       <label>Select client</label>
       <select name="clientId" class="form-control">
         <option value="">-</option>
         <?php foreach ($clients as $client): ?>
-         <option value="<?php echo $client['Id'];?>" <?php echo ($this->session->userdata('booking_client_id')==$client['Id']?'selected="selected"':'');?> ><?php echo $client['name'];?></option>
+         <option value="<?php echo $client['Id'];?>" <?php echo ($booking['clientId']==$client['Id']?'selected="selected"':'');?> ><?php echo $client['name'];?></option>
        <?php endforeach; ?>
       </select>
       <div class="text-danger"><?php echo form_error('clientId'); ?></div>
@@ -26,20 +25,52 @@
     <div class="col-lg-4 col-sm-12 mt-3">
       <label>Driver Add-on</label>
       <div class="checkbox">
-        <input name="add_driver" type="checkbox" <?php echo ($this->session->userdata('booking_add_driver')==true?'checked':''); ?>>Add ₱<?php echo number_format($driver_pay['value'],2);?> per day for a driver</label>
+        <input name="add_driver" type="checkbox" <?php echo ($booking['add_driver']==true?'checked':''); ?>>Add ₱<?php echo number_format($driver_pay['value'],2);?> per day for a driver</label>
       </div>
     </div>
     <div class="col-lg-3 col-sm-12 mt-3">
       <label>Start Date</label>
-      <input class="form-control col-12" name="start_date" type="date" min="<?php echo date("Y-m-d");?>" value="<?php echo $this->session->userdata('booking_start_date'); ?>">
+      <input class="form-control col-12" name="start_date" type="date" value="<?php echo $booking['start_date']; ?>">
     </div>
     <div class="col-lg-1 col-sm-12 mt-3">
       <label>Days</label>
-      <input type="number" min="1" class="form-control" name="number_of_days" value="<?php echo $this->session->userdata('booking_days'); ?>">
+      <input type="number" min="1" class="form-control" name="number_of_days" value="<?php echo $booking['number_of_days']; ?>">
     </div>
   </div>
-    <div class="text-center">
-      <button type="submit" class="btn btn-md btn-primary col-lg-3 col-sm-12 mt-3" id="btnSearch"><i class="fa fa-search"></i> Search available vehicles</button>
+    <div class="text-right  mt-3 border-top">
+      <button type="submit" class="btn btn-lg btn-warning col-lg-auto col-sm-12 mt-3" id="btnSearch"><i class="fa fa-floppy-o"></i> Save Edit</button>
+    </div>
+</div>
+<!-- Search vehicles -->
+<div class="card mt-3 p-4 bg-light">
+  <div class="row">
+    <div class="col-lg-3 col-sm-12 mt-3">
+      <label>Select client</label>
+      <select disabled name="clientId" class="form-control">
+        <option value="">-</option>
+        <?php foreach ($clients as $client): ?>
+         <option value="<?php echo $client['Id'];?>" <?php echo ($booking['clientId']==$client['Id']?'selected="selected"':'');?> ><?php echo $client['name'];?></option>
+       <?php endforeach; ?>
+      </select>
+      <div class="text-danger"><?php echo form_error('clientId'); ?></div>
+    </div>
+    <div class="col-lg-4 col-sm-12 mt-3">
+      <label>Driver Add-on</label>
+      <div class="checkbox">
+        <input name="add_driver" type="checkbox" <?php echo ($booking['add_driver']==true?'checked':''); ?>>Add ₱<?php echo number_format($driver_pay['value'],2);?> per day for a driver</label>
+      </div>
+    </div>
+    <div class="col-lg-3 col-sm-12 mt-3">
+      <label>Start Date</label>
+      <input class="form-control col-12" name="start_date" type="date" value="<?php echo $booking['start_date']; ?>">
+    </div>
+    <div class="col-lg-1 col-sm-12 mt-3">
+      <label>Days</label>
+      <input type="number" min="1" class="form-control" name="number_of_days" value="<?php echo $booking['number_of_days']; ?>">
+    </div>
+  </div>
+    <div class="text-center mt-3 border-top">
+      <button type="submit" class="btn btn-lg btn-primary col-lg-auto col-sm-12 mt-3" id="btnSearch"><i class="fa fa-search"></i> Search available vehicles</button>
     </div>
 </div>
 </form>
@@ -120,11 +151,11 @@
               <div class="row mt-3">
                 <div class="col-lg-6 col-sm-12">
                   <label>Downpayment</label>
-                  <input type="number" min="0" value="0" class="form-control" id="downpayment" name="downpayment" value="<?php echo set_value('downpayment'); ?>">
+                  <input type="number" min="0" value="0" class="form-control" id="downpayment">
                 </div>
                 <div class="col-lg-6 col-sm-12">
                   <label>Discount (Optional)</label>
-                  <input type="number" min="0" value="0" class="form-control" id="discount" name="discount" value="<?php echo set_value('discount'); ?>">
+                  <input type="number" min="0" value="0" class="form-control" id="discount" name="discount" value="<?php echo $booking['rental_discount']; ?>">
                 </div>
               </div>
               <div class="row">
@@ -165,12 +196,13 @@
 
 
 <script type="text/javascript">
-function thousands_separators(num)
-{
-  var num_parts = num.toString().split(".");
-  num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  return num_parts.join(".");
-}
+
+  function thousands_separators(num)
+  {
+    var num_parts = num.toString().split(".");
+    num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return num_parts.join(".");
+  }
 
   $('#exampleModal').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget) // Button that triggered the modal

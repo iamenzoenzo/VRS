@@ -1,4 +1,14 @@
-<h2><?= $title ;?></h2>
+<title><?= $title ;?></title>
+<div>
+  <div class="row">
+    <div class="col-lg-8 col-sm-12">
+      <h2><?= $title ;?></h2>
+    </div>
+    <div class="col">
+      <a href="<?php echo base_url()?>cars/index" class="btn btn-info btn-md pull-right col-lg-auto col-sm-12"><i class="fa fa-arrow-left"></i> Back to list</a>
+    </div>
+  </div>
+</div>
 <?php echo form_open_multipart('cars/create'); ?>
   <div class="row">
   	<div class="col">

@@ -1,10 +1,13 @@
 <title><?= $title.' - '.$bookings['reference_number'] ;?></title>
-<div class="row">
-  <div class="col">
-    <h2><?= $title ;?></h2>
-    <a class="btn btn-info float-right" href="<?php echo base_url()?>bookings/index"><i class="fa fa-arrow-left"></i> Back to bookings</a>
+<div>
+  <div class="row">
+    <div class="col-lg-8 col-sm-12">
+      <h2><?= $title ;?></h2>
+    </div>
+    <div class="col">
+      <a href="<?php echo base_url()?>bookings/index" class="btn btn-info btn-md pull-right col-lg-auto col-sm-12"><i class="fa fa-arrow-left"></i> Back to list</a>
+    </div>
   </div>
-
 </div>
 
 <div class="row">

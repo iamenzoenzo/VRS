@@ -1,27 +1,25 @@
 <title><?= $title; ?></title>
 
 <?php echo form_open('bookings/index'); ?>
-  <div class="row">
-    <div class="col">
-      <h2><?= $title; ?></h2>
-    </div>
-    <div class="col-lg-4">
-      <div class="row">
-        <div class="col">
-          <input class="form-control" name="filter" value="<?= $filter;?>" type="search" placeholder="Search" aria-label="Search">
-        </div class="col-lg-1">
-        <div>
-          <button class="btn btn-outline-success lg-12" type="submit"><i class="fa fa-search"></i> Search</button>
-        </div>
-      </div>
-    </div>
-      <div class="float-right pl-3">
-        <a href="<?php echo base_url(); ?>bookings/create" class="btn btn-primary"><i class="fa fa-plus"></i> Add Booking</a>
-      </div>
+<div class="row">
+  <div class="col mt-2">
+    <h2><?= $title; ?></h2>
   </div>
+  <div class="col-lg-6 mt-2">
+    <div class="row pr-3">
+      <div class="col">
+        <input class="form-control col-lg-auto" name="name_filter" value="<?= $filter;?>" type="search" placeholder="Search" aria-label="Search">
+      </div>
+      <div>
+        <button class="btn btn-outline-success col-lg-auto" type="submit"> <i class="fa fa-search"></i>Search</button>
+      </div>
+    </div>
+  </div>
+  <div class="col mt-2 pull-right pr-3 col-lg-auto">
+    <a href="<?php echo base_url(); ?>bookings/create" class="btn btn-primary col-sm-12"><i class="fa fa-plus"></i> Add Booking</a>
+  </div>
+</div>
 </form>
-
-
 
 <table class="table table-striped table-hover table-bordered">
   <thead>
