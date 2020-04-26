@@ -35,10 +35,7 @@
     </div>
     <div class="col">
       <label>User Type</label>
-      <select disabled class="custom-select" name="user_type">
-        <option value="user">User</option>
-        <option value="admin">Admin</option>
-    </select>
+      <input type="text" class="form-control" name="user_type" readonly value="<?php echo $users['user_type']; ?>">
     </div>
   </div>
 

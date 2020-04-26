@@ -17,6 +17,8 @@ date_default_timezone_set('Asia/Manila');
 			$data['bookings'] = $this->Booking_model->get_bookings($id);
 			$data['images'] = $this->BookingImage_model->get_images(null,$id);
 			$data['logs'] = $this->BookingLogs_model->get_logs_by_booking_id($id);
+			$data['payments'] = $this->BookingPayments_model->get_payments_by_booking_id($id);
+			$data['total_payments'] = $this->BookingPayments_model->get_payments_sum_by_booking_id($id);
 
 			if(empty($data['bookings'])){
 				show_404();
@@ -33,18 +35,38 @@ date_default_timezone_set('Asia/Manila');
 			}
 
 			$data['title'] = 'Add New Booking';
-			$startDate = date("Y-m-d");
-			$end_date = date('Y-m-d', strtotime($startDate. ' + 1 days'));
+
+			$user_data = array(
+				'booking_client_id' => $this->input->post('clientId'),
+				'booking_start_date' => (!empty($this->input->post('start_date'))?$this->input->post('start_date'):date("Y-m-d")),
+				'booking_days' => (!empty($this->input->post('number_of_days'))?$this->input->post('number_of_days'):1),
+				'booking_add_driver'=> ($this->input->post('add_driver')=='on'?true:false)
+			);
+
+			$this->session->set_userdata($user_data);
+
+			$startDate = $this->session->userdata('booking_start_date');
+			if(!isset($startDate)){
+				$startDate = date("Y-m-d");
+			}
+
+			$numberofdays = $this->session->userdata('booking_days');
+			if(!isset($numberofdays)){
+				$numberofdays = 1;
+			}
+			$end_date = date('Y-m-d', strtotime($startDate. ' + '.$numberofdays.' days'));
+
 			$data['cars'] = $this->Car_model->get_available_cars_on_date($startDate,$end_date);
 			$data['driver_pay'] = $this->Setting_model->get_settings(null,'Driver_Per_Day');
 			$data['clients'] = $this->Client_model->get_clients(null);
 
-			$this->form_validation->set_rules('clientId', 'Client', 'required');
-			$this->form_validation->set_rules('carId', 'Vehicle', 'required');
+			$this->form_validation->set_rules('clientId', 'Client', 'required|is_natural_no_zero');
+			$this->form_validation->set_rules('carId', 'Vehicle', 'required|is_natural_no_zero');
 			$this->form_validation->set_rules('start_date', 'Start date', 'required');
-			$this->form_validation->set_rules('number_of_days', 'Number of days', 'required');
+			$this->form_validation->set_rules('number_of_days', 'Number of days', 'required|greater_than[0]');
 
       if($this->form_validation->run() === FALSE){
+
 				$this->load->view('templates/header');
 				$this->load->view('bookings/create', $data);
 				$this->load->view('templates/footer');
@@ -87,28 +109,145 @@ date_default_timezone_set('Asia/Manila');
 					}
 				}
 
-
-				$this->Booking_model->create_booking($fileNames);
+				$BookingId = $this->Booking_model->create_booking($fileNames);
 
 				// Set message
 				$this->session->set_flashdata('booking_created', 'You have added a new booking');
 
-				redirect('bookings/index');
+				redirect('bookings/view/'.$BookingId);
 			}
+
 		}
 
-    public function edit($id){
-      $data['title'] = 'Edit Client Information';
-      $data['clients'] = $this->Client_model->get_clients($id);
+		public function edit($id){
+			if(!$this->session->userdata('logged_in')){
+				redirect('users/login');
+			}
 
-      if(empty($data['clients'])){
-        show_404();
-      }
-        $this->load->view('templates/header');
-        $this->load->view('clients/edit', $data);
-        $this->load->view('templates/footer');
+			$data['title'] = 'Edit Booking';
 
-    }
+			$booking = $this->Booking_model->get_bookings($id);
+			$data['booking'] = $booking;
+
+			$user_data = array(
+				'booking_client_id' => $booking['clientId'],
+				'booking_start_date' => date_format(date_create($booking['start_date']),"Y-m-d"),
+				'booking_days' => $booking['number_of_days'],
+				'booking_add_driver'=> $booking['add_driver']
+			);
+
+			$this->session->set_userdata($user_data);
+
+			$startDate = $this->session->userdata('booking_start_date');
+			if(!isset($startDate)){
+				$startDate = date("Y-m-d");
+			}
+
+			$numberofdays = $this->session->userdata('booking_days');
+			if(!isset($numberofdays)){
+				$numberofdays = 1;
+			}
+			$end_date = date('Y-m-d', strtotime($startDate. ' + '.$numberofdays.' days'));
+
+			$data['cars'] = $this->Car_model->get_available_cars_on_date($startDate,$end_date,$id);
+			$data['driver_pay'] = $this->Setting_model->get_settings(null,'Driver_Per_Day');
+			$data['clients'] = $this->Client_model->get_clients(null);
+			$data['status'] = $this->Status_model->get_status(null);
+
+			//$this->form_validation->set_rules('carId', 'Vehicle', 'required|is_natural_no_zero');
+			//$this->form_validation->set_rules('start_date', 'Start date', 'required');
+			//$this->form_validation->set_rules('number_of_days', 'Number of days', 'required|greater_than[0]');
+
+      if($this->form_validation->run() === FALSE){
+
+				$this->load->view('templates/header');
+				$this->load->view('bookings/edit', $data);
+				$this->load->view('templates/footer');
+			} else {
+				// Upload Image
+
+				$fileNames = array();
+				$files = $_FILES;
+				$timeStamp=time();
+
+				$count = count($_FILES['multiplefiles']['name']);
+
+				for($i=0;$i<$count;$i++){
+					if(!empty($files['multiplefiles']['name'][$i])){
+
+						$_FILES['multiplefiles']['name'] = $files['multiplefiles']['name'][$i];
+						$_FILES['multiplefiles']['type'] = $files['multiplefiles']['type'][$i];
+						$_FILES['multiplefiles']['tmp_name'] = $files['multiplefiles']['tmp_name'][$i];
+						$_FILES['multiplefiles']['error'] = $files['multiplefiles']['error'][$i];
+						$_FILES['multiplefiles']['size'] = $files['multiplefiles']['size'][$i];
+
+						$config['upload_path'] = './assets/images/client_bookings_images';
+						$config['allowed_types'] = 'jpg|jpeg|png|gif';
+						$config['max_size'] = '0';
+						$config['max_width'] = '0';
+						$config['max_height'] = '0';
+						$config['overwrite'] = FALSE;
+						$config['remove_spaces'] = TRUE;
+						$config['file_name'] = $timeStamp.'-'.$files['multiplefiles']['name'][$i];
+
+						$this->upload->initialize($config);
+
+						if(!$this->upload->do_upload('multiplefiles')){
+							$error = array('error' => $this->upload->display_errors());
+							//array_push($fileName,'no-image.jpg');
+						}else{
+							$uploadData = $this->upload->data();
+							array_push($fileNames,$filename = $uploadData['file_name']);
+						}
+					}
+				}
+
+				$this->Booking_model->update_booking();
+
+				// Set message
+				$this->session->set_flashdata('booking_updated', 'Client booking updated');
+
+				redirect('bookings/view/'.$id);
+			}
+
+		}
+
+
+		public function addPayement(){
+			$timestamp = time();
+			// Upload Image
+			$config['upload_path'] = './assets/images/client_bookings_payments';
+			$config['allowed_types'] = 'jpg|jpeg|png|gif';
+			$config['max_size'] = '0';
+			$config['max_width'] = '0';
+			$config['max_height'] = '0';
+			$config['overwrite'] = FALSE;
+			$config['remove_spaces'] = TRUE;
+			$config['file_name'] = $timestamp.'-'.$_FILES['paymentAttachment']['name'];
+
+			$this->upload->initialize($config);
+
+			if(!$this->upload->do_upload('paymentAttachment')){
+				$this->session->set_flashdata('global_error', 'Error encountered: '.$this->upload->display_errors());
+				redirect('bookings/view/'.$this->input->post('BookingId'));
+			} else {
+				$data = $this->upload->data();
+				$payment_image = $data['file_name'];
+			}
+
+			$paymentId = $this->BookingPayments_model->create_payment($this->input->post('BookingId'),$this->input->post('payment_amount'),$this->input->post('payment_remarks'),$this->session->userdata('user_id'),$payment_image);
+			if(!$paymentId>0){
+				// Set message
+				$this->session->set_flashdata('global_error', 'Error encountered while saving the payment.');
+
+			}else{
+				// Set message
+				$this->session->set_flashdata('payment_created', 'You have added a new payment for this booking');
+			}
+
+			redirect('bookings/view/'.$this->input->post('BookingId'));
+
+		}
 
 		public function get_available_vehicles($today=null)
 		{
@@ -128,6 +267,7 @@ date_default_timezone_set('Asia/Manila');
 
 		}
 
+		//compute rent
 		public function computeRent()
 		{
 			$adddriver=$this->input->post('add_driver');
@@ -146,16 +286,20 @@ date_default_timezone_set('Asia/Manila');
 			}
 		}
 
-    public function update(){
+    public function update($id){
+			if(!$this->session->userdata('logged_in')){
+				redirect('users/login');
+			}
 
-      $this->Client_model->update_client();
+      $this->Booking_model->update_booking();
 
       // Set message
-      $this->session->set_flashdata('client_updated', 'Client has been updated');
+      $this->session->set_flashdata('booking_updated', 'Booking has been updated');
 
-      redirect('clients/index');
+      redirect('bookings/view/'.$id);
     }
 
+		//delete booking
     public function delete($id){
       $result = $this->Booking_model->delete_booking($id);
 			if($result){

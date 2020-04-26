@@ -24,6 +24,6 @@
     </div>
   </div>
 <div>
-	<a href="<?php echo base_url(); ?>status/edit/<?php echo $status['Id']; ?>" class="btn btn-warning">Edit</a>
-  <a href="<?php echo base_url(); ?>status/delete/<?php echo $status['Id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this status?')">Delete</a>
+	<a href="<?php echo base_url(); ?>status/edit/<?php echo $status['Id']; ?>" class="btn btn-warning"><i class="fa fa-pencil-square-o"></i> Edit</a>
+  <a href="<?php echo base_url(); ?>status/delete/<?php echo $status['Id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this status?')"><i class="fa fa-trash-o"></i> Delete</a>
 </div>
