@@ -268,7 +268,7 @@
           </div>
           <div class="modal-body">
             <?php echo form_open_multipart('bookings/addPayement'); ?>
-            <input type="hidden" name="BookingId" value="<?php echo $bookings['BookingId']; ?>">
+              <input type="hidden" name="BookingId" value="<?php echo $bookings['BookingId']; ?>">
               <div class="row">
                 <div class="col">
                   <label>Amount</label>

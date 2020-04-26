@@ -273,25 +273,30 @@ date_default_timezone_set('Asia/Manila');
 
 
 		public function addPayement(){
-			$timestamp = time();
-			// Upload Image
-			$config['upload_path'] = './assets/images/client_bookings_payments';
-			$config['allowed_types'] = 'jpg|jpeg|png|gif';
-			$config['max_size'] = '0';
-			$config['max_width'] = '0';
-			$config['max_height'] = '0';
-			$config['overwrite'] = FALSE;
-			$config['remove_spaces'] = TRUE;
-			$config['file_name'] = $timestamp.'-'.$_FILES['paymentAttachment']['name'];
+			$payment_image='';
 
-			$this->upload->initialize($config);
+			//if no file is selected as attachment
+			if(!empty($_FILES['paymentAttachment']['name'])){
+				$timestamp = time();
+				$config['upload_path'] = './assets/images/client_bookings_payments';
+				$config['allowed_types'] = 'jpg|jpeg|png|gif';
+				$config['max_size'] = '0';
+				$config['max_width'] = '0';
+				$config['max_height'] = '0';
+				$config['overwrite'] = FALSE;
+				$config['remove_spaces'] = TRUE;
+				$config['file_name'] = $timestamp.'-'.$_FILES['paymentAttachment']['name'];
 
-			if(!$this->upload->do_upload('paymentAttachment')){
-				$this->session->set_flashdata('global_error', 'Error encountered: '.$this->upload->display_errors());
-				redirect('bookings/view/'.$this->input->post('BookingId'));
-			} else {
-				$data = $this->upload->data();
-				$payment_image = $data['file_name'];
+				$this->upload->initialize($config);
+
+				if(!$this->upload->do_upload('paymentAttachment')){
+					$this->session->set_flashdata('global_error', 'Error encountered: '.$this->upload->display_errors());
+					redirect('bookings/view/'.$this->input->post('BookingId'));
+				} else {
+					$data = $this->upload->data();
+					$payment_image = $data['file_name'];
+				}
+
 			}
 
 			$paymentId = $this->BookingPayments_model->create_payment($this->input->post('BookingId'),$this->input->post('payment_amount'),$this->input->post('payment_remarks'),$this->session->userdata('user_id'),$payment_image);
