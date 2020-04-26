@@ -45,7 +45,7 @@
     </div>
   </div>
 <div class="pt-3">
-	<button type="submit" class="btn btn-warning">Save Edit</button>
-  <a href="<?php echo base_url()?>cars/index" class="btn btn-danger">Cancel</a>
+	<button type="submit" class="btn btn-warning"><i class="fa fa-floppy-o"></i> Save Edit</button>
+  <a href="<?php echo base_url()?>cars/view/<?php echo $cars['Id']; ?>" class="btn btn-danger"><i class="fa fa-ban"></i> Cancel</a>
 </div>
 </form>
