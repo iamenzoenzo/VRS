@@ -50,6 +50,7 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="<?php echo base_url(); ?>bookings/create">Add booking</a>
           <a class="dropdown-item" href="<?php echo base_url(); ?>bookings/index">View bookings</a>
+          <a class="dropdown-item" href="<?php echo base_url(); ?>bookings/report">Reports</a>
         </div>
       </li>
       <li class="nav-item dropdown">

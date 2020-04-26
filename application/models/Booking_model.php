@@ -9,17 +9,27 @@
 				$this->db->join('status a', 'a.Id=clientbookings.statusId', 'inner');
 				$this->db->join('cars b', 'b.Id=clientbookings.carId', 'inner');
 				$this->db->join('clients c', 'c.Id=clientbookings.clientId', 'inner');
-				$this->db->order_by("clientbookings.BookingId", "asc");
+				$this->db->order_by("clientbookings.BookingId", "desc");
         $query=$this->db->get_where('clientbookings', array('clientbookings.BookingId' => $id));
         return $query->row_array();
       }else {
 				$this->db->join('status a', 'a.Id=clientbookings.statusId', 'inner');
 				$this->db->join('cars b', 'b.Id=clientbookings.carId', 'inner');
 				$this->db->join('clients c', 'c.Id=clientbookings.clientId', 'inner');
-				$this->db->order_by("clientbookings.BookingId", "asc");
-				$query=$this->db->get_where('clientbookings', array('start_date >= '=>'2020-04-01'));
+				$this->db->order_by("clientbookings.BookingId", "desc");
+				$query=$this->db->get('clientbookings');
   			return $query->result_array();
       }
+		}
+
+		public function get_bookings_report($start_date=null,$end_date=null,$carid=null){
+			if(isset($carid)){
+				$query=$this->db->query("SELECT *,(SELECT SUM(clientbookings.rental_fee_current) from clientbookings where clientbookings.carId=cars.Id) as Income,(SELECT SUM(clientbookings.number_of_days) from clientbookings where clientbookings.carId=cars.Id) AS TotalDays FROM cars inner join clientbookings on clientbookings.carId=cars.Id WHERE clientbookings.carId=".$carid." GROUP by cars.Id ORDER BY cars.car_description");
+			}else{
+				$query=$this->db->query("SELECT *,(SELECT SUM(clientbookings.rental_fee_current) from clientbookings where clientbookings.carId=cars.Id) as Income,(SELECT SUM(clientbookings.number_of_days) from clientbookings where clientbookings.carId=cars.Id) AS TotalDays FROM cars inner join clientbookings on clientbookings.carId=cars.Id GROUP by cars.Id ORDER BY cars.car_description");
+			}
+			return $query->result_array();
+
 		}
 
 		public function create_booking($filesdata){
