@@ -32,12 +32,13 @@
         <td class="text-right"><?php echo '₱'.number_format($booking['Income'],2) ;?></td>
         </tr>
     <?php endforeach;?>
-        <tr>
-          <td colspan="3" class="text-right"><b>Total Income</b></td>
-          <td class="text-right"><b>₱<?php echo number_format($totalIncome,2) ;?></b></td>
-        </tr>
     <?php if($counter==0):?>
       <tr><td colspan="4">No data to show</td></tr>
+    <?php else:?>
+      <tr>
+        <td colspan="3" class="text-right"><b>Total Income</b></td>
+        <td class="text-right"><b>₱<?php echo number_format($totalIncome,2) ;?></b></td>
+      </tr>
     <?php endif;?>
   </tbody>
 </table>
