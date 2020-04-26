@@ -42,7 +42,7 @@ date_default_timezone_set('Asia/Manila');
 				redirect('users/login');
 			}
 
-			$data['title'] = 'Bookings';
+			$data['title'] = 'Report';
 
 			if($use_session==false){
 				$start_date = date("Y-m-".'01');

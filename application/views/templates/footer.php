@@ -7,7 +7,7 @@
   <br>
   <br>
 </div>
-<div class="jumbotron bg-light" style="margin-bottom:0">
+<div class="jumbotron bg-light d-print-none" style="margin-bottom:0">
    <div class="container">
    <hr>
    <a class="nav-link text-light" href="<?php echo base_url(); ?>"><img src="<?php echo base_url();?>assets/images/system_images/vrslogo.png" width="30" height="30">&nbsp;VRS</a>
@@ -53,7 +53,7 @@
 
 
 
-<div class="jumbotron text-center bg-dark text-light" style="margin-bottom:0">
+<div class="jumbotron text-center bg-dark text-light d-print-none" style="margin-bottom:0">
   <small><p>Copyright &copy; 2020 VRS Inc. All rights reserved.
     <a href="<?php echo base_url(); ?>privacy">Privacy Policy</a> | <a href="<?php echo base_url(); ?>terms">Terms of Use</a></p>
   </small>
