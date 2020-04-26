@@ -1,7 +1,7 @@
 <title><?= $title; ?></title>
 <div class="row">
   <div class="col">
-    <h2><?= $title; ?></h2>
+    <h2><i class="fa fa-car"></i> <?= $title; ?></h2>
   </div>
   <?php if($this->session->userdata('logged_in') && $this->session->userdata('is_admin')):?>
     <div class="float-right pl-3">
