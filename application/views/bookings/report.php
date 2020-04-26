@@ -14,7 +14,7 @@
       </div>
     </div>
   </div>
-
+<small>*Booking data from <?php echo '<u><i>'.$this->session->userdata('report_start_date').'</i></u> to <u><i>'.$this->session->userdata('report_end_date').'</i></u>';?></small>
 <table class="table table-bordered">
   <thead>
     <tr>
