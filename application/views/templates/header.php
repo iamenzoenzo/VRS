@@ -50,6 +50,7 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="<?php echo base_url(); ?>bookings/create">Add booking</a>
           <a class="dropdown-item" href="<?php echo base_url(); ?>bookings/index">View bookings</a>
+          <a class="dropdown-item" href="<?php echo base_url(); ?>bookings/report">Reports</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -77,9 +78,9 @@
       <li>
         <?php
         if(!$this->session->userdata('logged_in')){
-          echo '<a class="btn btn-outline-primary" href="'.base_url().'users/login"><i class="fa fa-sign-in"></i> Login</a>';
+          echo '<a class="btn btn-primary" href="'.base_url().'users/login"><i class="fa fa-sign-in"></i> Login</a>';
         }else{
-          echo '<a class="btn btn-outline-danger" href="'.base_url().'users/logout"><i class="fa fa-sign-out"></i> Logout</a>';
+          echo '<a class="btn btn-danger" href="'.base_url().'users/logout"><i class="fa fa-sign-out"></i> Logout</a>';
         }
         ?>
       </li>

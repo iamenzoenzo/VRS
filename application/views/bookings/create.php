@@ -43,11 +43,14 @@
     </div>
 </div>
 </form>
-<?php if(count($cars)<1):?>
+<?php if(empty($this->session->userdata('booking_client_id'))):?>
+  <div class="bg-light border rounded text-center text-lg text-center p-3">
+    <h5>Please select a client for this booking</h5>
+  </div>
+<?php elseif(count($cars)<1):?>
   <div class="bg-light border rounded text-center text-lg text-center p-3">
     <h5>Vehicles are fully-booked on the chosen date</h5>
   </div>
-  </hr>
 <?php else:?>
   <div class="bg-light border border-bottom-0 rounded  text-center text-lg text-center p-3">
     <h5><?php echo count($cars).' vehicle(s) available for rent on <u>'.$this->session->userdata('booking_start_date').'</u> to <u>'.date('Y-m-d', strtotime($this->session->userdata('booking_start_date'). ' + '.$this->session->userdata('booking_days').' days')).'</u>';?></h5>

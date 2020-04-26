@@ -1,4 +1,15 @@
-<h2><?= $title ;?></h2>
+<title><?= $title ;?></title>
+
+<div class="row">
+  <div class="col mt-2">
+    <h2><?= $title; ?></h2>
+  </div>
+
+  <div class="col mt-2 pull-right pr-3 col-lg-auto">
+    <a href="<?php echo base_url(); ?>status/index" class="btn btn-info col-sm-12"><i class="fa fa-arrow-left"></i> Back to list</a>
+  </div>
+</div>
+
 <?php echo form_open('status/update'); ?>
 <input type="hidden" name="id" value="<?php echo $status['Id']; ?>">
   <div class="row">
@@ -26,7 +37,7 @@
     </div>
   </div>
 <div>
-	<button type="submit" class="btn btn-warning">Save Update</button>
-  <a href="<?php echo base_url()?>status/index" class="btn btn-danger">Cancel</a>
+	<button type="submit" class="btn btn-warning"><i class="fa fa-floppy-o"></i> Save Update</button>
+  <a href="<?php echo base_url()?>status/index" class="btn btn-danger"><i class="fa fa-ban"></i> Cancel</a>
 </div>
 </form>

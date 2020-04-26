@@ -1,5 +1,16 @@
 <title><?= $title ;?></title>
   <div class="row">
+    <div class="col mt-2">
+      <h2><?= $title; ?></h2>
+    </div>
+
+    <div class="col mt-2 pull-right pr-3 col-lg-auto">
+      <a href="<?php echo base_url(); ?>status/index" class="btn btn-info col-sm-12"><i class="fa fa-arrow-left"></i> Back to list</a>
+    </div>
+  </div>
+
+
+  <div class="row">
   	<div class="col">
   		<label>label</label>
   		<input readonly type="text" class="form-control" value="<?php echo $status['label']; ?>" name="label" placeholder="Enter setting name">

@@ -3,6 +3,10 @@ date_default_timezone_set('Asia/Manila');
 	class Bookings extends CI_Controller{
 
 		public function index(){
+			if(!$this->session->userdata('logged_in')){
+				redirect('users/login');
+			}
+
 			$data['title'] = 'Bookings';
 			$data['bookings'] = $this->Booking_model->get_bookings(null);
 			$data['filter'] = $this->input->post('name_filter');
@@ -13,6 +17,10 @@ date_default_timezone_set('Asia/Manila');
 		}
 
 		public function view($id){
+			if(!$this->session->userdata('logged_in')){
+				redirect('users/login');
+			}
+
 			$data['title'] = 'View Booking';
 			$data['bookings'] = $this->Booking_model->get_bookings($id);
 			$data['images'] = $this->BookingImage_model->get_images(null,$id);
@@ -26,6 +34,25 @@ date_default_timezone_set('Asia/Manila');
 				$this->load->view('templates/header');
 				$this->load->view('bookings/view', $data);
 				$this->load->view('templates/footer');
+
+		}
+
+		public function report(){
+			if(!$this->session->userdata('logged_in')){
+				redirect('users/login');
+			}
+
+			$data['title'] = 'Bookings';
+
+			$start_date = date("Y-m-".'01');
+			$end_date = date('Y-m-t');
+
+			$data['bookings'] = $this->Booking_model->get_bookings_report($start_date,$end_date);
+			$data['filter'] = $this->input->post('name_filter');
+
+			$this->load->view('templates/header');
+			$this->load->view('bookings/report', $data);
+			$this->load->view('templates/footer');
 
 		}
 

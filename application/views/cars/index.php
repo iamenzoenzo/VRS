@@ -3,9 +3,9 @@
   <div class="col">
     <h2><i class="fa fa-car"></i> <?= $title; ?></h2>
   </div>
-  <?php if($this->session->userdata('logged_in') && $this->session->userdata('is_admin')):?>
+  <?php if($this->session->userdata('logged_in')):?>
     <div class="float-right pl-3">
-      <a href="<?php echo base_url(); ?>cars/create" class="btn btn-primary">Add New Vehicle</a>
+      <a href="<?php echo base_url(); ?>cars/create" class="btn btn-primary"><i class="fa fa-plus"></i> Add New Vehicle</a>
     </div>
   <?php endif;?>
 </div>
