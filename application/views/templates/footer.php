@@ -16,9 +16,9 @@
     <div class="card">
       <div class="card-body">
         <small>
-        <p><a class="nav-link" href="<?php echo base_url(); ?>about">About Us</a>
-        <a class="nav-link" href="<?php echo base_url(); ?>contact">Contact Us</a>
-        <a class="nav-link" href="<?php echo base_url(); ?>faq">FAQs</a></p>
+        <p><a class="nav-link" href="<?php echo base_url(); ?>about"><i class="fa fa-user-secret"></i> About Us</a>
+        <a class="nav-link" href="<?php echo base_url(); ?>contact"><i class="fa fa-phone"></i> Contact Us</a>
+        <a class="nav-link" href="<?php echo base_url(); ?>faq"><i class="fa fa-question-circle-o"></i> FAQs</a></p>
       </small>
       </div>
     </div>

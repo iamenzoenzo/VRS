@@ -54,13 +54,13 @@
 <div class="card-deck">
   <div class="card">
   <div class="card-body">
-    <h4 class="card-title">Address</h4>
+    <h4 class="card-title"><i class="fa fa-map-marker"></i> Address</h4>
     <p class="card-text"><?php echo $address['value'];?></p>
-    <h4 class="card-title">Telephone</h4>
+    <h4 class="card-title"><i class="fa fa-phone-square"></i> Telephone</h4>
     <p class="card-text"><?php echo $phone['value'];?></p>
-    <h4 class="card-title">Mobile</h4>
+    <h4 class="card-title"><i class="fa fa-mobile"></i> Mobile</h4>
     <p class="card-text"><?php echo $mobile['value'];?></p>
-    <h4 class="card-title">Email</h4>
+    <h4 class="card-title"><i class="fa fa-envelope"></i> Email</h4>
     <a target="_top" class="card-link"><?php echo $email['value'];?></a>
   </div>
 </div>

@@ -2,7 +2,7 @@
 
 <div class="row">
   <div class="col">
-    <h2><?php echo $title ?></h2>
+    <h2><i class="fa fa-money"></i> <?php echo $title ?></h2>
   </div>
   <div class="float-right pl-3">
     <a href="<?php echo base_url(); ?>cars/index" class="btn btn-info"><i class="fa fa-arrow-left"></i> Back to list</a>

@@ -1,5 +1,5 @@
 <title><?php echo $title?></title>
-<h2>Frequently asked questions</h2>
+<h2><i class="fa fa-question-circle-o"></i> Frequently asked questions</h2>
 <p><strong>Note:</strong> Click the question to reveal the answer.</p>
 <div id="accordion">
   <div class="card">

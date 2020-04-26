@@ -45,7 +45,7 @@
       <?php if($this->session->userdata('logged_in')): ?>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Booking
+          <i class="fa fa-book"></i> Booking
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="<?php echo base_url(); ?>bookings/create">Add booking</a>
@@ -54,7 +54,7 @@
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Client
+          <i class="fa fa-users"></i> Client
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="<?php echo base_url(); ?>clients/create">Add client</a>
@@ -63,7 +63,7 @@
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Admin
+          <i class="fa fa-lock"></i> Admin
         </a>
         <div class="dropdown-menu dropleft" aria-labelledby="navbarDropdown">
           <a class="dropdown-item <?php echo (($this->session->userdata('logged_in')) && ($this->session->userdata('is_admin')))?'':'disabled'?>" href="<?php echo base_url(); ?>users/index">Users Management</a>
