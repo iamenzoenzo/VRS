@@ -4,7 +4,7 @@
     <h2><?= $title; ?></h2>
   </div>
     <div class="float-right pl-3">
-      <a href="<?php echo base_url(); ?>users/index" class="btn btn-primary">Back to list</a>
+      <a href="<?php echo base_url(); ?>users/index" class="btn btn-info"><i class="fa fa-arrow-left"></i> Back to list</a>
     </div>
 </div>
 
@@ -40,6 +40,6 @@
   </div>
 
 <div class="pt-3">
-  <a href="<?php echo base_url()?>users/edit/<?php echo $users['id']; ?>" class="btn btn-warning">Edit</a>
-  <a href="<?php echo base_url(); ?>users/delete/<?php echo $users['id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this user?')">Delete</a>
+  <a href="<?php echo base_url()?>users/edit/<?php echo $users['id']; ?>" class="btn btn-warning"><i class="fa fa-pencil-square-o"></i> Edit</a>
+  <a href="<?php echo base_url(); ?>users/delete/<?php echo $users['id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this user?')"><i class="fa fa-trash-o"></i> Delete</a>
 </div>

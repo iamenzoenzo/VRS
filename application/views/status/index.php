@@ -16,7 +16,7 @@
       <th scope="col">Label</th>
       <th scope="col">Color</th>
       <th scope="col">Is Active</th>
-      <th scope="col">Actions</th>
+      <th scope="col" class="text-center">Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -26,7 +26,7 @@
           <td><?php echo $stat['label'];?></td>
           <td><?php echo $stat['bootstrap_bg_color'];?></td>
           <td><?php echo ($stat['Is_Active']==1 ? 'True' : 'False');?></td>
-          <td>
+          <td class="text-center">
             <a class="btn btn-info" href="<?php echo base_url().'status/view/'.$stat['Id'];$counter++;?>"><i class="fa fa-eye"></i> View</a>
           </td>
         </tr>
