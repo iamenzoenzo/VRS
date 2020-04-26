@@ -52,7 +52,7 @@ date_default_timezone_set('Asia/Manila');
 					'report_start_date' => $start_date,
 					'report_end_date' => $end_date,
 					'report_car_id' => $carid
-				);	
+				);
 				$this->session->set_userdata($user_data);
 			}else{
 				$start_date = $this->session->userdata('report_start_date');
@@ -82,6 +82,12 @@ date_default_timezone_set('Asia/Manila');
 
 			redirect('bookings/report/'.true);
 		}
+
+		public function filter_clear(){
+
+			redirect('bookings/report/'.false);
+		}
+
 		public function create(){
 			if(!$this->session->userdata('logged_in')){
 				redirect('users/login');

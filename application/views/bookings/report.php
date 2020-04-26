@@ -6,7 +6,6 @@
     </div>
     <div class="col-lg-auto">
       <div class="row">
-
         <div class="col mt-2">
           <a data-toggle="modal" href="#filterModal" class="btn btn-outline-success col-lg-auto col-sm-12"> <i class="fa fa-filter"></i> Filter</a>
         </div>
@@ -74,8 +73,9 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col text-center mt-2">
-                  <button class="btn btn-outline-success col-lg-auto col-sm-12" type="submit"> <i class="fa fa-filter"></i> Filter</button>
+                <div class="col text-center">
+                  <button class="btn btn-outline-success col-lg-auto col-sm-12 mt-2" type="submit"> <i class="fa fa-filter"></i> Filter</button>
+                  <a href="<?php echo base_url(); ?>bookings/filter_clear" class="btn btn-outline-warning col-lg-auto col-sm-12 mt-2"><i class="fa fa-times"></i> Clear Filter</a>
                 </div>
               </div>
             </form>
