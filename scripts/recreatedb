@@ -1,9 +1,10 @@
 #!/bin/bash
-mysql -u admin -pTeamlaban! -h upoudb1.chioee9qrhwf.us-east-1.rds.amazonaws.com <<EOF
-#!mysql -u root -pnewpassword -h localhost <<EOF
+#!mysql -u admin -pTeamlaban! -h upoudb1.chioee9qrhwf.us-east-1.rds.amazonaws.com <<EOF
+mysql -u root -pnewpassword -h localhost <<EOF
 DROP DATABASE IF EXISTS carrental;
 CREATE SCHEMA carrental ;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+set global sql_mode='';
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -152,7 +153,6 @@ CREATE TABLE carrental.clientsphotos (
   created_date datetime NOT NULL DEFAULT current_timestamp(),
   Is_Active bit(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 
 INSERT INTO carrental.clientsphotos (Id, client_id, file_name, created_date, Is_Active) VALUES
 (77, 99, '1586755450-unnamed.jpg', '2020-04-13 13:24:10', b'1'),
