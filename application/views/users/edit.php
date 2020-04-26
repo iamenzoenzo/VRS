@@ -36,7 +36,7 @@
   </div>
 
 <div class="pt-3">
-	<button type="submit" class="btn btn-warning">Save Edit</button>
-  <a href="<?php echo base_url()?>users/index" class="btn btn-danger">Cancel</a>
+	<button type="submit" class="btn btn-warning"><i class="fa fa-floppy-o"></i> Save Edit</button>
+  <a href="<?php echo base_url()?>users/index" class="btn btn-danger"><i class="fa fa-ban"></i> Cancel</a>
 </div>
 </form>

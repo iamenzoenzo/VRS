@@ -125,7 +125,7 @@
             <div class="row mt-2">
               <div class="col">
                 <?php if($this->session->userdata('logged_in')): ?>
-                  <a href="<?php echo base_url(); ?>bookings/edit/<?php echo $bookings['BookingId']; ?>" class="btn btn-success"><i class="fa fa-pencil-square-o"></i> Edit</a>
+                  <a href="<?php echo base_url(); ?>bookings/edit/<?php echo $bookings['BookingId']; ?>" class="btn btn-warning"><i class="fa fa-pencil-square-o"></i> Edit</a>
                   <a href="<?php echo base_url(); ?>bookings/delete/<?php echo $bookings['BookingId']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this booking?')"><i class="fa fa-trash-o"></i> Delete</a>
                 <?php endif; ?>
               </div>

@@ -4,7 +4,7 @@
     <h2><?= $title; ?></h2>
   </div>
     <div class="float-right pl-3">
-      <a href="<?php echo base_url(); ?>cars/index" class="btn btn-primary">Back to list</a>
+      <a href="<?php echo base_url(); ?>cars/index" class="btn btn-info"><i class="fa fa-arrow-left"></i> Back to list</a>
     </div>
 </div>
 
@@ -52,8 +52,8 @@
   </div>
 <div class="pt-3">
   <?php if($this->session->userdata('logged_in')): ?>
-    <a href="<?php echo base_url(); ?>cars/edit/<?php echo $cars['Id']; ?>" class="btn btn-success">Edit</a>
-    <a href="<?php echo base_url(); ?>cars/delete/<?php echo $cars['Id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this vehicle?')">Delete</a>
+    <a href="<?php echo base_url(); ?>cars/edit/<?php echo $cars['Id']; ?>" class="btn btn-warning"><i class="fa fa-pencil-square-o"></i> Edit</a>
+    <a href="<?php echo base_url(); ?>cars/delete/<?php echo $cars['Id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this vehicle?')"><i class="fa fa-trash-o"></i> Delete</a>
   <?php endif; ?>
 </div>
 </div>
