@@ -63,10 +63,12 @@
 
 				// Login user
 				$user_id = $this->User_model->login($username, $password);
+				$user = $this->User_model->get_users($user_id);
 				if($user_id){
 					// Create session
 					$user_data = array(
 						'user_id' => $user_id,
+						'user_type' => $user['user_type'],
 						'username' => $username,
 						'logged_in' => true,
 						'is_admin'=> $this->User_model->user_is_admin($user_id)
