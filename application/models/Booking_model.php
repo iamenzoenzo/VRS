@@ -23,10 +23,10 @@
 		}
 
 		public function get_bookings_report($start_date=null,$end_date=null,$carid=null){
-			if(isset($carid)){
-				$query=$this->db->query("SELECT *,(SELECT SUM(clientbookings.rental_fee_current) from clientbookings where clientbookings.carId=cars.Id) as Income,(SELECT SUM(clientbookings.number_of_days) from clientbookings where clientbookings.carId=cars.Id) AS TotalDays FROM cars inner join clientbookings on clientbookings.carId=cars.Id WHERE clientbookings.carId=".$carid." GROUP by cars.Id ORDER BY cars.car_description");
+			if($carid!=0){
+				$query=$this->db->query("SELECT *,(SELECT SUM(clientbookings.rental_fee_current) from clientbookings where clientbookings.carId=cars.Id) as Income,(SELECT SUM(clientbookings.number_of_days) from clientbookings where clientbookings.carId=cars.Id) AS TotalDays FROM cars inner join clientbookings on clientbookings.carId=cars.Id WHERE clientbookings.carId=".$carid." AND (clientbookings.start_date BETWEEN '".$start_date."' AND '".$end_date."') GROUP by cars.Id ORDER BY cars.car_description");
 			}else{
-				$query=$this->db->query("SELECT *,(SELECT SUM(clientbookings.rental_fee_current) from clientbookings where clientbookings.carId=cars.Id) as Income,(SELECT SUM(clientbookings.number_of_days) from clientbookings where clientbookings.carId=cars.Id) AS TotalDays FROM cars inner join clientbookings on clientbookings.carId=cars.Id GROUP by cars.Id ORDER BY cars.car_description");
+				$query=$this->db->query("SELECT *,(SELECT SUM(clientbookings.rental_fee_current) from clientbookings where clientbookings.carId=cars.Id) as Income,(SELECT SUM(clientbookings.number_of_days) from clientbookings where clientbookings.carId=cars.Id) AS TotalDays FROM cars inner join clientbookings on clientbookings.carId=cars.Id WHERE (clientbookings.start_date BETWEEN '".$start_date."' AND '".$end_date."') GROUP by cars.Id ORDER BY cars.car_description");
 			}
 			return $query->result_array();
 
