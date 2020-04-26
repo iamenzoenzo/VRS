@@ -16,8 +16,8 @@
   <div class="mt-3">
   <div class="row">
   	<div class="col">
-  		<label>Name</label>
-  		<input readonly type="text" class="form-control" name="car-name" placeholder="Enter name" value="<?php echo $cars['name']; ?>">
+  		<label>Description</label>
+  		<input readonly type="text" class="form-control" name="car-name" placeholder="Enter name" value="<?php echo $cars['car_description']; ?>">
   	</div>
     <div class="col">
       <label>Code Name</label>

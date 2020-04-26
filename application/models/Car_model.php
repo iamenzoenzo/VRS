@@ -6,27 +6,31 @@
 
 		public function get_cars($id){
 			if(isset($id)){
-				$this->db->order_by('name');
+				$this->db->order_by('car_description');
 				$query=$this->db->get_where('cars', array('Id' => $id));
 				return $query->row_array();
 			}else {
-				$this->db->order_by('name');
+				$this->db->order_by('car_description');
 				$query = $this->db->get('cars');
 				return $query->result_array();
 			}
 		}
 
-		public function get_available_cars_on_date($start_date,$end_date){
+		public function get_available_cars_on_date($start_date,$end_date,$BookingId=0){
 			//$this->db->order_by('name');
 			$this->db->where('Is_Active',1);
-			$where = "cars.id NOT IN (SELECT DISTINCT clientbookings.carId from clientbookings WHERE (clientbookings.start_date BETWEEN '".$start_date."' AND '".$end_date."') OR (clientbookings.end_date BETWEEN '".$start_date."' AND '".$end_date."'))";
+			if($BookingId!=0){
+				$where = "cars.id NOT IN (SELECT DISTINCT clientbookings.carId from clientbookings WHERE ((clientbookings.start_date BETWEEN '".$start_date."' AND '".$end_date."') OR (clientbookings.end_date BETWEEN '".$start_date."' AND '".$end_date."')) AND clientbookings.BookingId<>".$BookingId.")";
+			}else{
+				$where = "cars.id NOT IN (SELECT DISTINCT clientbookings.carId from clientbookings WHERE (clientbookings.start_date BETWEEN '".$start_date."' AND '".$end_date."') OR (clientbookings.end_date BETWEEN '".$start_date."' AND '".$end_date."'))";
+			}
 			$this->db->where($where);
 			$query=$this->db->get('cars');
 			return $query->result_array();
 		}
 
 		public function get_distinct_cars(){
-			$this->db->order_by('name');
+			$this->db->order_by('car_description');
 			$this->db->group_by(array("cars.model", "cars.manufacturer"));
 			$query = $this->db->get('cars');
 			return $query->result_array();
@@ -34,7 +38,7 @@
 
 		public function create_car($car_image){
 			$data = array(
-				'name' => $this->input->post('car-name'),
+				'car_description' => $this->input->post('car-name'),
         'code_name' => $this->input->post('car-code-name'),
 				'model' => $this->input->post('car-model-name'),
         'manufacturer' => $this->input->post('car-manufacturer'),
@@ -52,7 +56,7 @@
 
 		public function update_car(){
 			$data = array(
-				'name' => $this->input->post('car-name'),
+				'car_description' => $this->input->post('car-name'),
 				'code_name' => $this->input->post('car-code-name'),
 				'model' => $this->input->post('car-model-name'),
 				'manufacturer' => $this->input->post('car-manufacturer'),

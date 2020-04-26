@@ -1,214 +1,200 @@
 <title><?= $title ;?></title>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
-
-
-  </script>
-
-
-<?php echo form_open_multipart('bookings/create'); ?>
-<!-- hidden fields -->
-
-<div class="row">
-  <div class="col-lg-6 col-sm-12 mt-3">
-    <div class="card">
-      <div class="card-header">
-        <h5><?= $title ;?></h5>
-      </div>
-      <div class="card-body">
-        <div class="row mt-2 text-center">
-          <div class="col">
-            <h1 id="for_total_rent">₱0.00</h1>
-            <small>Total rent to pay in Pesos</small>
-          </div>
-        </div>
-        <div class="row mt-2">
-          <div class="col-lg-8 col-sm-12">
-            <label>Start Date</label>
-            <input id="start_date" class="form-control col-12" name="start_date" type="text">
-          </div>
-          <div class="col-lg-4 col-sm-12">
-            <label>Number of days</label>
-            <input id="number_of_days" type="number" min="1" class="form-control" name="number_of_days" value="1">
-          </div>
-        </div>
-      <div class="row">
-      	<div id="for_car_id" class="col">
-          <label>Select vehicle</label>
-          <select id="carId" name="carId" class="form-control <?php echo (count($cars)==0)?'is-invalid':'';?>">
-            <option value="0">-</option>
-            <?php foreach ($cars as $car): ?>
-             <option value="<?php echo $car['Id'];?>"><?php echo $car['code_name'].' ('.$car['plate_number'].')';?></option>
-           <?php endforeach; ?>
-          </select>
-          <?php if(count($cars)==0):?>
-            <div class="invalid-feedback">Vehicles are fully-booked on this date.</div>
-          <?php endif; ?>
-      	</div>
-      </div>
-        <div class="row mt-2">
-          <div class="col">
-            <div class="checkbox">
-                <input id="add_driver" name="add_driver" type="checkbox"> Client need driver? Add ₱<?php echo number_format($driver_pay['value'],2);?> per day</label>
-            </div>
-          </div>
-        </div>
-        <div class="row mt-2">
-          <div class="col">
-            <label>Driver name (Optional)</label>
-            <input type="text" class="form-control" name="driver_name">
-          </div>
-        </div>
-        <div class="row mt-2">
-          <div class="col-lg-8 col-sm-12">
-            <label>Discount amount (Optional)</label>
-            <input type="number" min="0" value="0" class="form-control" id="discount" name="discount">
-          </div>
-          <div class="col-lg-4 col-sm-12">
-            <label> </br></label>
-            <input type="button" class="form-control btn-success" id="btnCompute" value="Compute">
-          </div>
-        </div>
-        <div class="row mt-3">
-          <div class="col">
-            <label>Select client</label>
-            <select name="clientId" class="form-control">
-              <option value="0">-</option>
-              <?php foreach ($clients as $client): ?>
-               <option value="<?php echo $client['Id'];?>"><?php echo $client['name'];?></option>
-             <?php endforeach; ?>
-            </select>
-          </div>
-        </div>
-        <div class="row mt-2">
-          <div class="col">
-            <label>Remarks</label>
-            <input type="text" class="form-control" name="remarks">
-          </div>
-        </div>
-        <div class="row pt-3">
-          <div class="col">
-            <label>Multiple Attachments (Receipts etc.)</label></br>
-            <input type="file" name="multiplefiles[]" multiple="">
-          </div>
-        </div>
-      <div class="pt-3">
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <a href="<?php echo base_url()?>bookings/index" class="btn btn-danger">Cancel</a>
-      </div>
-      </div> <!-- end of card body -->
+<div>
+  <div class="row">
+    <div class="col-lg-8 col-sm-12">
+      <h2><?= $title ;?></h2>
     </div>
-  </div>
-
-  <div class="col-lg-6 col-sm-12 mt-3">
-    <div class="card">
-      <div class="card-header">
-        <h5>Transaction logs</h5>
-      </div>
-      <div class="card-body">
-        <p>No transaction logs to show</p>
-      </div>
+    <div class="col">
+      <a href="<?php echo base_url()?>bookings/index" class="btn btn-info btn-md pull-right col-lg-auto col-sm-12"><i class="fa fa-arrow-left"></i> Back to list</a>
     </div>
   </div>
 </div>
+<?php echo form_open('bookings/create'); ?>
+<!-- hidden fields -->
+<div class="card p-4 bg-light">
+  <div class="row">
+    <div class="col-lg-3 col-sm-12 mt-3">
+      <label>Select client</label>
+      <select name="clientId" class="form-control">
+        <option value="">-</option>
+        <?php foreach ($clients as $client): ?>
+         <option value="<?php echo $client['Id'];?>" <?php echo ($this->session->userdata('booking_client_id')==$client['Id']?'selected="selected"':'');?> ><?php echo $client['name'];?></option>
+       <?php endforeach; ?>
+      </select>
+      <div class="text-danger"><?php echo form_error('clientId'); ?></div>
+    </div>
+    <div class="col-lg-4 col-sm-12 mt-3">
+      <label>Driver Add-on</label>
+      <div class="checkbox">
+        <input name="add_driver" type="checkbox" <?php echo ($this->session->userdata('booking_add_driver')==true?'checked':''); ?>>Add ₱<?php echo number_format($driver_pay['value'],2);?> per day for a driver</label>
+      </div>
+    </div>
+    <div class="col-lg-3 col-sm-12 mt-3">
+      <label>Start Date</label>
+      <input class="form-control col-12" name="start_date" type="date" min="<?php echo date("Y-m-d");?>" value="<?php echo $this->session->userdata('booking_start_date'); ?>">
+    </div>
+    <div class="col-lg-1 col-sm-12 mt-3">
+      <label>Days</label>
+      <input type="number" min="1" class="form-control" name="number_of_days" value="<?php echo $this->session->userdata('booking_days'); ?>">
+    </div>
+  </div>
+    <div class="text-center">
+      <button type="submit" class="btn btn-md btn-primary col-lg-3 col-sm-12 mt-3" id="btnSearch"><i class="fa fa-search"></i> Search available vehicles</button>
+    </div>
+</div>
 </form>
+<?php if(count($cars)<1):?>
+  <div class="bg-light border rounded text-center text-lg text-center p-3">
+    <h5>Vehicles are fully-booked on the chosen date</h5>
+  </div>
+  </hr>
+<?php else:?>
+  <div class="bg-light border border-bottom-0 rounded  text-center text-lg text-center p-3">
+    <h5><?php echo count($cars).' vehicle(s) available for rent on <u>'.$this->session->userdata('booking_start_date').'</u> to <u>'.date('Y-m-d', strtotime($this->session->userdata('booking_start_date'). ' + '.$this->session->userdata('booking_days').' days')).'</u>';?></h5>
+  </div>
+  <div class="card bg-light p-4">
+    <div class="album">
+        <div class="container">
+          <div class="row">
+            <?php foreach($cars as $car) : ?>
+              <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                  <a data-toggle="modal" href="#exampleModal" title="Click image to view full image" data-filepath="<?php echo base_url()."assets/images/cars_images/".$car['file_name']; ?>">
+                    <img class="img-fluid img-thumbnail d-block" style="width:400px;height:300px;object-fit: cover;" src="<?php echo base_url()."assets/images/cars_images/".$car['file_name']; ?>">
+                  </a>
+                  <!--img class="img-fluid img-thumbnail" height="100%" width="100%" src="<?php echo base_url()."assets/images/cars_images/".$car['car_image_path']; ?>" -->
+                  <div class="card-body">
+                  <h4><?php echo $car['manufacturer']." ".$car['model']." (".$car['year'].")"; ?></h4>
+                    <p class="card-text">With a maximum capacity of <b><?php echo $car['Capacity']; ?> persons</b> including driver. Drive now for a minimum rent of <b>₱<?php echo number_format($car['RentPerDay'],2); ?></b> for 24 hours.</p>
+                    <div>
+                      <a data-toggle="modal" href="#rentModal" class="btn btn-md btn-success form-control" data-selectedcar="<?php echo $car['Id'].'|'.$car['RentPerDay'].'|'.$this->session->userdata('booking_days').'|'.$this->session->userdata('booking_add_driver').'|'.$driver_pay['value'];?>" href="<?php echo base_url()?>pages/estimate/<?php echo $car['Id']?>" role="button"><i class="fa fa-hand-rock-o"></i> Rent this!</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <?php endforeach; ?>
+        </div>
+      </div>
+    </div>
+  </div>
+<?php endif;?>
 
-<script type='text/javascript'>
 
-  //set minimum date today
-  function setStartDate() {
-    //var date = new Date('2020-04-01');
-    var date = new Date();
-    var dd = date.getDate();
-    var mm = date.getMonth()+1; //January is 0!
-    var yyyy = date.getFullYear();
-    today = (mm>9?'':'0')+mm+"/"+dd+"/"+yyyy;
-    document.getElementById("start_date").setAttribute("min", today);
-    document.getElementById("start_date").setAttribute("value", today);
-  }
+<!-- start of modal popup -->
+<div class="modal fade" role="dialog" id="exampleModal" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Full Image</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+            <div id="ImageContainer">
+            </div>
+          </div> <!-- end of modal body -->
+      </div> <!-- end of modal content -->
+    </div>
+</div> <!-- end of modal popup -->
 
 
-  $(document).ready(function() {
-      $('#btnCompute').click(function(e) {
-        var selectedCar = document.getElementById("carId");
-          var driver=$('#add_driver').is(":checked")
-          e.preventDefault();
-          $.ajax({
-              method: "post",
-              url: "<?php echo base_url(); ?>bookings/computeRent",
-              data: {
-                      no_of_days: document.getElementById('number_of_days').value,
-                      car_id: selectedCar.options[selectedCar.selectedIndex].value,
-                      add_driver: driver,
-                      discount: document.getElementById('discount').value
-                  },
-              dataType: "html",
-              context: document.body,
-              success: function (response){
-                var myhtml='<h1 id="for_total_rent">₱'+response+'</h1>';
-                  $('#for_total_rent').html(myhtml);
-              }
-          });
-      })
+<!-- start of modal popup -->
+<div class="modal fade" role="dialog" id="rentModal" tabindex="-1"  aria-labelledby="rentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="rentModalLabel">Booking Reservation</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+            <?php echo form_open_multipart('bookings/create'); ?>
+              <div class="row mt-2 text-center">
+                <div class="col">
+                  <h1 id="for_total_rent">₱0.00</h1>
+                  <small>Total rent to pay in Pesos</small>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-lg-6 col-sm-12">
+                  <label>Downpayment</label>
+                  <input type="number" min="0" value="0" class="form-control" id="downpayment" name="downpayment" value="<?php echo set_value('downpayment'); ?>">
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                  <label>Discount (Optional)</label>
+                  <input type="number" min="0" value="0" class="form-control" id="discount" name="discount" value="<?php echo set_value('discount'); ?>">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <label>Driver name (Optional)</label>
+                  <input type="text" class="form-control" name="driver_name" value="<?php echo set_value('driver_name'); ?>">
+                </div>
+              </div>
+              <div class="row mt-2">
+                <div class="col">
+                  <label>Remarks (Optional)</label>
+                  <input type="text" class="form-control" name="remarks" value="<?php echo set_value('remarks'); ?>">
+                </div>
+              </div>
+              <div class="row pt-3">
+                <div class="col">
+                  <label>Multiple attachments (Receipts etc.)</label></br>
+                  <input type="file" name="multiplefiles[]" multiple="">
+                </div>
+              </div>
+              <div class="pt-3">
+                <button type="submit" class="btn btn-primary form-control" id="btnSubmit">Submit</button>
+              </div>
+              <!-- hidden fields -->
+              <input type="hidden" name="clientId" value="<?php echo $this->session->userdata('booking_client_id'); ?>">
+              <input type="hidden" name="start_date" value="<?php echo $this->session->userdata('booking_start_date'); ?>">
+              <input type="hidden" name="clientId" value="<?php echo $this->session->userdata('booking_client_id'); ?>">
+              <input type="hidden" name="number_of_days" value="<?php echo $this->session->userdata('booking_days'); ?>">
+              <input type="hidden" name="add_driver" value="<?php echo $this->session->userdata('booking_add_driver'); ?>">
+              <div class="d-none" id="forcarId" name="carId">
+                <input type="hidden" name="carId" value="<?php echo $this->session->userdata('booking_client_id'); ?>">
+              </div>
+            </form>
+          </div> <!-- end of modal body -->
+      </div> <!-- end of modal content -->
+    </div>
+</div> <!-- end of modal popup -->
+
+
+<script type="text/javascript">
+function thousands_separators(num)
+{
+  var num_parts = num.toString().split(".");
+  num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return num_parts.join(".");
+}
+
+  $('#exampleModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      var file_path = button.data('filepath')
+      var modal = $(this);
+      var htmlText='<img style="width:100%;height=100%;object-fit:contain;" src="'+file_path+'">';
+      document.getElementById("ImageContainer").innerHTML=htmlText;
   });
 
-  $( function() {
-    $("#start_date")
-    .datepicker()
-    .on("change", function() {
-      $.ajax({
-          method: "post",
-          url: "<?php echo base_url(); ?>bookings/get_available_vehicles",
-          data: {
-                  start_date: document.getElementById('start_date').value,
-                  number_of_days: document.getElementById('number_of_days').value
-              },
-          dataType: "html",
-          context: document.body,
-          success: function (response){
-            var obj = JSON.parse(response);
-            var myhtml='<label>Select vehicle</label> <select id="carId" name="carId" class="form-control '+((obj.length==0)?'is-invalid':'')+'"> <option value="0">-</option>';
-            for(var i=0;i<obj.length;i++){
-              myhtml=myhtml+"<option value="+obj[i].Id+">"+obj[i].code_name+" ("+obj[i].plate_number+")"+"</option>";
-            }
-            myhtml=myhtml+"</select>";
-            if(obj.length==0){
-              myhtml=myhtml+'<div class="invalid-feedback">Vehicles are fully-booked on this date.</div>';
-            }
-            $('#for_car_id').html(myhtml);
-          }
-      });
-    });
+  $('#rentModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      var selectedcarId = button.data('selectedcar').toString();
+      var splitted = selectedcarId.split('|');
+      var modal = $(this);
+      var htmlTextForCarId='<input type="hidden" name="carId" value="'+splitted[0]+'">';
+      document.getElementById("forcarId").innerHTML=htmlTextForCarId;
+      if(splitted[3]){
+        var driverCost = parseFloat(splitted[4])*parseFloat(splitted[2]);
+      }else{
+        var driverCost=0;
+      }
+      var htmlTextForTotalRent='₱'+thousands_separators(((parseFloat(splitted[1])*parseFloat(splitted[2]))+driverCost).toFixed(2));
+      document.getElementById("for_total_rent").innerHTML=htmlTextForTotalRent;
 
-    $("#number_of_days")
-    .on("change", function() {
-      $.ajax({
-          method: "post",
-          url: "<?php echo base_url(); ?>bookings/get_available_vehicles",
-          data: {
-                  start_date: document.getElementById('start_date').value,
-                  number_of_days: document.getElementById('number_of_days').value
-              },
-          dataType: "html",
-          context: document.body,
-          success: function (response){
-            var obj = JSON.parse(response);
-            var myhtml='<label>Select vehicle</label> <select id="carId" name="carId" class="form-control '+((obj.length==0)?'is-invalid':'')+'"> <option value="0">-</option>';
-            for(var i=0;i<obj.length;i++){
-              myhtml=myhtml+"<option value="+obj[i].Id+">"+obj[i].code_name+" ("+obj[i].plate_number+")"+"</option>";
-            }
-            myhtml=myhtml+"</select>";
-            if(obj.length==0){
-              myhtml=myhtml+'<div class="invalid-feedback">Vehicles are fully-booked on this date.</div>';
-            }
-            $('#for_car_id').html(myhtml);
-          }
-      });
-    });
   });
-
-
-  window.onload = setStartDate();
 
 </script>

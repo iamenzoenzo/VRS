@@ -58,17 +58,33 @@
 				$this->BookingLogs_model->create_log($BookingId,'applied a discount amount of '.$this->input->post('discount'),$this->session->userdata('user_id'));
 			}
 
-			return true;
+			if(!empty($this->input->post('downpayment'))){
+				$this->BookingPayments_model->create_payment($BookingId,$this->input->post('downpayment'),$this->input->post('remarks'),$this->session->userdata('user_id'),'');
+			}
+
+			return $BookingId;
 		}
 
-    public function update_status(){
+    public function update_booking(){
+
+			$startDate = $this->input->post('start_date');
+			$BookingId = $this->input->post('bookingid');
+
       $data = array(
-				'label' => $this->input->post('label'),
-				'Is_Active' => (($this->input->post('is_active_checkbox')=='on') ? 1 : 0)
+        //'carId' => $startDate,
+        //'start_date' => $this->input->post('start_date'),
+				//'end_date' => date('Y-m-d', strtotime($startDate. ' + '.$NumberOfDays.' days')),
+        //'number_of_days' => $NumberOfDays,
+				'add_driver' => (($this->input->post('add_driver')=='on') ? 1 : 0),
+				'driver_name' => $this->input->post('driver_name'),
+				//'rental_discount' => $this->input->post('discount'),
+        'statusId' => $this->input->post('status_id')
       );
 
-      $this->db->where('Id', $this->input->post('id'));
-      return $this->db->update('status', $data);
+      $this->db->where('BookingId', $BookingId);
+			$this->db->update('clientbookings', $data);
+			$this->BookingLogs_model->create_log($BookingId,'updated this booking',$this->session->userdata('user_id'));
+      return true;
     }
 
 		public function delete_booking($id){

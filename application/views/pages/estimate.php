@@ -2,10 +2,10 @@
 
 <div class="row">
   <div class="col">
-    <h2><?php echo $title ?></h2>
+    <h2><i class="fa fa-money"></i> <?php echo $title ?></h2>
   </div>
   <div class="float-right pl-3">
-    <a href="<?php echo base_url(); ?>cars/index" class="btn btn-primary">Back to available vehicles</a>
+    <a href="<?php echo base_url(); ?>cars/index" class="btn btn-info"><i class="fa fa-arrow-left"></i> Back to list</a>
   </div>
 </div>
 
@@ -31,7 +31,7 @@
                 <select name="carId" id="carId" class="form-control">
                   <option value="0">-</option>
                 <?php foreach ($cars as $car): ?>
-                  <option <?php echo isset($SelectedCar)?(($car['Id']==$SelectedCar['Id'])?'selected="selected"':''):''; ?> value="<?php echo $car['Id'];?>"><?php echo $car['name'].' (₱'.number_format($car['RentPerDay'],2).' per day)';?></option>
+                  <option <?php echo isset($SelectedCar)?(($car['Id']==$SelectedCar['Id'])?'selected="selected"':''):''; ?> value="<?php echo $car['Id'];?>"><?php echo $car['car_description'].' (₱'.number_format($car['RentPerDay'],2).' per day)';?></option>
                 <?php endforeach; ?>
                 </select>
               </div>

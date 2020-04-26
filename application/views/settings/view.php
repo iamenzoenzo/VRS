@@ -4,7 +4,7 @@
     <h2><?= $title; ?></h2>
   </div>
     <div class="float-right pl-3">
-      <a href="<?php echo base_url(); ?>settings/index" class="btn btn-primary">Back to list</a>
+      <a href="<?php echo base_url(); ?>settings/index" class="btn btn-info"><i class="fa fa-arrow-left"></i> Back to list</a>
     </div>
 </div>
 
@@ -40,6 +40,6 @@
     </div>
   </div>
 <div>
-	<a href="<?php echo base_url()?>settings/edit/<?php echo $settings['Id']; ?>" class="btn btn-warning">Edit</a>
-  <a href="<?php echo base_url(); ?>settings/delete/<?php echo $settings['Id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this setting?')">Delete</a>
+	<a href="<?php echo base_url()?>settings/edit/<?php echo $settings['Id']; ?>" class="btn btn-warning"><i class="fa fa-pencil-square-o"></i> Edit</a>
+  <a href="<?php echo base_url(); ?>settings/delete/<?php echo $settings['Id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this setting?')"><i class="fa fa-trash-o"></i> Delete</a>
 </div>

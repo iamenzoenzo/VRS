@@ -24,8 +24,8 @@
 			$data['title'] = 'Add New User';
 			$this->form_validation->set_rules('fname', 'First Name', 'required');
       $this->form_validation->set_rules('lname', 'Last Name', 'required');
-      $this->form_validation->set_rules('email', 'Email', 'required');
-      $this->form_validation->set_rules('username', 'Username', 'required');
+      $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+      $this->form_validation->set_rules('username', 'Username', 'required|is_unique[users.username]');
       $this->form_validation->set_rules('password', 'Password', 'required');
       $this->form_validation->set_rules('user_type', 'User Type', 'required');
 
