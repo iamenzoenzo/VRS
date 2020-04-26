@@ -37,18 +37,33 @@ date_default_timezone_set('Asia/Manila');
 
 		}
 
-		public function report(){
+		public function report($use_session=false){
 			if(!$this->session->userdata('logged_in')){
 				redirect('users/login');
 			}
 
 			$data['title'] = 'Bookings';
 
-			$start_date = date("Y-m-".'01');
-			$end_date = date('Y-m-t');
+			if($use_session==false){
+				$start_date = date("Y-m-".'01');
+				$end_date = date('Y-m-t');
+				$carid=null;
+				$user_data = array(
+					'report_start_date' => $start_date,
+					'report_end_date' => $end_date,
+					'report_car_id' => $carid
+				);	
+				$this->session->set_userdata($user_data);
+			}else{
+				$start_date = $this->session->userdata('report_start_date');
+				$end_date = $this->session->userdata('report_end_date');
+				$carid = $this->session->userdata('report_car_id');
+			}
 
-			$data['bookings'] = $this->Booking_model->get_bookings_report($start_date,$end_date);
-			$data['filter'] = $this->input->post('name_filter');
+
+
+			$data['cars'] = $this->Car_model->get_cars(null);
+			$data['bookings'] = $this->Booking_model->get_bookings_report($start_date,$end_date,$carid);
 
 			$this->load->view('templates/header');
 			$this->load->view('bookings/report', $data);
@@ -56,6 +71,17 @@ date_default_timezone_set('Asia/Manila');
 
 		}
 
+		public function filter(){
+			$user_data = array(
+				'report_start_date' => $this->input->post('report_start_date'),
+				'report_end_date' => $this->input->post('report_end_date'),
+				'report_car_id' => $this->input->post('report_car_id')
+			);
+
+			$this->session->set_userdata($user_data);
+
+			redirect('bookings/report/'.true);
+		}
 		public function create(){
 			if(!$this->session->userdata('logged_in')){
 				redirect('users/login');
