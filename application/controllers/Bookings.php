@@ -42,7 +42,7 @@ date_default_timezone_set('Asia/Manila');
 				redirect('users/login');
 			}
 
-			$data['title'] = 'Report';
+			$data['title'] = 'Vehicle Earnings Report';
 
 			if($use_session==false){
 				$start_date = date("Y-m-".'01');
@@ -63,7 +63,9 @@ date_default_timezone_set('Asia/Manila');
 
 
 			$data['cars'] = $this->Car_model->get_cars(null);
+			$data['selectedcar'] = $this->Car_model->get_cars($carid);
 			$data['bookings'] = $this->Booking_model->get_bookings_report($start_date,$end_date,$carid);
+
 
 			$this->load->view('templates/header');
 			$this->load->view('bookings/report', $data);
