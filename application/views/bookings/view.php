@@ -5,7 +5,7 @@
       <h2><?= $title ;?></h2>
     </div>
     <div class="col">
-      <a href="<?php echo base_url()?>bookings/index" class="btn btn-info btn-md pull-right col-lg-auto col-sm-12"><i class="fa fa-arrow-left"></i> Back to list</a>
+      <a href="<?php echo base_url()?>bookings/index" class="btn btn-info btn-md pull-right col-lg-auto col-sm-12 d-print-none"><i class="fa fa-arrow-left"></i> Back to list</a>
     </div>
   </div>
 </div>
@@ -125,8 +125,8 @@
             <div class="row mt-2">
               <div class="col">
                 <?php if($this->session->userdata('logged_in')): ?>
-                  <a href="<?php echo base_url(); ?>bookings/edit/<?php echo $bookings['BookingId']; ?>" class="btn btn-warning"><i class="fa fa-pencil-square-o"></i> Edit</a>
-                  <a href="<?php echo base_url(); ?>bookings/delete/<?php echo $bookings['BookingId']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this booking?')"><i class="fa fa-trash-o"></i> Delete</a>
+                  <a href="<?php echo base_url(); ?>bookings/edit/<?php echo $bookings['BookingId']; ?>" class="btn btn-warning d-print-none"><i class="fa fa-pencil-square-o"></i> Edit</a>
+                  <a href="<?php echo base_url(); ?>bookings/delete/<?php echo $bookings['BookingId']; ?>" class="btn btn-danger d-print-none" onclick="return confirm('Are you sure you want to delete this booking?')"><i class="fa fa-trash-o"></i> Delete</a>
                 <?php endif; ?>
               </div>
             </div>
@@ -166,7 +166,7 @@
       </div>
       <div class="row mt-3">
         <div class="col">
-          <a class="btn btn-primary float-right"data-toggle="modal" href="#paymentModal"><i class="fa fa-credit-card"></i> Add Payment</a>
+          <a class="btn btn-primary float-right d-print-none"data-toggle="modal" href="#paymentModal"><i class="fa fa-credit-card"></i> Add Payment</a>
         </div>
       </div>
 
@@ -206,7 +206,7 @@
 </div>
   </div>
 
-  <div class="row mt-3">
+  <div class="row mt-3 d-print-none">
     <div class="col">
       <h5>Attachments</h5>
       <table class="table table-bordered table-striped">

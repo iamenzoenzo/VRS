@@ -54,16 +54,18 @@ date_default_timezone_set('Asia/Manila');
 					'report_car_id' => $carid
 				);
 				$this->session->set_userdata($user_data);
+				$data['selectedcar'] = null;
 			}else{
 				$start_date = $this->session->userdata('report_start_date');
 				$end_date = $this->session->userdata('report_end_date');
 				$carid = $this->session->userdata('report_car_id');
+				$data['selectedcar'] = $this->Car_model->get_cars($carid);
 			}
 
 
 
 			$data['cars'] = $this->Car_model->get_cars(null);
-			$data['selectedcar'] = $this->Car_model->get_cars($carid);
+
 			$data['bookings'] = $this->Booking_model->get_bookings_report($start_date,$end_date,$carid);
 
 
