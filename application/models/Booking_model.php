@@ -4,20 +4,22 @@
 			$this->load->database();
 		}
 
-		public function get_bookings($id){
+		public function get_bookings($id,$filter='VRS-2004391WR'){
 			if(isset($id)){
 				$this->db->join('status a', 'a.Id=clientbookings.statusId', 'inner');
 				$this->db->join('cars b', 'b.Id=clientbookings.carId', 'inner');
 				$this->db->join('clients c', 'c.Id=clientbookings.clientId', 'inner');
 				$this->db->order_by("clientbookings.BookingId", "desc");
-        $query=$this->db->get_where('clientbookings', array('clientbookings.BookingId' => $id));
+				$query=$this->db->get_where('clientbookings', array('clientbookings.BookingId' => $id));
         return $query->row_array();
       }else {
 				$this->db->join('status a', 'a.Id=clientbookings.statusId', 'inner');
 				$this->db->join('cars b', 'b.Id=clientbookings.carId', 'inner');
 				$this->db->join('clients c', 'c.Id=clientbookings.clientId', 'inner');
-				$this->db->order_by("clientbookings.BookingId", "desc");
+				$this->db->where("clientbookings.reference_number LIKE '%".$filter."%' OR c.name LIKE '%".$filter."%'");
 				$query=$this->db->get('clientbookings');
+				$this->db->order_by("clientbookings.BookingId", "desc");
+				//$query=$this->db->get('clientbookings');
   			return $query->result_array();
       }
 		}

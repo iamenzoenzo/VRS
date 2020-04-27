@@ -7,9 +7,14 @@ date_default_timezone_set('Asia/Manila');
 				redirect('users/login');
 			}
 
+			if(empty($this->session->userdata('booking_filter'))){
+				$filter="";
+			}else{
+				$filter = $this->session->userdata('booking_filter');
+			}
+
 			$data['title'] = 'Bookings';
-			$data['bookings'] = $this->Booking_model->get_bookings(null);
-			$data['filter'] = $this->input->post('name_filter');
+			$data['bookings'] = $this->Booking_model->get_bookings(null,$filter);
 
 			$this->load->view('templates/header');
 			$this->load->view('bookings/index', $data);
@@ -85,6 +90,16 @@ date_default_timezone_set('Asia/Manila');
 			$this->session->set_userdata($user_data);
 
 			redirect('bookings/report/'.true);
+		}
+
+		public function filter_index(){
+			$user_data = array(
+				'booking_filter' => $this->input->post('filter')
+			);
+
+			$this->session->set_userdata($user_data);
+
+			redirect('bookings/index');
 		}
 
 		public function filter_clear(){

@@ -1,6 +1,6 @@
 <title><?= $title; ?></title>
 
-<?php echo form_open('bookings/index'); ?>
+<?php echo form_open('bookings/filter_index'); ?>
   <div class="row">
     <div class="col mt-2">
       <h2><?= $title; ?></h2>
@@ -8,7 +8,7 @@
     <div class="col-lg-6 mt-2">
       <div class="row pr-3">
         <div class="col">
-          <input class="form-control col-lg-auto" name="name_filter" value="<?= $filter;?>" type="search" placeholder="Search" aria-label="Search">
+          <input class="form-control col-lg-auto" name="filter" value="<?php echo $this->session->userdata('booking_filter');?>" type="search" placeholder="Type reference number or client name" aria-label="Search">
         </div>
         <div>
           <button class="btn btn-outline-success col-lg-auto" type="submit"> <i class="fa fa-search"></i>Search</button>
