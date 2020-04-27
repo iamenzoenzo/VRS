@@ -29,11 +29,11 @@
     <?php $totalIncome=0;$counter=0; foreach ($bookings as $booking):?>
         <!--tr class='clickable-row' title="Click to view this booking" data-href="<?php echo base_url().'bookings/view/'.$booking['BookingId'];?>" -->
         <tr>
-        <td><?php $totalIncome+=($booking['rental_fee_current']*$booking['TotalDays']); $counter++; echo $counter ;?></td>
+        <td><?php $totalIncome+=($booking['Income']); $counter++; echo $counter ;?></td>
         <td><?php echo $booking['code_name'].' <small>('.$booking['plate_number'].')</small>';?></td>
         <td class="text-center"><?php echo $booking['NumberOfBooking'] ;?></td>
         <td class="text-center"><?php echo $booking['TotalDays'] ;?></td>
-        <td class="text-right"><?php echo '₱'.number_format($booking['rental_fee_current']*$booking['TotalDays'],2) ;?></td>
+        <td class="text-right"><?php echo '₱'.number_format($booking['Income'],2) ;?></td>
         </tr>
     <?php endforeach;?>
     <?php if($counter==0):?>
