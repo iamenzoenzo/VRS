@@ -102,14 +102,9 @@
     }
 
 		public function delete_booking($id){
-			$images=$this->BookingImage_model->get_images(null,$id);
-			foreach ($images as $key) {
-				$path_to_file = './assets/images/client_bookings_images/'.$key['file_name'];
-				$this->File_model->delete_photo_from_directory($path_to_file);
-				if(unlink($path_to_file)) {
-				     $this->BookingImage_model->delete_booking_photo($key['Id']);
-				}
-			}
+			$this->BookingImage_model->delete_booking_photo_by_booking_id($id);
+			$this->BookingLogs_model->delete_logs_by_booking_id($id);
+			$this->BookingPayments_model->delete_payments_by_booking_id($id);
 			$this->db->where('bookingid', $id);
 			$this->db->delete('clientbookings');
 			return true;

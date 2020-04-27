@@ -30,7 +30,7 @@
       <th scope="col-4">Vehicle</th>
       <th scope="col">Start Date</th>
       <th scope="col">End Date</th>
-      <th scope="col"># of days</th>
+      <th scope="col" class="text-center">Days</th>
       <th scope="col">Total Rent</th>
       <th scope="col">Status</th>
       <th scope="col">Actions</th>
@@ -46,7 +46,7 @@
         <td><?php echo '<b>'.$booking['code_name'].'</b></br><small>Plate#: '.$booking['plate_number'].'</br>Rent per day: ₱'.number_format($booking['RentPerDay'],2).'</small>' ;?></td>
         <td><?php echo $booking['start_date'] ;?></td>
         <td><?php echo $booking['end_date'] ;?></td>
-        <td><?php echo $booking['number_of_days'] ;?></td>
+        <td class="text-center"><?php echo $booking['number_of_days'] ;?></td>
         <td><?php echo '₱'.number_format(($booking['number_of_days'] * $booking['driver_fee_current'])+($booking['number_of_days'] * $booking['rental_fee_current'])-($booking['rental_discount']),2) ;?></td>
         <td class="bg-<?php echo $booking['bootstrap_bg_color'];?>"><?php echo $booking['label'] ;?></td>
         <td>

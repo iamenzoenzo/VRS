@@ -24,12 +24,25 @@
 			return $query->result_array();
 		}
 
-public function get_payments_sum_by_booking_id($bookingId){
+		public function get_payments_sum_by_booking_id($bookingId){
 			$this->db->select_sum('amount');
 			$this->db->from('clientbookingspayments');
 			$this->db->where('Booking_Id',$bookingId);
 			$query = $this->db->get();
 			return $query->row()->amount;
+		}
+
+		public function delete_payments_by_booking_id($id){
+			$payments = $this->get_payments_by_booking_id($id);
+			foreach ($payments as $payment) {
+				$path_to_file = './assets/images/client_bookings_payments/'.$payment['attachment_path'];
+				$this->db->where('PaymentId', $payment['PaymentId']);
+				$this->db->delete('clientbookingspayments');
+				$affectedRows=$this->db->affected_rows();
+				if($affectedRows>0){
+					$this->File_model->delete_photo_from_directory($path_to_file);
+				}
+			}
 		}
 
 
