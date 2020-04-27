@@ -10,7 +10,7 @@
     </div>
   </div>
 </div>
-<?php echo form_open('bookings/update/'.$booking['BookingId']); ?>
+<?php echo form_open('bookings/update'); ?>
   <div class="card p-4 bg-light mt-2">
     <div class="row">
       <div class="col">
@@ -67,7 +67,7 @@
       </div>
       <div class="col-lg-4 col-sm-12 mt-3">
         <small>Rental fee (Per day)</small>
-        <input type="number" class="form-control" name="rental_fee_current" value="<?php echo $booking['rental_fee_current']; ?>">
+        <input type="number" class="form-control" name="rental_fee_current" value="<?php echo $this->session->userdata('booking_rental_fee_current'); ?>">
       </div>
       <div class="col-lg-4 col-sm-12 mt-3">
         <small>Discount (Optional)</small>
@@ -98,7 +98,7 @@
           <div class="row">
             <?php foreach($cars as $car) : ?>
               <div class="col-md-4">
-                <div class="card mb-4 shadow-sm <?php echo ($car['Id']==$booking['carId']?'border-success':'border-danger') ?>">
+                <div class="card mb-4 shadow-sm <?php echo ($car['Id']==$this->session->userdata('booking_car_id')?'border-success':'border-danger') ?>">
                   <a data-toggle="modal" href="#exampleModal" title="Click image to view full image" data-filepath="<?php echo base_url()."assets/images/cars_images/".$car['file_name']; ?>">
                     <img class="img-fluid img-thumbnail d-block" style="width:400px;height:300px;object-fit: cover;" src="<?php echo base_url()."assets/images/cars_images/".$car['file_name']; ?>">
                   </a>
@@ -107,7 +107,9 @@
                   <h4><?php echo $car['manufacturer']." ".$car['model']." (".$car['year'].")"; ?></h4>
                     <p class="card-text">With a maximum capacity of <b><?php echo $car['Capacity']; ?> persons</b> including driver. Drive now for a minimum rent of <b>₱<?php echo number_format($car['RentPerDay'],2); ?></b> for 24 hours.</p>
                     <div>
-                      <a data-toggle="modal" href="#rentModal" class="btn btn-md <?php echo ($car['Id']==$booking['carId']?'btn-success':'btn-danger') ?> form-control" data-selectedcar="<?php echo $car['Id'].'|'.$car['RentPerDay'].'|'.$this->session->userdata('booking_days').'|'.$this->session->userdata('booking_add_driver').'|'.$driver_pay['value'];?>" href="<?php echo base_url()?>pages/estimate/<?php echo $car['Id']?>" role="button"><i class="fa fa-hand-rock-o"></i> <?php echo ($car['Id']==$booking['carId']?'Rent this! (Same vehicle)':'Rent this! (Replace vehicle)') ?></a>
+                      <a href="<?php echo base_url();?>bookings/select_new_car/<?php echo $car['Id'].'/'.$car['RentPerDay'];?>/<?php echo $booking['BookingId'];?>" role="button" class="<?php echo "btn form-control ".($car['Id']==$this->session->userdata('booking_car_id')?'btn-success':'btn-danger')?>">
+                      <?php echo ($car['Id']==$this->session->userdata('booking_car_id')?'<i class="fa fa-check-circle"></i> Chosen vehicle':'<i class="fa fa-times-circle"></i> Replace vehicle');?>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -142,11 +144,11 @@
 <div class="modal fade" role="dialog" id="changeDateModal" tabindex="-1"  aria-labelledby="changeDateModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-          <?php echo form_open('bookings/filter_edit'); ?>
+          <?php echo form_open('bookings/set_new_dates/'.$booking['BookingId']); ?>
             <div class="modal-header">
                 <h5 class="modal-title" id="changeDateModalLabel">Change booking dates</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
+                  <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
@@ -170,73 +172,6 @@
     </div>
 </div> <!-- end of change date modal popup -->
 
-
-<!-- start of modal popup -->
-<div class="modal fade" role="dialog" id="rentModal" tabindex="-1"  aria-labelledby="rentModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title" id="rentModalLabel">Booking Reservation</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-              </button>
-          </div>
-          <div class="modal-body">
-            <?php echo form_open_multipart('bookings/update'); ?>
-              <div class="row mt-2 text-center">
-                <div class="col">
-                  <h1 id="for_total_rent">₱0.00</h1>
-                  <small>Total rent to pay in Pesos</small>
-                </div>
-              </div>
-              <div class="row mt-3">
-                <div class="col-lg-6 col-sm-12">
-                  <label>Downpayment</label>
-                  <input type="number" min="0" value="0" class="form-control" id="downpayment">
-                </div>
-                <div class="col-lg-6 col-sm-12">
-                  <label>Discount (Optional)</label>
-                  <input type="number" min="0" value="<?php echo $booking['rental_discount']; ?>" class="form-control" id="discount" name="discount" value="<?php echo $booking['rental_discount']; ?>">
-                </div>
-              </div>
-              <div class="row">
-                <div class="col">
-                  <label>Driver name (Optional)</label>
-                  <input type="text" class="form-control" name="driver_name" value="<?php echo set_value('driver_name'); ?>">
-                </div>
-              </div>
-              <div class="row mt-2">
-                <div class="col">
-                  <label>Remarks (Optional)</label>
-                  <input type="text" class="form-control" name="remarks" value="<?php echo set_value('remarks'); ?>">
-                </div>
-              </div>
-              <div class="row pt-3">
-                <div class="col">
-                  <label>Multiple attachments (Receipts etc.)</label></br>
-                  <input type="file" name="multiplefiles[]" multiple="">
-                </div>
-              </div>
-              <div class="row pt-3">
-                <div class="col col-lg-auto col-sm-12">
-                    <button type="submit" class="btn btn-warning pull-center" id="btnSubmit"><i class="fa fa-floppy-o"></i> Save Edit</button>
-                </div>
-              </div>
-              <!-- hidden fields -->
-              <input type="hidden" name="clientId" value="<?php echo $this->session->userdata('booking_client_id'); ?>">
-              <input type="hidden" name="start_date" value="<?php echo $this->session->userdata('booking_start_date'); ?>">
-              <input type="hidden" name="number_of_days" value="<?php echo $this->session->userdata('booking_days'); ?>">
-              <input type="hidden" name="add_driver" value="<?php echo $this->session->userdata('booking_add_driver'); ?>">
-              <div class="d-none" id="forcarId" name="carId">
-              <input type="hidden" name="carId" value="<?php echo $this->session->userdata('booking_client_id'); ?>">
-              </div>
-            </form>
-          </div> <!-- end of modal body -->
-      </div> <!-- end of modal content -->
-    </div>
-</div> <!-- end of modal popup -->
-
-
 <script type="text/javascript">
 
   function thousands_separators(num)
@@ -254,21 +189,5 @@
       document.getElementById("ImageContainer").innerHTML=htmlText;
   });
 
-  $('#rentModal').on('show.bs.modal', function (event) {
-      var button = $(event.relatedTarget) // Button that triggered the modal
-      var selectedcarId = button.data('selectedcar').toString();
-      var splitted = selectedcarId.split('|');
-      var modal = $(this);
-      var htmlTextForCarId='<input type="hidden" name="carId" value="'+splitted[0]+'">';
-      document.getElementById("forcarId").innerHTML=htmlTextForCarId;
-      if(splitted[3]){
-        var driverCost = parseFloat(splitted[4])*parseFloat(splitted[2]);
-      }else{
-        var driverCost=0;
-      }
-      var htmlTextForTotalRent='₱'+thousands_separators(((parseFloat(splitted[1])*parseFloat(splitted[2]))+driverCost).toFixed(2));
-      document.getElementById("for_total_rent").innerHTML=htmlTextForTotalRent;
-
-  });
 
 </script>

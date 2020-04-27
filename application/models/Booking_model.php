@@ -77,21 +77,21 @@
 
     public function update_booking(){
 
-			$startDate = $this->input->post('start_date');
+			$startDate = $this->session->userdata('booking_start_date');
 			$BookingId = $this->input->post('bookingid');
 
-      $data = array(
-        //'carId' => $startDate,
-        //'start_date' => $this->input->post('start_date'),
-				//'end_date' => date('Y-m-d', strtotime($startDate. ' + '.$NumberOfDays.' days')),
-        'number_of_days' => $NumberOfDays,
+			$data = array(
+				'carId' => $this->session->userdata('booking_car_id'),
+				'start_date' => $this->session->userdata('booking_start_date'),
+				'end_date' => date('Y-m-d', strtotime($startDate. ' + '.$this->session->userdata('booking_days').' days')),
+				'number_of_days' => $this->session->userdata('booking_days'),
 				'add_driver' => (($this->input->post('add_driver')=='on') ? 1 : 0),
 				'driver_name' => $this->input->post('driver_name'),
 				'driver_fee_current' => $this->input->post('driver_fee_current'),
-				'rental_fee_current' => $this->input->post('rental_fee_current'),
+				'rental_fee_current' => $this->session->userdata('booking_rental_fee_current'),
 				'rental_discount' => $this->input->post('rental_discount'),
-        'statusId' => $this->input->post('status_id')
-      );
+				'statusId' => $this->input->post('status_id')
+			);
 
       $this->db->where('BookingId', $BookingId);
 			$this->db->update('clientbookings', $data);

@@ -182,7 +182,7 @@ date_default_timezone_set('Asia/Manila');
 
 		}
 
-		public function edit($id,$change_date=false){
+		public function edit($id,$date_changed=false){
 			if(!$this->session->userdata('logged_in')){
 				redirect('users/login');
 			}
@@ -192,11 +192,14 @@ date_default_timezone_set('Asia/Manila');
 			$booking = $this->Booking_model->get_bookings($id);
 			$data['booking'] = $booking;
 
-			if($change_date==false){
+			if($date_changed==false){
 				$user_data = array(
-					'booking_client_id' => $booking['clientId'],
 					'booking_start_date' => date_format(date_create($booking['start_date']),"Y-m-d"),
-					'booking_days' => $booking['number_of_days']
+					'booking_days' => $booking['number_of_days'],
+					'booking_car_id' => $booking['carId'],
+					'booking_rental_fee_current' => $booking['rental_fee_current']
+					//'booking_rental_discount' => $booking['rental_discount'],
+					//'booking_driver_fee_current' => $booking['driver_fee_current'],
 				);
 				$this->session->set_userdata($user_data);
 			}
@@ -275,13 +278,22 @@ date_default_timezone_set('Asia/Manila');
 
 		}
 
-		public function filter_edit(){
+		public function select_new_car($carId,$rent,$BookingId){
 			$user_data = array(
-				'booking_start_date' => $this->input->post('booking_edit_start_date'),
-				'booking_days' => $this->input->post('booking_edit_number_of_days')
+				'booking_car_id' => $carId,
+				'booking_rental_fee_current' => $rent
 			);
 			$this->session->set_userdata($user_data);
-			redirect('bookings/edit/'.$this->input->post('edit_booking_id').'/'.true);
+			redirect('bookings/edit/'.$BookingId.'/'.true);
+		}
+
+		public function set_new_dates($BookingId){
+			$user_data = array(
+				'booking_start_date' => date_format(date_create($this->input->post('booking_edit_start_date')),"Y-m-d"),
+				'booking_days' => $this->input->post('booking_edit_number_of_days'),
+			);
+			$this->session->set_userdata($user_data);
+			redirect('bookings/edit/'.$BookingId.'/'.true);
 		}
 
 		public function addPayement(){
@@ -362,17 +374,17 @@ date_default_timezone_set('Asia/Manila');
 			}
 		}
 
-    public function update($id)
+    public function update($include_car_update=false)
 		{
 			if(!$this->session->userdata('logged_in')){
 				redirect('users/login');
 			}
 
-      $this->Booking_model->update_booking();
+      $this->Booking_model->update_booking($include_car_update);
       // Set message
       $this->session->set_flashdata('booking_updated', 'Booking has been updated');
 
-      redirect('bookings/view/'.$id);
+      redirect('bookings/view/'.$this->input->post('bookingid'));
     }
 
 		//delete booking
