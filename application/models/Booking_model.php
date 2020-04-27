@@ -84,10 +84,12 @@
         //'carId' => $startDate,
         //'start_date' => $this->input->post('start_date'),
 				//'end_date' => date('Y-m-d', strtotime($startDate. ' + '.$NumberOfDays.' days')),
-        //'number_of_days' => $NumberOfDays,
+        'number_of_days' => $NumberOfDays,
 				'add_driver' => (($this->input->post('add_driver')=='on') ? 1 : 0),
 				'driver_name' => $this->input->post('driver_name'),
-				//'rental_discount' => $this->input->post('discount'),
+				'driver_fee_current' => $this->input->post('driver_fee_current'),
+				'rental_fee_current' => $this->input->post('rental_fee_current'),
+				'rental_discount' => $this->input->post('rental_discount'),
         'statusId' => $this->input->post('status_id')
       );
 

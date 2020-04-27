@@ -3,7 +3,7 @@
 <div class="container">
   <br>
   <br>
-  <hr>
+  <hr class="d-print-none">
   <br>
   <br>
 </div>

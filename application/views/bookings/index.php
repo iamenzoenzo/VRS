@@ -56,7 +56,7 @@
     <?php endforeach;?>
 
     <?php if($counter==0):?>
-      <tr><td colspan="9">No data to show</td></tr>
+      <tr><td colspan="10">No data to show</td></tr>
     <?php endif;?>
   </tbody>
 </table>

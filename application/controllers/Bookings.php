@@ -182,7 +182,7 @@ date_default_timezone_set('Asia/Manila');
 
 		}
 
-		public function edit($id){
+		public function edit($id,$change_date=false){
 			if(!$this->session->userdata('logged_in')){
 				redirect('users/login');
 			}
@@ -192,14 +192,14 @@ date_default_timezone_set('Asia/Manila');
 			$booking = $this->Booking_model->get_bookings($id);
 			$data['booking'] = $booking;
 
-			$user_data = array(
-				'booking_client_id' => $booking['clientId'],
-				'booking_start_date' => date_format(date_create($booking['start_date']),"Y-m-d"),
-				'booking_days' => $booking['number_of_days'],
-				'booking_add_driver'=> $booking['add_driver']
-			);
-
-			$this->session->set_userdata($user_data);
+			if($change_date==false){
+				$user_data = array(
+					'booking_client_id' => $booking['clientId'],
+					'booking_start_date' => date_format(date_create($booking['start_date']),"Y-m-d"),
+					'booking_days' => $booking['number_of_days']
+				);
+				$this->session->set_userdata($user_data);
+			}
 
 			$startDate = $this->session->userdata('booking_start_date');
 			if(!isset($startDate)){
@@ -275,6 +275,14 @@ date_default_timezone_set('Asia/Manila');
 
 		}
 
+		public function filter_edit(){
+			$user_data = array(
+				'booking_start_date' => $this->input->post('booking_edit_start_date'),
+				'booking_days' => $this->input->post('booking_edit_number_of_days')
+			);
+			$this->session->set_userdata($user_data);
+			redirect('bookings/edit/'.$this->input->post('edit_booking_id').'/'.true);
+		}
 
 		public function addPayement(){
 			$payment_image='';
@@ -354,13 +362,13 @@ date_default_timezone_set('Asia/Manila');
 			}
 		}
 
-    public function update($id){
+    public function update($id)
+		{
 			if(!$this->session->userdata('logged_in')){
 				redirect('users/login');
 			}
 
       $this->Booking_model->update_booking();
-
       // Set message
       $this->session->set_flashdata('booking_updated', 'Booking has been updated');
 

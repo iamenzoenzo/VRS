@@ -89,7 +89,7 @@
   </nav>
   <br>
 <div class="container">
-  <hr>
+  <hr class="d-print-none">
 </div>
 
 <div class="container">
