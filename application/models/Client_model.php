@@ -50,7 +50,9 @@
 				$path_to_file = './assets/images/client_images/'.$key['file_name'];
 				$this->File_model->delete_photo_from_directory($path_to_file);
 				if(unlink($path_to_file)) {
-				     $this->ClientImage_model->delete_client_photo($key['Id']);
+					if($key['file_name']!='noimage'){
+						$this->ClientImage_model->delete_client_photo($key['Id']);
+					}
 				}
 			}
 			$this->db->where('id', $id);
