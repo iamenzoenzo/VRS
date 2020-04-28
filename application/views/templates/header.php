@@ -48,9 +48,9 @@
           <i class="fa fa-book"></i> Booking
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="<?php echo base_url(); ?>bookings/create">Add booking</a>
-          <a class="dropdown-item" href="<?php echo base_url(); ?>bookings/index">View bookings</a>
-          <a class="dropdown-item" href="<?php echo base_url(); ?>bookings/report">Reports</a>
+          <a class="dropdown-item" href="<?php echo base_url(); ?>bookings/create"><i class="fa fa-plus-circle"></i> Add booking</a>
+          <a class="dropdown-item" href="<?php echo base_url(); ?>bookings/index"><i class="fa fa-eye"></i> View bookings</a>
+          <a class="dropdown-item" href="<?php echo base_url(); ?>bookings/report"><i class="fa fa-tachometer"></i> Reports</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -58,8 +58,8 @@
           <i class="fa fa-users"></i> Client
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="<?php echo base_url(); ?>clients/create">Add client</a>
-          <a class="dropdown-item" href="<?php echo base_url(); ?>clients/index">View clients</a>
+          <a class="dropdown-item" href="<?php echo base_url(); ?>clients/create"><i class="fa fa-plus-circle"></i> Add client</a>
+          <a class="dropdown-item" href="<?php echo base_url(); ?>clients/index"><i class="fa fa-eye"></i> View clients</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -67,20 +67,20 @@
           <i class="fa fa-lock"></i> Admin
         </a>
         <div class="dropdown-menu dropleft" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item <?php echo (($this->session->userdata('logged_in')) && ($this->session->userdata('is_admin')))?'':'disabled'?>" href="<?php echo base_url(); ?>users/index">Users Management</a>
-          <a class="dropdown-item" href="<?php echo base_url(); ?>cars/index">Vehicle Management</a>
+          <a class="dropdown-item <?php echo (($this->session->userdata('logged_in')) && ($this->session->userdata('is_admin')))?'':'disabled'?>" href="<?php echo base_url(); ?>users/index"><i class="fa fa-users"></i> Users Management</a>
+          <a class="dropdown-item" href="<?php echo base_url(); ?>cars/index"><i class="fa fa-car"></i> Vehicle Management</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item <?php echo (($this->session->userdata('logged_in')) && ($this->session->userdata('is_admin')))?'':'disabled'?>" href="<?php echo base_url(); ?>status/index">Status Management</a>
-            <a class="dropdown-item <?php echo (($this->session->userdata('logged_in')) && ($this->session->userdata('is_admin')))?'':'disabled'?>" href="<?php echo base_url(); ?>settings/index">System Settings</a>
+            <a class="dropdown-item <?php echo (($this->session->userdata('logged_in')) && ($this->session->userdata('is_admin')))?'':'disabled'?>" href="<?php echo base_url(); ?>status/index"><i class="fa fa-toggle-on"></i> Status Management</a>
+            <a class="dropdown-item <?php echo (($this->session->userdata('logged_in')) && ($this->session->userdata('is_admin')))?'':'disabled'?>" href="<?php echo base_url(); ?>settings/index"><i class="fa fa-cog"></i> System Settings</a>
         </div>
       </li>
       <?php endif; ?>
       <li>
         <?php
         if(!$this->session->userdata('logged_in')){
-          echo '<a class="btn btn-primary" href="'.base_url().'users/login"><i class="fa fa-sign-in"></i> Login</a>';
+          echo '<a class="btn btn-primary" href="'.base_url().'users/login"><i class="fa fa-power-off"></i> Login</a>';
         }else{
-          echo '<a class="btn btn-danger" href="'.base_url().'users/logout"><i class="fa fa-sign-out"></i> Logout</a>';
+          echo '<a class="btn btn-danger" href="'.base_url().'users/logout"><i class="fa fa-power-off"></i> Logout</a>';
         }
         ?>
       </li>

@@ -3,7 +3,7 @@
   <?php echo form_open('settings/index'); ?>
     <div class="row">
       <div class="col">
-        <h2>Clients</h2>
+        <h2><i class="fa fa-cog"></i> System Settings</h2>
       </div>
       <div class="col-lg-4">
         <div class="row">
