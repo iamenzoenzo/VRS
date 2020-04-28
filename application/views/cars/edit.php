@@ -2,7 +2,7 @@
 <h2><?= $title ;?></h2>
 <?php echo form_open_multipart('cars/update'); ?>
   <input type="hidden" name="id" value="<?php echo $cars['Id']; ?>">
-    <input type="hidden" name="old_file_name" value="<?php echo $cars['file_name']; ?>">
+  <input type="hidden" name="old_file_name" value="<?php echo $cars['file_name']; ?>">
   <div class="row">
   	<div class="col">
   		<label>Description</label>
