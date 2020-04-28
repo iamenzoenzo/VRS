@@ -1,7 +1,8 @@
 <title><?= $title ;?></title>
 <h2><?= $title ;?></h2>
 <?php echo form_open_multipart('cars/update'); ?>
-<input type="hidden" name="id" value="<?php echo $cars['Id']; ?>">
+  <input type="hidden" name="id" value="<?php echo $cars['Id']; ?>">
+    <input type="hidden" name="old_file_name" value="<?php echo $cars['file_name']; ?>">
   <div class="row">
   	<div class="col">
   		<label>Description</label>
@@ -45,7 +46,7 @@
     </div>
   </div>
 <div class="pt-3">
-	<button type="submit" class="btn btn-warning">Save Edit</button>
-  <a href="<?php echo base_url()?>cars/index" class="btn btn-danger">Cancel</a>
+	<button type="submit" class="btn btn-warning"><i class="fa fa-floppy-o"></i> Save Edit</button>
+  <a href="<?php echo base_url()?>cars/view/<?php echo $cars['Id']; ?>" class="btn btn-danger"><i class="fa fa-ban"></i> Cancel</a>
 </div>
 </form>

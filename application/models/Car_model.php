@@ -68,6 +68,11 @@
 				'Is_Active' => 1
 			);
 
+			if(!empty($car_image)){
+				$path_to_file = './assets/images/cars_images/'.$this->input->post('old_file_name');
+				unlink($path_to_file);
+			}
+
 			$this->db->where('id', $this->input->post('id'));
 			return $this->db->update('cars', $data);
 		}

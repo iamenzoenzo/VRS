@@ -7,18 +7,21 @@
     <div class="col-lg-auto">
       <div class="row">
         <div class="col mt-2">
-          <a data-toggle="modal" href="#filterModal" class="btn btn-outline-success col-lg-auto col-sm-12"> <i class="fa fa-filter"></i> Filter</a>
+          <a data-toggle="modal" href="#filterModal" class="btn btn-outline-success col-lg-auto col-sm-12 d-print-none"> <i class="fa fa-filter"></i> Filter</a>
+          <button class="btn btn-outline-success col-lg-auto col-sm-12 d-print-none" onclick="window.print()"> <i class="fa fa-print"></i> Print</button>
         </div>
+
       </div>
     </div>
   </div>
-
-<table class="table table-bordered">
+<small>*Filter dates: <?php echo '<u><i>'.$this->session->userdata('report_start_date').'</i></u> to <u><i>'.$this->session->userdata('report_end_date').'</i></u>'.(isset($selectedcar)?'</br>**Filter vehicle: <u><i>'.$selectedcar['car_description'].'</u></i>':'');?></small>
+<table class="table table-bordered table-fit">
   <thead>
-    <tr>
+    <tr class="bg-light">
       <th scope="col">#</th>
       <th scope="col-4">Vehicle</th>
-      <th scope="col" class="text-center">Days</th>
+      <th scope="col" class="text-center">Total Bookings</th>
+      <th scope="col" class="text-center">Total Days</th>
       <th scope="col" class="text-right">Total Income</th>
     </tr>
   </thead>
@@ -26,17 +29,18 @@
     <?php $totalIncome=0;$counter=0; foreach ($bookings as $booking):?>
         <!--tr class='clickable-row' title="Click to view this booking" data-href="<?php echo base_url().'bookings/view/'.$booking['BookingId'];?>" -->
         <tr>
-        <td><?php $totalIncome+=$booking['Income']; $counter++; echo $counter ;?></td>
+        <td><?php $totalIncome+=($booking['Income']); $counter++; echo $counter ;?></td>
         <td><?php echo $booking['code_name'].' <small>('.$booking['plate_number'].')</small>';?></td>
+        <td class="text-center"><?php echo $booking['NumberOfBooking'] ;?></td>
         <td class="text-center"><?php echo $booking['TotalDays'] ;?></td>
         <td class="text-right"><?php echo '₱'.number_format($booking['Income'],2) ;?></td>
         </tr>
     <?php endforeach;?>
     <?php if($counter==0):?>
-      <tr><td colspan="4">No data to show</td></tr>
+      <tr><td colspan="5">No data to show</td></tr>
     <?php else:?>
-      <tr>
-        <td colspan="3" class="text-right"><b>Total Income</b></td>
+      <tr class="bg-light">
+        <td colspan="4" class="text-right"><b>Total Income</b></td>
         <td class="text-right"><b>₱<?php echo number_format($totalIncome,2) ;?></b></td>
       </tr>
     <?php endif;?>
@@ -75,7 +79,7 @@
               </div>
               <div class="row">
                 <div class="col text-center">
-                  <button class="btn btn-outline-success col-lg-auto col-sm-12 mt-2" type="submit"> <i class="fa fa-filter"></i> Filter</button>
+                  <button class="btn btn-outline-success col-lg-auto col-sm-12 mt-2 hidden-print" type="submit"> <i class="fa fa-filter"></i> Filter</button>
                   <a href="<?php echo base_url(); ?>bookings/filter_clear" class="btn btn-outline-warning col-lg-auto col-sm-12 mt-2"><i class="fa fa-times"></i> Clear Filter</a>
                 </div>
               </div>

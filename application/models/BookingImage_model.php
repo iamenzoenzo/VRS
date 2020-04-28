@@ -36,9 +36,17 @@
 			$affectedRows=$this->db->affected_rows();
 			if($affectedRows>0){
 				$this->File_model->delete_photo_from_directory($path_to_file);
-				return true;
 			}else {
 				return false;
 			}
 		}
+
+		public function delete_booking_photo_by_booking_id($BookingId){
+			$bookingImage = $this->get_images(null,$BookingId);
+			foreach ($bookingImage as $bi) {
+				$this->delete_booking_photo($bi['Id']);
+			}
+
+		}
+
 	}
