@@ -54,7 +54,7 @@
 			return $this->db->insert('cars', $data);
 		}
 
-		public function update_car(){
+		public function update_car($car_image){
 			$data = array(
 				'car_description' => $this->input->post('car-name'),
 				'code_name' => $this->input->post('car-code-name'),
@@ -64,9 +64,14 @@
 				'plate_number' => $this->input->post('car-plate-number'),
 				'RentPerDay' => $this->input->post('car-rent-per-day'),
 				'Capacity' => $this->input->post('car-capacity'),
-				//'car_image_path' => $car_image,
+				'file_name' => $car_image,
 				'Is_Active' => 1
 			);
+
+			if(!empty($car_image)){
+				$path_to_file = './assets/images/cars_images/'.$this->input->post('old_file_name');
+				unlink($path_to_file);
+			}
 
 			$this->db->where('id', $this->input->post('id'));
 			return $this->db->update('cars', $data);

@@ -1,6 +1,6 @@
 <title><?= $title; ?></title>
 
-<?php echo form_open('bookings/index'); ?>
+<?php echo form_open('bookings/filter_index'); ?>
   <div class="row">
     <div class="col mt-2">
       <h2><?= $title; ?></h2>
@@ -8,7 +8,7 @@
     <div class="col-lg-6 mt-2">
       <div class="row pr-3">
         <div class="col">
-          <input class="form-control col-lg-auto" name="name_filter" value="<?= $filter;?>" type="search" placeholder="Search" aria-label="Search">
+          <input class="form-control col-lg-auto" name="filter" value="<?php echo $this->session->userdata('booking_filter');?>" type="search" placeholder="Type reference number or client name" aria-label="Search">
         </div>
         <div>
           <button class="btn btn-outline-success col-lg-auto" type="submit"> <i class="fa fa-search"></i>Search</button>
@@ -30,7 +30,7 @@
       <th scope="col-4">Vehicle</th>
       <th scope="col">Start Date</th>
       <th scope="col">End Date</th>
-      <th scope="col"># of days</th>
+      <th scope="col" class="text-center">Days</th>
       <th scope="col">Total Rent</th>
       <th scope="col">Status</th>
       <th scope="col">Actions</th>
@@ -46,7 +46,7 @@
         <td><?php echo '<b>'.$booking['code_name'].'</b></br><small>Plate#: '.$booking['plate_number'].'</br>Rent per day: ₱'.number_format($booking['RentPerDay'],2).'</small>' ;?></td>
         <td><?php echo $booking['start_date'] ;?></td>
         <td><?php echo $booking['end_date'] ;?></td>
-        <td><?php echo $booking['number_of_days'] ;?></td>
+        <td class="text-center"><?php echo $booking['number_of_days'] ;?></td>
         <td><?php echo '₱'.number_format(($booking['number_of_days'] * $booking['driver_fee_current'])+($booking['number_of_days'] * $booking['rental_fee_current'])-($booking['rental_discount']),2) ;?></td>
         <td class="bg-<?php echo $booking['bootstrap_bg_color'];?>"><?php echo $booking['label'] ;?></td>
         <td>
@@ -56,7 +56,7 @@
     <?php endforeach;?>
 
     <?php if($counter==0):?>
-      <tr><td colspan="9">No data to show</td></tr>
+      <tr><td colspan="10">No data to show</td></tr>
     <?php endif;?>
   </tbody>
 </table>

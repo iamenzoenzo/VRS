@@ -100,7 +100,28 @@
 				redirect('users/login');
 			}
 
-			$this->Car_model->update_car();
+			$timestamp = time();
+			// Upload Image
+			$config['upload_path'] = './assets/images/cars_images';
+			$config['allowed_types'] = 'jpg|jpeg|png|gif';
+			$config['max_size'] = '0';
+			$config['max_width'] = '0';
+			$config['max_height'] = '0';
+			$config['overwrite'] = FALSE;
+			$config['remove_spaces'] = TRUE;
+			$config['file_name'] = $timestamp.'-'.$_FILES['userfile']['name'];
+
+			$this->upload->initialize($config);
+
+			if(!$this->upload->do_upload('userfile')){
+				$errors = array('error' => $this->upload->display_errors());
+				$car_image = 'noimage.jpg';
+			} else {
+				$data = $this->upload->data();
+				$car_image = $data['file_name'];
+			}
+
+			$this->Car_model->update_car($car_image);
 
 			// Set message
 			$this->session->set_flashdata('car_updated', 'Vehicle information has been updated');

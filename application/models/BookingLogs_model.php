@@ -20,4 +20,12 @@
 			return $query->result_array();
 		}
 
+		public function delete_logs_by_booking_id($bookingId){
+			$logs = $this->get_logs_by_booking_id($bookingId);
+			foreach ($logs as $log) {
+				$this->db->where('Id', $log['Id']);
+				$this->db->delete('clientbookingslogs');
+			}
+		}
+
 	}

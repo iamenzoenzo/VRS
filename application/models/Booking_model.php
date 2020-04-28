@@ -4,29 +4,31 @@
 			$this->load->database();
 		}
 
-		public function get_bookings($id){
+		public function get_bookings($id,$filter='VRS-2004391WR'){
 			if(isset($id)){
 				$this->db->join('status a', 'a.Id=clientbookings.statusId', 'inner');
 				$this->db->join('cars b', 'b.Id=clientbookings.carId', 'inner');
 				$this->db->join('clients c', 'c.Id=clientbookings.clientId', 'inner');
 				$this->db->order_by("clientbookings.BookingId", "desc");
-        $query=$this->db->get_where('clientbookings', array('clientbookings.BookingId' => $id));
+				$query=$this->db->get_where('clientbookings', array('clientbookings.BookingId' => $id));
         return $query->row_array();
       }else {
 				$this->db->join('status a', 'a.Id=clientbookings.statusId', 'inner');
 				$this->db->join('cars b', 'b.Id=clientbookings.carId', 'inner');
 				$this->db->join('clients c', 'c.Id=clientbookings.clientId', 'inner');
-				$this->db->order_by("clientbookings.BookingId", "desc");
+				$this->db->where("clientbookings.reference_number LIKE '%".$filter."%' OR c.name LIKE '%".$filter."%'");
 				$query=$this->db->get('clientbookings');
+				$this->db->order_by("clientbookings.BookingId", "desc");
+				//$query=$this->db->get('clientbookings');
   			return $query->result_array();
       }
 		}
 
 		public function get_bookings_report($start_date=null,$end_date=null,$carid=null){
-			if(isset($carid)){
-				$query=$this->db->query("SELECT *,(SELECT SUM(clientbookings.rental_fee_current) from clientbookings where clientbookings.carId=cars.Id) as Income,(SELECT SUM(clientbookings.number_of_days) from clientbookings where clientbookings.carId=cars.Id) AS TotalDays FROM cars inner join clientbookings on clientbookings.carId=cars.Id WHERE clientbookings.carId=".$carid." GROUP by cars.Id ORDER BY cars.car_description");
+			if($carid!=0){
+				$query=$this->db->query("SELECT *,(SELECT SUM(clientbookings.rental_fee_current*clientbookings.number_of_days) from clientbookings where clientbookings.carId=cars.Id AND (clientbookings.start_date BETWEEN '".$start_date."' AND '".$end_date."')) AS Income,(SELECT SUM(clientbookings.number_of_days) from clientbookings where clientbookings.carId=cars.Id AND (clientbookings.start_date BETWEEN '".$start_date."' AND '".$end_date."')) AS TotalDays,(SELECT COUNT(*) from clientbookings where clientbookings.carId=cars.Id AND (clientbookings.start_date BETWEEN '".$start_date."' AND '".$end_date."')) AS NumberOfBooking FROM cars inner join clientbookings on clientbookings.carId=cars.Id WHERE clientbookings.carId=".$carid." AND (clientbookings.start_date BETWEEN '".$start_date."' AND '".$end_date."') GROUP by cars.Id ORDER BY cars.car_description");
 			}else{
-				$query=$this->db->query("SELECT *,(SELECT SUM(clientbookings.rental_fee_current) from clientbookings where clientbookings.carId=cars.Id) as Income,(SELECT SUM(clientbookings.number_of_days) from clientbookings where clientbookings.carId=cars.Id) AS TotalDays FROM cars inner join clientbookings on clientbookings.carId=cars.Id GROUP by cars.Id ORDER BY cars.car_description");
+				$query=$this->db->query("SELECT *,(SELECT SUM(clientbookings.rental_fee_current*clientbookings.number_of_days) from clientbookings where clientbookings.carId=cars.Id AND (clientbookings.start_date BETWEEN '".$start_date."' AND '".$end_date."')) AS Income,(SELECT SUM(clientbookings.number_of_days) from clientbookings where clientbookings.carId=cars.Id AND (clientbookings.start_date BETWEEN '".$start_date."' AND '".$end_date."')) AS TotalDays,(SELECT COUNT(*) from clientbookings where clientbookings.carId=cars.Id AND (clientbookings.start_date BETWEEN '".$start_date."' AND '".$end_date."')) AS NumberOfBooking FROM cars inner join clientbookings on clientbookings.carId=cars.Id WHERE (clientbookings.start_date BETWEEN '".$start_date."' AND '".$end_date."') GROUP by cars.Id ORDER BY cars.car_description");
 			}
 			return $query->result_array();
 
@@ -77,19 +79,21 @@
 
     public function update_booking(){
 
-			$startDate = $this->input->post('start_date');
+			$startDate = $this->session->userdata('booking_start_date');
 			$BookingId = $this->input->post('bookingid');
 
-      $data = array(
-        //'carId' => $startDate,
-        //'start_date' => $this->input->post('start_date'),
-				//'end_date' => date('Y-m-d', strtotime($startDate. ' + '.$NumberOfDays.' days')),
-        //'number_of_days' => $NumberOfDays,
+			$data = array(
+				'carId' => $this->session->userdata('booking_car_id'),
+				'start_date' => $this->session->userdata('booking_start_date'),
+				'end_date' => date('Y-m-d', strtotime($startDate. ' + '.$this->session->userdata('booking_days').' days')),
+				'number_of_days' => $this->session->userdata('booking_days'),
 				'add_driver' => (($this->input->post('add_driver')=='on') ? 1 : 0),
 				'driver_name' => $this->input->post('driver_name'),
-				//'rental_discount' => $this->input->post('discount'),
-        'statusId' => $this->input->post('status_id')
-      );
+				'driver_fee_current' => $this->input->post('driver_fee_current'),
+				'rental_fee_current' => $this->session->userdata('booking_rental_fee_current'),
+				'rental_discount' => $this->input->post('rental_discount'),
+				'statusId' => $this->input->post('status_id')
+			);
 
       $this->db->where('BookingId', $BookingId);
 			$this->db->update('clientbookings', $data);
@@ -98,14 +102,9 @@
     }
 
 		public function delete_booking($id){
-			$images=$this->BookingImage_model->get_images(null,$id);
-			foreach ($images as $key) {
-				$path_to_file = './assets/images/client_bookings_images/'.$key['file_name'];
-				$this->File_model->delete_photo_from_directory($path_to_file);
-				if(unlink($path_to_file)) {
-				     $this->BookingImage_model->delete_booking_photo($key['Id']);
-				}
-			}
+			$this->BookingImage_model->delete_booking_photo_by_booking_id($id);
+			$this->BookingLogs_model->delete_logs_by_booking_id($id);
+			$this->BookingPayments_model->delete_payments_by_booking_id($id);
 			$this->db->where('bookingid', $id);
 			$this->db->delete('clientbookings');
 			return true;
