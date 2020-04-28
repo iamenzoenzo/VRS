@@ -2,7 +2,7 @@
 <?php echo form_open('clients/index'); ?>
   <div class="row">
     <div class="col mt-2">
-      <h2><?= $title; ?></h2>
+      <h2><i class="fa fa-users"></i> <?= $title; ?></h2>
     </div>
     <div class="col-lg-6 mt-2">
       <div class="row pr-3">
