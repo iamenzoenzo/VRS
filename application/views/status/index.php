@@ -2,7 +2,7 @@
 <div>
   <div class="row">
     <div class="col">
-      <h2>Status List</h2>
+      <h2><i class="fa fa-toggle-on"></i> Status List</h2>
     </div>
     <div class="col">
       <a href="<?php echo base_url(); ?>status/create" class="btn float-right btn-primary"><i class="fa fa-plus"></i> Add New Status</a>
