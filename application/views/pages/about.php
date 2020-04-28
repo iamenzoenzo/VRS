@@ -3,7 +3,7 @@
 <p>Vehicle Reservation System is the final project for <strong>IS226 Web Information System</strong>, Master of Information Systems at the University of the Philippines Open University.</p>
 <p><strong>Developed by:</strong> Jeff Manhulad and Enzo Cerbas</p>
 
-<p>A small car rental business operating in Valencia City, Bukidnon is looking for an MIS system that
+<p>A car rental business operating in Valencia City, Bukidnon is looking for an MIS system that
 can ease their burden in reservation tracking and eventually support their expansion goals.
 One of their pain points is the challenges in tracking car unit availability anytime and anywhere
 they want especially because currently they are manually tallying their reservations on a planner.
