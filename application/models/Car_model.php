@@ -64,7 +64,7 @@
 				'plate_number' => $this->input->post('car-plate-number'),
 				'RentPerDay' => $this->input->post('car-rent-per-day'),
 				'Capacity' => $this->input->post('car-capacity'),
-				'file_name' => $car_image,
+				'file_name' => (!empty($car_image)?$car_image:$this->input->post('old_file_name')),
 				'Is_Active' => 1
 			);
 
@@ -89,7 +89,10 @@
 			$rowsAffected = $this->db->affected_rows();
 			$path_to_file="./assets/images/cars_images/".$car['file_name'];
 			if($rowsAffected>0){
-				$this->File_model->delete_photo_from_directory($path_to_file);
+				if($car['file_name']!='noimage.jpg'){
+					$this->File_model->delete_photo_from_directory($path_to_file);
+				}
+
 			}
 			return true;
 		}

@@ -113,12 +113,11 @@
 
 			$this->upload->initialize($config);
 
-			if(!$this->upload->do_upload('userfile')){
-				$errors = array('error' => $this->upload->display_errors());
-				$car_image = 'noimage.jpg';
-			} else {
+			if($this->upload->do_upload('userfile')){
 				$data = $this->upload->data();
 				$car_image = $data['file_name'];
+			}else {
+				$car_image=null;
 			}
 
 			$this->Car_model->update_car($car_image);
