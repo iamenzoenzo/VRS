@@ -1,9 +1,5 @@
 <title>VRS Home</title>
-<div class="container">
-<br>
-<hr>
-<br>
-</div>
+
 <div class="container">
   <h1>Project VRS Video Demo</h1>
     <div class="embed-responsive embed-responsive-16by9">
