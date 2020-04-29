@@ -27,9 +27,9 @@
         <!-- Add font awesome icons -->
         <small>
         <p>
-        <a class="nav-link" href="#"><i class="fa fa-facebook"></i> facebook</a>
-        <a class="nav-link" href="#"><i class="fa fa-twitter"></i> twitter</a>
-        <a class="nav-link" href="#"><i class="fa fa-youtube"></i> youtube</a>
+        <a class="nav-link" href="#"><i class="fa fa-facebook"></i> Facebook</a>
+        <a class="nav-link" href="#"><i class="fa fa-twitter"></i> Twitter</a>
+        <a class="nav-link" href="https://youtu.be/YqDQaHGUKGE"><i class="fa fa-youtube"></i> Youtube</a>
         </p>
       </small>
       </div>
