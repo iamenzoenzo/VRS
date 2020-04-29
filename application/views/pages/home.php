@@ -13,6 +13,16 @@
 <br>
 </div>
 
+<div class="container">
+  <p>Please give us some <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=NacDvaMqykyXIirkkpqz7EBqHmKm1ehGt0yUUOOmvXVUQUNDSjZSRlZXVUc5WlFQRjVGSkNMWjlOVC4u" target="_blank"><button type="button" class="btn btn-primary">feedback.</button></a></p>
+</div>
+
+<div class="container">
+<br>
+<hr>
+<br>
+</div>
+
 <!-- start of carousel -->
 <div id="demo" class="carousel slide" data-ride="carousel">
   <ul class="carousel-indicators">
