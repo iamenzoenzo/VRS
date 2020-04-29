@@ -2,7 +2,7 @@
 <h2><?= $title ;?></h2>
 <?php echo form_open_multipart('cars/update'); ?>
   <input type="hidden" name="id" value="<?php echo $cars['Id']; ?>">
-    <input type="hidden" name="old_file_name" value="<?php echo $cars['file_name']; ?>">
+  <input type="hidden" name="old_file_name" value="<?php echo $cars['file_name']; ?>">
   <div class="row">
   	<div class="col">
   		<label>Description</label>
@@ -24,7 +24,7 @@
   <div class="row  pt-2">
     <div class="col-3">
       <label>Year</label>
-      <input type="number" value="1990" min="1900" class="form-control" name="car-model-year" value="<?php echo $cars['year']; ?>">
+      <input type="number" min="1900" class="form-control" name="car-model-year" value="<?php echo $cars['year']; ?>">
     </div>
     <div class="col-3">
       <label>Plate Number</label>

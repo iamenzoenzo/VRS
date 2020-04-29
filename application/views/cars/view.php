@@ -35,7 +35,7 @@
   <div class="row  pt-2">
     <div class="col-3">
       <label>Year</label>
-      <input readonly type="number" value="1990" min="1900" class="form-control" name="car-model-year" value="<?php echo $cars['year']; ?>">
+      <input readonly type="number" class="form-control" name="car-model-year" value="<?php echo $cars['year']; ?>">
     </div>
     <div class="col-3">
       <label>Plate Number</label>
