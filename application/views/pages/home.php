@@ -61,17 +61,7 @@
   </a>
 </div>
 <!-- end of carousel -->
-<div class="container">
-  <br>
-  <hr>
-  <br>
-</div>
 
-<div class="container">
-  <center>
-  <p>Please give us some <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=NacDvaMqykyXIirkkpqz7EBqHmKm1ehGt0yUUOOmvXVUQUNDSjZSRlZXVUc5WlFQRjVGSkNMWjlOVC4u" target="_blank"><button type="button" class="btn btn-primary">feedback.</button></a></p>
-  </center>
-</div>
 
 <div class="container">
   <br>
@@ -101,4 +91,16 @@
 		<!--Google Maps-->
   </div>
 </div>
+</div>
+
+<div class="container">
+  <br>
+  <hr>
+  <br>
+</div>
+
+<div class="container">
+  <center>
+  <p>Please give us some <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=NacDvaMqykyXIirkkpqz7EBqHmKm1ehGt0yUUOOmvXVUQUNDSjZSRlZXVUc5WlFQRjVGSkNMWjlOVC4u" target="_blank"><button type="button" class="btn btn-primary">feedback.</button></a></p>
+  </center>
 </div>
