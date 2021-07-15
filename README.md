@@ -1,11 +1,5 @@
 # wamcr
-Wheels Automarket and Car Rental
-
-# Readme
-
-# Usability Form (to be shared with at least 5 persons with email @outlook.up.edu.ph)
-https://forms.microsoft.com/Pages/ResponsePage.aspx?id=NacDvaMqykyXIirkkpqz7EBqHmKm1ehGt0yUUOOmvXVUQUNDSjZSRlZXVUc5WlFQRjVGSkNMWjlOVC4u
-
+Vehicle Reservation System is a web information system made using PHP, mySQL, CodeIgniter, Bootstrap and jQuery for managing vehicle reservations. Developed in collaboration with Jeff.
 
 # Use Cases by Stakeholders 
 
